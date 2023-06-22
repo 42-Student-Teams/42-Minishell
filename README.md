@@ -34,13 +34,13 @@ The 42-Minishell project encompasses the following key features:
     - ctrl-D exits the shell.
     - ctrl-\ does nothing.
 - **Interactive Mode**: In interactive mode, the shell implements the following built-ins:
-    - echo with the -n option.
-    - cd with only relative or absolute paths.
-    - pwd without any options.
-    - export without any options.
-    - unset without any options.
-    - env without any options or arguments.
-    - exit without any options.
+    - **´echo´** with the -n option.
+    - **´cd´** with only relative or absolute paths.
+    - **´pwd´** without any options.
+    - **´export´** without any options.
+    - **´unset´** without any options.
+    - **´env´** without any options or arguments.
+    - **´exit´** without any options.
 
 - **Handling of Memory Leaks**: While the readline() function may cause memory leaks, they do not need to be managed in this project. However, it is crucial to ensure that your own code does not have any memory leaks.
 

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/22 16:55:39 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:55:27 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # include <term.h>
 # include <dirent.h>
 # include <sys/stat.h>
-# include <string.h> 
+# include <string.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /*
 ** Faire categorie par structure et mettre en commentaire

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 13:52:07 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:51:27 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ typedef struct s_env t_env;
 typedef struct s_lst t_lst;
 typedef struct s_node t_node;
 
+enum e_type
+{
+	PIPE,	// |
+	AND,	// &
+	OR,		// ||
+	REDIR_IN,	// <
+	REDIR_OUT,	// >
+	REDIR_HEREDOC, // <<
+	REDIR_APPEND, // >>
+	CMD,	// "ls -l"
+	END,	// \0
+};
+
 typedef struct s_env
 {
 	char			*key;
@@ -45,8 +58,8 @@ typedef struct s_env
 
 typedef struct s_node
 {
-	char	*data;
-	int		type;
+	char			**cmd;
+	enum e_type		type;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
@@ -58,18 +71,6 @@ typedef struct s_lst
 	t_node	*end;
 	int		size;
 }	t_lst;
-
-enum e_type
-{
-	PIPE,	// |
-	SEMICOLON,	// ;
-	REDIR_IN,	// <
-	REDIR_OUT,	// >
-	REDIR_HEREDOC, // <<
-	REDIR_APPEND, // >>
-	CMD,	// "ls -l"
-	END,	// \0
-};
 
 t_list	*get_data(t_list *ptr);
 int		free_all(void);

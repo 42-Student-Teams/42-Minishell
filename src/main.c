@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 13:41:31 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:40:14 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	init_minishell(void)
 {
 	char	*input;
-	
-	// data = get_data(NULL);
+	t_list data;
+
 	while (42)
 	{
 		input = readline("Minishell$ ");
@@ -34,13 +34,14 @@ void	init_minishell(void)
 
 int	main(int ac, char **av, char **env)
 {
-	t_list	list;
+	t_lst	lst;
 
 	(void)ac;
 	(void)av;
 	(void)env;
-	list = (t_list){};
-	get_data(&list);
+
+	lst = (t_lst){};
+	get_data(&lst);
 	init_minishell();
 	// free_all();
 	return (0);

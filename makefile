@@ -7,13 +7,16 @@ READLINE_DIR := $(HOME)/.brew/opt/readline
 INCS        := include libft/include $(READLINE_DIR)/include
 
 SRC_DIR     := src
-SRCS        := src/main.c
+SRCS        := src/main.c		\
+		src/utils/get_data.c	\
+		src/utils/free_all.c	\
+		src/env/env.c	
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 CC          := gcc
-CFLAGS      := -Wall -Wextra -Werror
+CFLAGS      := -Wall -Wextra -Werror -fsanitize=address -g3
 CPPFLAGS    := $(addprefix -I,$(INCS))
 LDFLAGS     := -L$(READLINE_DIR)/lib
 LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft

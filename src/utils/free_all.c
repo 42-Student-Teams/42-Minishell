@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 10:25:23 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/29 07:59:25 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/06/28 23:37:32 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/06/30 13:40:34 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*tab;
+// int	free_all(void)
+// {
+// 	t_data	*data;
 
-	tab = malloc(sizeof(char) * (count * size));
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, count * size);
-	return (tab);
-}
+// 	data = get_data(NULL);
+// 	free(data);
+// 	data = NULL;
+// 	return (0);
+// }

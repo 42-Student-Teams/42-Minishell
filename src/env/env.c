@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 10:25:23 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/29 07:59:25 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/06/30 10:54:35 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*tab;
+// int	init_env(char **env)
+// {
+// 	int		i;
+// 	t_data	*data;
 
-	tab = malloc(sizeof(char) * (count * size));
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, count * size);
-	return (tab);
-}
+// 	i = 0;
+// 	data = get_data(NULL);
+// 	while (env[i])
+// 		i ++;
+// 	if (ft_calloc(data->env, i + 1))
+// 		return (1);
+// 	return (0);
+// }

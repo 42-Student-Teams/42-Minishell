@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 10:25:23 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/29 07:59:25 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/06/28 23:09:32 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/06/30 13:40:12 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_list	*get_data(t_list *ptr)
 {
-	void	*tab;
+	static t_list	*new;
 
-	tab = malloc(sizeof(char) * (count * size));
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, count * size);
-	return (tab);
+	if (ptr)
+		new = ptr;
+	return (new);
 }

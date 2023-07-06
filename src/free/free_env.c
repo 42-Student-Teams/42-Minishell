@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_btree.c                                       :+:      :+:    :+:   */
+/*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/28 23:37:32 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 16:49:51 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/06/30 20:47:29 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/06/30 20:50:30 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-void	free_btree(t_node *node)
+void free_env(t_env *env)
 {
-	if (node == NULL)
-		return;
-
-	// Recursively free the left and right subtrees
-	free_btree(node->left);
-	free_btree(node->right);
-
-	// Free the members of the current node
-	free(node->data);
-	free(node->type);
-	ft_free_pp((void **)node->cmd);
-
-	// Free the current node itself
-	free(node);
+	t_env	*curr_env;
+	
+	*curr_env = *env;
+	if (env->key || env->value)
+	{
+		while ()	
+	}
 }

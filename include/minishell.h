@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 16:51:27 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/06/30 20:18:04 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,19 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "ast.h"
+
+# define SUCCESS 0
+# define ERROR 1
+
+typedef struct s_global
+{
+	int		status;
+}	t_global;
 
 /*
 ** Faire categorie par structure et mettre en commentaire
 */
-
-typedef struct s_env t_env;
-typedef struct s_lst t_lst;
-typedef struct s_node t_node;
-
-enum e_type
-{
-	PIPE,	// |
-	AND,	// &
-	OR,		// ||
-	REDIR_IN,	// <
-	REDIR_OUT,	// >
-	REDIR_HEREDOC, // <<
-	REDIR_APPEND, // >>
-	CMD,	// "ls -l"
-	END,	// \0
-};
 
 typedef struct s_env
 {
@@ -56,21 +48,14 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_node
+typedef struct s_shell
 {
-	char			**cmd;
-	enum e_type		type;
-	struct s_node	*left;
-	struct s_node	*right;
-}	t_node;
+	char			*input;
+	struct s_env	*env;
+	pid_t			pid;
+}	t_shell;
 
-
-typedef struct s_lst
-{
-	t_node	*start;
-	t_node	*end;
-	int		size;
-}	t_lst;
+t_global g_shell;
 
 t_list	*get_data(t_list *ptr);
 int		free_all(void);

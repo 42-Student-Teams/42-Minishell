@@ -6,43 +6,39 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 16:40:14 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/06/30 20:27:14 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_minishell(void)
-{
-	char	*input;
-	t_list data;
 
-	while (42)
-	{
-		input = readline("Minishell$ ");
-		if (input == NULL || ft_strcmp(input, "exit") == 0)
-		{
-			free(input);
-			break ;
-		}
-		//parser
-		// Add the input to the history
-		add_history(input);
-		free(input);
-	}
-}
 
 int	main(int ac, char **av, char **env)
 {
-	t_lst	lst;
+	t_tree *root;
+	t_shell	shell;
 
 	(void)ac;
 	(void)av;
-	(void)env;
-
-	lst = (t_lst){};
-	get_data(&lst);
-	init_minishell();
-	// free_all();
+	root = NULL;
+	ft_bzero((void *)&shell, 0);
+	ft_bzero((void *)root, 0);
+	ft_bzero((void *)&g_shell, 0);
+	if (init_env(&shell, env));
+		exit (0);
+	while (42)
+	{
+		shell.input = readline("Minishell$ ");
+		if (shell.input)
+			add_history(shell.input);
+		else
+			exit (0);
+		if (ft_strcmp(shell.input, "exit"))
+		{
+			printf("Exit\n");
+			exit(0);	
+		}
+	}
 	return (0);
 }

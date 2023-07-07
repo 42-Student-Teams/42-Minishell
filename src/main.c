@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/07 12:34:54 by lsaba-qu         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/07 12:40:57 by bverdeci         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_tree *root;
+	t_tree	*root;
 	t_shell	shell;
 
 	(void)ac;
@@ -26,8 +30,7 @@ int	main(int ac, char **av, char **env)
 	ft_bzero((void *)&shell, 0);
 	ft_bzero((void *)root, 0);
 	ft_bzero((void *)&g_shell, 0);
-	// if (init_env(&shell, env))
-	// 	exit (0);
+	(void) env;
 	while (42)
 	{
 		shell.input = readline("Minishell$ ");
@@ -38,7 +41,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strcmp(shell.input, "exit"))
 		{
 			printf("Exit\n");
-			exit(0);	
+			exit(0);
 		}
 	}
 	return (0);

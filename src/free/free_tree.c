@@ -6,16 +6,16 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:50:38 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 19:55:17 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:14:36 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_tree(t_tree *node)
+void	free_tree(t_tree *node)
 {
-    if (node == NULL)
-        return ;
+	if (node == NULL)
+		return ;
     // Free the left subtree
 	if (node->left)
     {

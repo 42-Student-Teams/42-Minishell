@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 20:18:04 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:19:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_shell
 	pid_t			pid;
 }	t_shell;
 
-t_global g_shell;
+t_global	g_shell;
 
 t_list	*get_data(t_list *ptr);
 int		free_all(void);

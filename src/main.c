@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 20:27:14 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:26:27 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **env)
 	ft_bzero((void *)&shell, 0);
 	ft_bzero((void *)root, 0);
 	ft_bzero((void *)&g_shell, 0);
-	if (init_env(&shell, env));
+	if (init_env(&shell, env))
 		exit (0);
 	while (42)
 	{

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/06/30 20:44:46 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:51:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ int	init_env(t_shell *shell, char **env)
 
 		i++;
 	}
+	return (0);
 }

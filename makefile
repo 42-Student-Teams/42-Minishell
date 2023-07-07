@@ -9,8 +9,8 @@ INCS        := include libft/include $(READLINE_DIR)/include
 SRC_DIR     := src
 SRCS        := src/main.c		\
 		src/utils/get_data.c	\
-		src/utils/free_all.c	\
-		src/env/env.c	
+		src/free/free_tree.c	\
+		src/env/env.c
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

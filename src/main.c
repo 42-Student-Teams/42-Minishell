@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/07 12:34:54 by lsaba-qu         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/07 12:40:57 by bverdeci         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2023/07/07 12:48:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +34,7 @@ int	main(int ac, char **av, char **env)
 			add_history(shell.input);
 		else
 			exit (0);
-		if (ft_strcmp(shell.input, "exit"))
+		if (ft_strcmp(shell.input, "exit") == 0)
 		{
 			printf("Exit\n");
 			exit(0);

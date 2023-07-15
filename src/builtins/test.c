@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/13 13:49:59 by bverdeci         ###   ########.fr       */
+/*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
+/*   Updated: 2023/07/13 13:50:18 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	my_cd(char	*path)
+int	test_builtins(char *input)
 {
-	if (path == NULL)
-		path = getenv("HOME");
-	if (chdir(path) == -1)
-	{
-		free(path);
+	char	**args;
+	char	*path;
+
+	args = ft_split(input, ' ');
+	path = NULL;
+	if (args[1])
+		path = args[1];
+	if (my_cd(path) == 1)
 		return (1);
-	}
-	free(path);
 	return (0);
 }

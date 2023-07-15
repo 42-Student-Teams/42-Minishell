@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/07 12:48:22 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:30:55 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int	main(int ac, char **av, char **env)
 		else
 			exit (0);
 		if (ft_strcmp(shell.input, "exit") == 0)
-		{
-			printf("Exit\n");
 			exit(0);
+		if (test_builtins(shell.input) == 1)
+		{
+			printf("BUILTIN ERROR\n");
+			exit (1);
 		}
 	}
 	return (0);

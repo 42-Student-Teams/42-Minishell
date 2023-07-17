@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/07/17 20:26:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:42:03 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	test_builtins(char *input)
 	char	**args;
 	char	*cmd;
 
+	if (input[0] == ' ')
+		return (0);
 	args = ft_split(input, ' ');
 	if (args == NULL)
 		return (0);

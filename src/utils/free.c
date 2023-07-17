@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/17 15:27:43 by bverdeci         ###   ########.fr       */
+/*   Created: 2023/07/17 15:20:25 by bverdeci          #+#    #+#             */
+/*   Updated: 2023/07/17 15:22:13 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_cd(char	*path)
+void	free_split(char **split)
 {
-	if (path == NULL)
-		path = getenv("HOME");
-	if (chdir(path) == -1)
-		return (1);
-	return (0);
-}
+	int	i;
 
-int	my_cd(char **args)
-{
-	char	*path;
-
-	path = NULL;
-	if (args[1])
-		path = args[1];
-	if (exec_cd(path) == 1)
-		return (1);
-	return (0);
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
 }

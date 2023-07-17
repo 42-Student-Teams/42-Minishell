@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/13 13:27:23 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:31:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,17 @@ t_list	*get_data(t_list *ptr);
 int		free_all(void);
 void	init_minishell(void);
 
-// BUILTINS
+// --------- UTILS ---------
+void	free_split(char **split);
 
+// --------- BUILTINS ---------
 int		test_builtins(char *input);
-int		my_cd(char *path);
+
+// CD
+int		my_cd(char **args);
+int		exec_cd(char *path);
+
+// ECHO
+void	my_echo(char **args);
 
 #endif

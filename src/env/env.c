@@ -6,53 +6,40 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/07 12:51:22 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:43:39 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+//test
 int	init_env(t_shell *shell, char **env)
 {
-	int i = 0;
-
-	// Check if the env parameter is NULL
-	if (env == NULL)
-		return 1;
-
-	// Iterate through the env array
-	while (env[i])
+	while (*env && env)
 	{
-		// Create a new environment variable node
-		t_env *new_env = malloc(sizeof(t_env));
-		if (new_env == NULL)
-			return 1;
-
-		// Extract the key and value from the env string
-		char *key = strtok(env[i], "=");
-		char *value = strtok(NULL, "=");
-
-		// Set the key and value for the new environment variable node
-		new_env->key = ft_strdup(key);
-		new_env->value = ft_strdup(value);
-		new_env->next = NULL;
-
-		// Insert the new node into the linked list
+		shell->env = (t_env *)malloc(sizeof(t_env));
 		if (shell->env == NULL)
-		{
-			// If the linked list is empty, set the new node as the head
-			shell->env = new_env;
-		}
-		else
-		{
-			// If the linked list is not empty, find the last node and append the new node
-			t_env *current = shell->env;
-			while (current->next != NULL)
-				current = current->next;
-			current->next = new_env;
-		}
-
-		i++;
+			return (-1);
+		shell->env->key = ft_substr(*env, 0, ft_strchr(*env, '=') - *env);
+		shell->env->value = ft_substr(*env, ft_strchr(*env, '=') - *env + 1, ft_strlen(*env));
+		//prints the key and value of the env when using export
+		// printf("declare -x %s=%s\n", shell->env->key, shell->env->value);
+		env++; 
 	}
 	return (0);
 }
+
+
+// Doesn't work it aborts at line 42 !!!!!
+// void	print_env(t_env *env)
+// {
+// 	t_env *current;
+
+// 	current = env;
+// 	while (current)
+// 	{
+// 		printf("declare -x %s=%s\n", current->key, current->value);
+// 		current = current->next;
+// 	}
+// }

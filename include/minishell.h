@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/17 15:31:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:39:52 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ t_list	*get_data(t_list *ptr);
 int		free_all(void);
 void	init_minishell(void);
 
+// --------- ENV ---------
+int		init_env(t_shell *shell, char **env);
+void	print_env(t_env *env);
+
 // --------- UTILS ---------
 void	free_split(char **split);
 
 // --------- BUILTINS ---------
 int		test_builtins(char *input);
+
 
 // CD
 int		my_cd(char **args);

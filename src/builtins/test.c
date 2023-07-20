@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/07/17 20:42:03 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:42:47 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	test_builtins(char *input)
 	free_split(args);
 	return (0);
 }
+
+
 
 void	my_echo(char **args)
 {

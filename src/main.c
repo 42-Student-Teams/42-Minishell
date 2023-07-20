@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/17 20:31:00 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:38:21 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,20 @@ int	main(int ac, char **av, char **env)
 		printf("Too many arguments\n");
 		return (1);
 	}
+	init_env(&shell, env);
 	while (42)
 	{
 		shell.input = readline("Minishell$ ");
-		if (shell.input == NULL)
-			exit (0);
+		if (!shell.input)
+			exit(0);
 		if (shell.input[0] != '\0')
 		{
 			add_history(shell.input);
 			if (ft_strcmp(shell.input, "exit") == 0)
 				exit(0);
+			// -- when using export it prints the key and value of the env --
+			// if (ft_strcmp(shell.input, "export") == 0)
+			// 	print_env(shell.env);
 			if (test_builtins(shell.input) == 1)
 			{
 				printf("BUILTIN ERROR\n");

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/20 16:39:52 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:03:37 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include <curses.h>
 # include <term.h>
+# include <signal.h>
 # include <dirent.h>
 # include <sys/stat.h>
 # include <string.h>
@@ -35,6 +36,7 @@
 typedef struct s_global
 {
 	int		status;
+	char	**env_copy;
 }	t_global;
 
 /*
@@ -62,15 +64,22 @@ int		free_all(void);
 void	init_minishell(void);
 
 // --------- ENV ---------
-int		init_env(t_shell *shell, char **env);
+int		init_env(t_shell *shell);
 void	print_env(t_env *env);
+void	copy_env(char **env);
 
 // --------- UTILS ---------
 void	free_split(char **split);
+void	rl_replace_line(const char *text, int clear_undo);
 
 // --------- BUILTINS ---------
 int		test_builtins(char *input);
 
+// --------- SIGNALS ---------
+void	signal_handler(int signal);
+
+// --------- TERMIOS ---------
+void	init_termios(void);
 
 // CD
 int		my_cd(char **args);

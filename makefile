@@ -2,18 +2,19 @@ NAME        = minishell
 
 LIBS        := ft readline
 LIBS_TARGET := libft/libft.a
-READLINE_DIR := $(HOME)/.brew/opt/readline
+READLINE_DIR := /opt/homebrew/opt/readline
 
 INCS        := include libft/include $(READLINE_DIR)/include
 
 SRC_DIR     := src
 SRCS        := src/main.c		\
+		src/signals/signals.c	\
 		src/utils/get_data.c	\
 		src/utils/free.c		\
-		src/free/free_tree.c	\
 		src/env/env.c			\
 		src/builtins/test.c		\
 		src/builtins/cd.c		\
+		src/utils/termios.c		\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
@@ -21,8 +22,10 @@ OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 CC          := gcc
 CFLAGS      := -Wall -Wextra -Werror -fsanitize=address -g3
 CPPFLAGS    := $(addprefix -I,$(INCS))
-LDFLAGS     := -L$(READLINE_DIR)/lib
-LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
+# -------  GARDER POUR ECOLE ------- 
+# LDLIBS		:= -L/Users/${USER}/.brew/opt/readline/lib -I/Users/${USER}/.brew/opt/readline/include
+# -------  GARDER POUR ECOLE -------
+LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
 
 RM          := rm -rf
 MAKEFLAGS   += --silent --no-print-directory

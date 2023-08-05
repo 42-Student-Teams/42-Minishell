@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"*.excalidraw": "json",
+		"*.excalidrawlib": "json",
+		"readline.h": "c"
+	}
+}

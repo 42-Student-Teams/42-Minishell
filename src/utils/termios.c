@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_tree.c                                        :+:      :+:    :+:   */
+/*   termios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 19:50:38 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/07 12:14:36 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/08/05 22:01:17 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/08/05 22:08:15 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_tree(t_tree *node)
+void	init_termios(void)
 {
-	if (node == NULL)
-		return ;
-    // Free the left subtree
-	if (node->left)
-    {
-		free_tree(node->left);
-    	node->left = NULL;
-	}
-    // Free the right subtree
-    if (node->right)
-    {
-		free_tree(node->right);
-    	node->right = NULL;
-	}
-    // Free the command string
-    if (node->cmd)
-	{
-		free(node->cmd);
-    	node->cmd = NULL;
-	}
-    // Free the current node
-    free(node);
-	node = NULL;
+	struct termios	termios;
+	
+	//catch ctrl + C
+	signal(SIGINT, signal_handler);
+	//catch ctrl + D
+	signal(SIGQUIT, signal_handler);
+	if ((tcgetattr(STDIN_FILENO, &termios)) == -1)
+		exit(EXIT_FAILURE);
+	termios.c_lflag &= ~(ECHOCTL);
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
+		exit(EXIT_FAILURE);
 }

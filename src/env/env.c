@@ -6,29 +6,40 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/20 16:43:39 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:05:02 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-//test
-int	init_env(t_shell *shell, char **env)
+void	copy_env(char **env)
 {
-	while (*env && env)
+	int	i;
+
+	i = 0;
+	g_shell.env_copy = ft_calloc(sizeof(char **), 1000);
+	while (env[i])
 	{
-		shell->env = (t_env *)malloc(sizeof(t_env));
-		if (shell->env == NULL)
-			return (-1);
-		shell->env->key = ft_substr(*env, 0, ft_strchr(*env, '=') - *env);
-		shell->env->value = ft_substr(*env, ft_strchr(*env, '=') - *env + 1, ft_strlen(*env));
-		//prints the key and value of the env when using export
-		// printf("declare -x %s=%s\n", shell->env->key, shell->env->value);
-		env++; 
+		g_shell.env_copy[i] = ft_strdup(env[i]);
+		i++;
 	}
-	return (0);
 }
+
+// PEUT ETRE USELESS 
+// int	init_env(t_shell *shell)
+// {
+// 	while (*env && env)
+// 	{
+// 		shell->env = (t_env *)malloc(sizeof(t_env));
+// 		if (shell->env == NULL)
+// 			return (-1);
+// 		shell->env->key = ft_substr(*env, 0, ft_strchr(*env, '=') - *env);
+// 		shell->env->value = ft_substr(*env, ft_strchr(*env, '=') - *env + 1, ft_strlen(*env));
+
+// 		env++; 
+// 	}
+// 	return (0);
+// }
 
 
 // Doesn't work it aborts at line 42 !!!!!

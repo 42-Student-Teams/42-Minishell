@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 20:47:29 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/20 18:50:30 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/07/20 18:18:23 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/08/05 22:00:50 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_env(t_env *env)
+
+void	signal_handler(int signal)
 {
-	t_env	*temp;
-	
-	while (env)
+	if (signal == SIGINT)
 	{
-		temp = env;
-		env = env->next;
-		free(temp->key);
-		free(temp->value);
-		free(temp);
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }

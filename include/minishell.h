@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/05 22:03:37 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:09:11 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_global
 	char	**env_copy;
 }	t_global;
 
+// VARIABLE GLOBALE 
+t_global	g_shell;
+
 /*
 ** Faire categorie par structure et mettre en commentaire
 */
@@ -57,8 +60,6 @@ typedef struct s_shell
 	pid_t			pid;
 }	t_shell;
 
-t_global	g_shell;
-
 t_list	*get_data(t_list *ptr);
 int		free_all(void);
 void	init_minishell(void);
@@ -72,14 +73,14 @@ void	copy_env(char **env);
 void	free_split(char **split);
 void	rl_replace_line(const char *text, int clear_undo);
 
-// --------- BUILTINS ---------
-int		test_builtins(char *input);
-
 // --------- SIGNALS ---------
 void	signal_handler(int signal);
 
 // --------- TERMIOS ---------
 void	init_termios(void);
+
+// --------- BUILTINS ---------
+int		test_builtins(char *input);
 
 // CD
 int		my_cd(char **args);
@@ -87,5 +88,8 @@ int		exec_cd(char *path);
 
 // ECHO
 void	my_echo(char **args);
+
+// PWD
+void	my_pwd(void);
 
 #endif

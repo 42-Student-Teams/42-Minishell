@@ -16,6 +16,7 @@ SRCS        := src/main.c		\
 		src/builtins/cd.c		\
 		src/builtins/echo.c		\
 		src/builtins/pwd.c		\
+		src/builtins/env.c		\
 		src/utils/termios.c		\
 
 BUILD_DIR   := .build

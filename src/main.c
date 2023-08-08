@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/05 22:07:47 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:32:49 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_loop(t_shell shell)
 		{
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
-			if (ft_strcmp(shell.input, "exit") == 0)
+			if (ft_strncmp(shell.input, "exit", 4) == 0)
 				exit(0);
 			if (test_builtins(shell.input) == 1)
 			{

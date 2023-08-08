@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/07/17 15:27:43 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:08:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	exec_cd(char	*path)
 	if (path == NULL)
 		path = getenv("HOME");
 	if (chdir(path) == -1)
+	{
+		perror(NULL);
 		return (1);
+	}
 	return (0);
 }
 

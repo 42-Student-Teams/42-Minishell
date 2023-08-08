@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/06 12:09:11 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:59:55 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ void	my_echo(char **args);
 
 // PWD
 void	my_pwd(void);
+
+// ENV
+int 	my_env(char **args);
 
 #endif

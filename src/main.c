@@ -6,18 +6,25 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/08 13:32:49 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/09 03:30:08 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	init_shell(t_shell *shell, char **env)
-{
+{	
 	ft_bzero((void *)&shell, 0);
-	ft_bzero((void *)&g_shell, 0);
+	ft_bzero((void *)&g_shell, 0); 
 	//copy env dans la variable globale accessible partout
 	copy_env(env);
+	// crée liste chainée pour env
+	g_shell.env_l = NULL;
+	if(env_list(&g_shell.env_l, g_shell.env_copy) == 1)
+	{
+		ft_putendl_fd("env liste error", 2);
+		exit(1);
+	}
 	// catch les signaux et cache le ^C, ^/ ,^D etc	
 	init_termios();
 	// init_env(&shell);
@@ -51,6 +58,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)av;
 	(void)ac;
+
 	//check si on est dans un terminal
 	if (isatty(0) && isatty(2))
 		rl_outstream = stderr;

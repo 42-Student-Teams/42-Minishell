@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/05 22:05:02 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:00:06 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,39 @@ void	copy_env(char **env)
 	}
 }
 
-// PEUT ETRE USELESS 
-// int	init_env(t_shell *shell)
-// {
-// 	while (*env && env)
-// 	{
-// 		shell->env = (t_env *)malloc(sizeof(t_env));
-// 		if (shell->env == NULL)
-// 			return (-1);
-// 		shell->env->key = ft_substr(*env, 0, ft_strchr(*env, '=') - *env);
-// 		shell->env->value = ft_substr(*env, ft_strchr(*env, '=') - *env + 1, ft_strlen(*env));
+// crée un élément de la liste
 
-// 		env++; 
-// 	}
-// 	return (0);
-// }
+t_env	*new_el(char *key_value)
+{
+	t_env	*new;
 
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->key = ft_substr(key_value, 0, ft_strchr(key_value, '=') - key_value);
+	new->value = ft_substr(key_value, ft_strchr(key_value, '=')
+			- key_value + 1, ft_strlen(key_value));
+	new->next = NULL;
+	return (new);
+}
 
-// Doesn't work it aborts at line 42 !!!!!
-// void	print_env(t_env *env)
-// {
-// 	t_env *current;
+// crée la liste liste 
 
-// 	current = env;
-// 	while (current)
-// 	{
-// 		printf("declare -x %s=%s\n", current->key, current->value);
-// 		current = current->next;
-// 	}
-// }
+int	env_list(t_env **env_l, char **env_copy)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	*env_l = new_el(env_copy[i]);
+	while (env_copy[++i] && *env_l)
+	{
+		tmp = *env_l;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_el(env_copy[i]);
+		if (!(tmp->next))
+			return (1);
+	}
+	return (0);
+}

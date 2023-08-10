@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   tabs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 16:26:42 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/10 12:55:30 by bverdeci         ###   ########.fr       */
+/*   Created: 2023/08/09 03:35:35 by bverdeci          #+#    #+#             */
+/*   Updated: 2023/08/09 03:43:35 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	my_env(char **args)
+int		strtab_len(char **str_tab)
 {
-	int		i;
-	t_env	*tmp;
+	int	i;
 
 	i = 0;
-	while (args[++i])
-	{
-		if (ft_strcmp(args[i], " ") != 0)
-		{
-			ft_putendl_fd("env error", 2);
-			return (1);
-		}
-	}
-	tmp = g_shell.env_l;
-	while (tmp)
-	{
-		printf("%s=%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
-	}
-	return (0);
+	while (str_tab[i])
+		i++;
+	return (i);
 }

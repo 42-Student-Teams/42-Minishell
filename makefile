@@ -11,13 +11,16 @@ SRCS        := src/main.c		\
 		src/signals/signals.c	\
 		src/utils/get_data.c	\
 		src/utils/free.c		\
+		src/utils/termios.c		\
+		src/utils/tabs.c		\
 		src/env/env.c			\
 		src/builtins/test.c		\
 		src/builtins/cd.c		\
 		src/builtins/echo.c		\
 		src/builtins/pwd.c		\
 		src/builtins/env.c		\
-		src/utils/termios.c		\
+		src/builtins/export.c	\
+		src/builtins/unset.c	\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

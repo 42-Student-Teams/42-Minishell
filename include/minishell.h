@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/07 10:59:55 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/10 13:03:59 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 
 typedef struct s_global
 {
-	int		status;
-	char	**env_copy;
+	int				status;
+	char			**env_copy;
+	struct s_env	*env_l;
 }	t_global;
 
 // VARIABLE GLOBALE 
@@ -53,25 +54,34 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+/*				ACHTUNG
+**
+**	je capte pas l'utilité si variable globale deja présente 
+**
+*/ 
 typedef struct s_shell
 {
 	char			*input;
-	struct s_env	*env;
 	pid_t			pid;
 }	t_shell;
+
 
 t_list	*get_data(t_list *ptr);
 int		free_all(void);
 void	init_minishell(void);
 
 // --------- ENV ---------
-int		init_env(t_shell *shell);
 void	print_env(t_env *env);
 void	copy_env(char **env);
+int		env_list(t_env **env_l, char **env_copy);
+t_env 	*new_el(char *key_value);
+
 
 // --------- UTILS ---------
 void	free_split(char **split);
 void	rl_replace_line(const char *text, int clear_undo);
+int		strtab_len(char **str_tab);
+
 
 // --------- SIGNALS ---------
 void	signal_handler(int signal);
@@ -93,6 +103,12 @@ void	my_echo(char **args);
 void	my_pwd(void);
 
 // ENV
-int 	my_env(char **args);
+int		my_env(char **args);
+
+// EXPORT
+int		my_export(char **args, t_env **env_l);
+
+// UNSET
+void	my_unset(t_env **env_l);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/09 04:19:39 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:59:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int	test_builtins(char *input)
 			return (1);
 	}
 	else if (ft_strcmp(cmd, "export") == 0)
-	{
-		if (my_export(args, &g_shell.env_l) == 1)
-			return (1);
-	}
+		my_export(args, &g_shell.env_l);
 	free_split(args);
 	return (0);
 }

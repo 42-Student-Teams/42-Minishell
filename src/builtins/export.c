@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/10 12:59:01 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/11 01:25:58 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,41 +39,59 @@ static int	in_env(char *key, t_env *env_l)
 	return (0);
 }
 
-static void	change_value(char **args, t_env *tmp, char *key)
+static void	change_value(char *args, t_env *tmp, char *key)
 {
 	while (ft_strcmp(tmp->key, key))
 			tmp = tmp->next;
 	free(tmp->value);
-	tmp->value = ft_substr(args[1], ft_strchr(args[1], '=')
-			- args[1] + 1, ft_strlen(args[1]));
-	free(key);
+	tmp->value = ft_substr(args, ft_strchr(args, '=')
+			- args + 1, ft_strlen(args));
+}
+
+static void	add_to_env(char **args, t_env **env_l, int *not_in)
+{
+	t_env	*tmp;
+	char	*key;
+	int		i;
+
+	i = 0;
+	while (args[++i])
+	{
+		if (is_in(args[i]))
+		{
+			if (!(*env_l))
+				*env_l = new_el(args[i++]);
+			tmp = *env_l;
+			key = ft_substr(args[i], 0, ft_strchr(args[i], '=') - args[i]);
+			if (in_env(key, *env_l))
+				change_value(args[i], tmp, key);
+			else
+			{
+				*env_l = new_el(args[i]);
+				(*env_l)->next = tmp;
+			}
+			free(key);
+		}
+		else
+			++(*not_in);
+	}
 }
 
 int	my_export(char **args, t_env **env_l)
 {
-	int		len;
+	int		not_in;
 	t_env	*tmp;
-	char	*key;
 
-	len = strtab_len(args);
-	if (len > 2 || len < 2 || !is_in(args[1]))
-		return (0);
-	if (!(*env_l))
-	{
-		*env_l = new_el(args[1]);
-		if (!(*env_l))
-			return (1);
-		return (0);
-	}
 	tmp = *env_l;
-	key = ft_substr(args[1], 0, ft_strchr(args[1], '=') - args[1]);
-	if (in_env(key, *env_l))
+	not_in = 0;
+	if (!args[1])
 	{
-		change_value(args, tmp, key);
-		return (0);
+		while (tmp)
+		{
+			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			tmp = tmp->next;
+		}
 	}
-	free(key);
-	*env_l = new_el(args[1]);
-	(*env_l)->next = tmp;
-	return (0);
+	add_to_env(args, env_l, &not_in);
+	return (not_in);
 }

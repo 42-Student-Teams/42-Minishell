@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/14 14:39:00 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:58:25 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	commands(char **args, char *cmd)
 	else if (ft_strcmp(cmd, "export") == 0)
 		my_export(args, &g_shell.env_l);
 	else if (ft_strcmp(cmd, "unset") == 0)
-		my_unset(&g_shell.env_l, args);
+		my_unset(&g_shell.env_l, args, -1);
 	return (0);
 }
 

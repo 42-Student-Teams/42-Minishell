@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 18:03:23 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:58:45 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int		is_equal_in(char *s);
 int		key_in_env(char *key, t_env *env_l);
 
 // UNSET
-int		my_unset(t_env **env_l, char **args);
+int		my_unset(t_env **env_l, char **args, int i);
 
 #endif

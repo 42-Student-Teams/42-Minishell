@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:51 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/13 23:00:47 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:59:13 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,47 @@ static void	delete_node(t_env *tmp, t_env **env_l, int *found)
 	*found = 1;
 }
 
-int	my_unset(t_env **env_l, char **args)
+static int	check_valid(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (!ft_isalpha(s[i]) && !ft_isdigit(s[i]) && s[i] != '_')
+		{
+			printf("bash: unset: `%s': not a valid identifier\n", s);
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	my_unset(t_env **env_l, char **args, int i)
 {
 	t_env	*tmp;
 	int		found;
 	int		not_in;
-	int		i;
 
 	not_in = 0;
-	i = 0;
 	while (args[++i])
 	{
 		tmp = *env_l;
 		found = 0;
-		while (tmp)
+		if (check_valid(args[i]))
 		{
-			if (ft_strcmp(tmp->key, args[i]) == 0)
+			while (tmp)
 			{
-				delete_node(tmp, env_l, &found);
-				break ;
-			}
-			else
+				if (ft_strcmp(tmp->key, args[i]) == 0)
+				{
+					delete_node(tmp, env_l, &found);
+					break ;
+				}
 				tmp = tmp->next;
+			}
+			if (found == 0)
+				++not_in;
 		}
-		if (found == 0)
-			++not_in;
 	}
 	return (not_in);
 }

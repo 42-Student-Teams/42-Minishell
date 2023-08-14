@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/09 03:30:08 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:40:05 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_loop(t_shell shell)
 				add_history(shell.input);
 			if (ft_strncmp(shell.input, "exit", 4) == 0)
 				exit(0);
-			if (test_builtins(shell.input) == 1)
+			if (builtins(shell.input) == 1)
 			{
 				printf("BUILTIN ERROR\n");
 				exit (1);

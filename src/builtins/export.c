@@ -6,38 +6,11 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/11 01:25:58 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:29:52 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_in(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '=')
-			return (1);
-	}
-	return (0);
-}
-
-static int	in_env(char *key, t_env *env_l)
-{
-	t_env	*tmp;
-
-	tmp = env_l;
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->key, key) == 0)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 static void	change_value(char *args, t_env *tmp, char *key)
 {
@@ -48,37 +21,64 @@ static void	change_value(char *args, t_env *tmp, char *key)
 			- args + 1, ft_strlen(args));
 }
 
-static void	add_to_env(char **args, t_env **env_l, int *not_in)
+static char	*check_valid(char *s, int i)
+{
+	int		len;
+	char	*key;
+
+	len = ft_strlen(s);
+	key = s;
+	while (s[++i] && i < len - 1)
+	{
+		if (!ft_isalpha(s[i]) && !ft_isdigit(s[i]) && s[i] != '_')
+		{
+			printf("bash: export: `%s': not a valid identifier\n", s);
+			return (NULL);
+		}
+	}
+	if (!ft_isalpha(s[i]) && !ft_isdigit(s[i]) && s[i] != '_' && s[i] != '+')
+	{
+		printf("bash: export: `%s': not a valid identifier\n", s);
+		return (NULL);
+	}
+	if (s[i] == '+')
+	{
+		key = ft_substr(s, 0, len - 1);
+		free(s);
+	}
+	return (key);
+}
+
+static void	add_to_env(char *args, t_env **env_l, int *not_in)
 {
 	t_env	*tmp;
 	char	*key;
-	int		i;
 
-	i = 0;
-	while (args[++i])
+	if (is_equal_in(args))
 	{
-		if (is_in(args[i]))
+		tmp = *env_l;
+		key = ft_substr(args, 0, ft_strchr(args, '=') - args);
+		key = check_valid(key, -1);
+		if (key)
 		{
-			if (!(*env_l))
-				*env_l = new_el(args[i++]);
-			tmp = *env_l;
-			key = ft_substr(args[i], 0, ft_strchr(args[i], '=') - args[i]);
-			if (in_env(key, *env_l))
-				change_value(args[i], tmp, key);
+			if (key_in_env(key, *env_l))
+				change_value(args, tmp, key);
 			else
 			{
-				*env_l = new_el(args[i]);
+				*env_l = new_el(key);
 				(*env_l)->next = tmp;
+				tmp->prev = *env_l;
 			}
-			free(key);
 		}
-		else
-			++(*not_in);
+		free(key);
 	}
+	else
+		++(*not_in);
 }
 
 int	my_export(char **args, t_env **env_l)
 {
+	int		i;
 	int		not_in;
 	t_env	*tmp;
 
@@ -92,6 +92,8 @@ int	my_export(char **args, t_env **env_l)
 			tmp = tmp->next;
 		}
 	}
-	add_to_env(args, env_l, &not_in);
+	i = 0;
+	while (args[++i])
+		add_to_env(args[i], env_l, &not_in);
 	return (not_in);
 }

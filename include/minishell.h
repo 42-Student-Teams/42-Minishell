@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/10 13:03:59 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:30:46 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	struct s_env	*next;
+	struct s_env	*prev;
 }	t_env;
 
 /*				ACHTUNG
 **
 **	je capte pas l'utilité si variable globale deja présente 
 **
-*/ 
+*/
 typedef struct s_shell
 {
 	char			*input;
@@ -74,7 +75,7 @@ void	init_minishell(void);
 void	print_env(t_env *env);
 void	copy_env(char **env);
 int		env_list(t_env **env_l, char **env_copy);
-t_env 	*new_el(char *key_value);
+t_env	*new_el(char *key_value);
 
 
 // --------- UTILS ---------
@@ -90,7 +91,7 @@ void	signal_handler(int signal);
 void	init_termios(void);
 
 // --------- BUILTINS ---------
-int		test_builtins(char *input);
+int		builtins(char *input);
 
 // CD
 int		my_cd(char **args);
@@ -107,8 +108,10 @@ int		my_env(char **args);
 
 // EXPORT
 int		my_export(char **args, t_env **env_l);
+int		is_equal_in(char *s);
+int		key_in_env(char *key, t_env *env_l);
 
 // UNSET
-void	my_unset(t_env **env_l);
+int		my_unset(t_env **env_l, char **args);
 
 #endif

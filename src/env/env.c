@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/10 13:00:06 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:43:41 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_env	*new_el(char *key_value)
 	new->value = ft_substr(key_value, ft_strchr(key_value, '=')
 			- key_value + 1, ft_strlen(key_value));
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -47,17 +48,24 @@ int	env_list(t_env **env_l, char **env_copy)
 {
 	int		i;
 	t_env	*tmp;
+	t_env	*prev;
 
 	i = 0;
+	tmp = NULL;
 	*env_l = new_el(env_copy[i]);
-	while (env_copy[++i] && *env_l)
+	prev = NULL;
+	while (env_copy[++i])
 	{
 		tmp = *env_l;
 		while (tmp->next)
+		{
+			prev = tmp;
 			tmp = tmp->next;
+		}
 		tmp->next = new_el(env_copy[i]);
+		tmp->prev = prev;
 		if (!(tmp->next))
-			return (1);
+			return (ERROR);
 	}
 	return (0);
 }

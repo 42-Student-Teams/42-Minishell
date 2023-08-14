@@ -13,7 +13,7 @@ SRCS        := src/main.c			\
 		src/utils/free.c			\
 		src/utils/termios.c			\
 		src/utils/tabs.c			\
-		src/env/env.c				\
+		src/env/init_env.c			\
 		src/builtins/test.c			\
 		src/builtins/cd.c			\
 		src/builtins/echo.c			\

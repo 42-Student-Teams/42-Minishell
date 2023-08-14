@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 12:30:46 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/14 18:03:23 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,11 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "ast.h"
-
-# define SUCCESS 0
-# define ERROR 1
-
-typedef struct s_global
-{
-	int				status;
-	char			**env_copy;
-	struct s_env	*env_l;
-}	t_global;
+# include "define.h"
+# include "struct.h"
 
 // VARIABLE GLOBALE 
 t_global	g_shell;
-
-/*
-** Faire categorie par structure et mettre en commentaire
-*/
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-	struct s_env	*prev;
-}	t_env;
-
-/*				ACHTUNG
-**
-**	je capte pas l'utilité si variable globale deja présente 
-**
-*/
-typedef struct s_shell
-{
-	char			*input;
-	pid_t			pid;
-}	t_shell;
-
 
 t_list	*get_data(t_list *ptr);
 int		free_all(void);

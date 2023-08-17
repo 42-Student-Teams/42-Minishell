@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 18:45:14 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:22:41 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_shell(t_shell *shell, char **env)
 	g_shell.env_l = NULL;
 	if (env_list(&g_shell.env_l, g_shell.env_copy) == 1)
 	{
-		ft_putendl_fd("env liste error", 2);
+		ft_putendl_fd("env liste error", STDERR_FILENO);
 		exit(1);
 	}
 	init_termios();

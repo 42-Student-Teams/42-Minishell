@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 15:52:22 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:17:44 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int		exec_cd(char *path);
 int		my_cd(char **args, t_env **env_l);
 
 // ECHO
-void	my_echo(char **args);
+int		my_echo(char **args);
 
 // PWD
-void	my_pwd(void);
+int		my_pwd(void);
 
 // ENV
 int		my_env(char **args, t_global *g_shell);

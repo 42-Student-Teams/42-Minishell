@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/17 20:31:33 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:56:25 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	handle_string(t_token **token, char *s, int index)
 	(void)token;
 	(void)s;
 	(void)index;
+	printf("HEllo\n");
 	return (0);
 }
 
@@ -55,7 +56,9 @@ int	lexer(t_token **token, char *s, int index)
 		return (1);
 	}
 	else
-		return (handle_string(token, s, index));
+		return (0);
+	// else
+	// 	return (handle_string(token, s, index));
 }
 
 

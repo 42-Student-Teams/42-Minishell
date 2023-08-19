@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 19:32:10 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:54:41 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,14 @@ void	prepare_cmd(t_shell *shell)
 	tokens = NULL;
 	while (shell->input && shell->input[i])
 		i += lexer(&tokens, shell->input, i);
-	first = (t_token *)ft_lst_get((t_list *)tokens, 0);
-	if (first && first->type == E_PIPE)
-	{
-		printf("PIPE ERROR\n");
-		exit(1);
-	}
-	if (builtins(shell->input) == 1)
-	{
-		printf("BUILTIN ERROR\n");
-		exit(1);
-	}
+
+	(void)first;
+	// first = (t_token *)ft_lst_get((t_list *)tokens, 0);
+	// if (first && first->type == E_PIPE)
+	// {
+	// 	printf("PIPE ERROR\n");
+	// 	exit(1);
+	// }
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)
@@ -62,6 +59,7 @@ void	init_loop(t_shell shell, t_global *g_shell)
 		{
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
+			prepare_cmd(&shell);
 			if (builtins(shell.input, g_shell) == 1)
 			{
 				printf("BUILTIN ERROR\n");

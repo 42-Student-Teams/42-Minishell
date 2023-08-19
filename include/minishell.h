@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 19:33:25 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:51:03 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_env	*new_el(char *key_value);
 void	free_split(char **split);
 void	rl_replace_line(const char *text, int clear_undo);
 int		strtab_len(char **str_tab);
+int		ft_isspace(char c);
 
 
 // --------- SIGNALS ---------
@@ -61,28 +62,16 @@ void	signal_handler(int signal);
 void	init_termios(void);
 
 // --------- BUILTINS ---------
-int		builtins(char *input);
-
-// CD
-int		my_cd(char **args);
+int		builtins(char *input, t_global *g_shell);
+int		my_cd(char **args, t_env **env_l);
 int		exec_cd(char *path);
-
-// ECHO
-void	my_echo(char **args);
-
-// PWD
-void	my_pwd(void);
-
-// ENV
-int		my_env(char **args);
-
-// EXPORT
+int		my_echo(char **args);
+int		my_pwd(void);
+int		my_env(char **args, t_global *g_shell);
 int		my_export(char **args, t_env **env_l);
 int		is_equal_in(char *s);
 int		key_in_env(char *key, t_env *env_l);
 int		my_unset(t_env **env_l, char **args, int i);
-
-// EXIT
 int		my_exit(char **args);
 
 #endif

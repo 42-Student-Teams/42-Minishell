@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 19:54:41 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/19 20:42:38 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	prepare_cmd(t_shell *shell)
 	t_token *first;
 	int		i;
 
-	i = 0;
 	tokens = NULL;
+	i = 0;
 	while (shell->input && shell->input[i])
 		i += lexer(&tokens, shell->input, i);
-
 	(void)first;
 	// first = (t_token *)ft_lst_get((t_list *)tokens, 0);
 	// if (first && first->type == E_PIPE)

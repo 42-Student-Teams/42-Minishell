@@ -6,13 +6,13 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 03:35:35 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/09 03:43:35 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:43:36 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		strtab_len(char **str_tab)
+int	strtab_len(char **str_tab)
 {
 	int	i;
 

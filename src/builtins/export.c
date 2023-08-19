@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 12:29:52 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:54:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ static void	change_value(char *args, t_env *tmp, char *key)
 			- args + 1, ft_strlen(args));
 }
 
+static void	print_error_msg(char *s)
+{
+	ft_putstr_fd("bash: export: `", STDERR_FILENO);
+	ft_putstr_fd(s, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+}
+
 static char	*check_valid(char *s, int i)
 {
 	int		len;
@@ -32,13 +39,13 @@ static char	*check_valid(char *s, int i)
 	{
 		if (!ft_isalpha(s[i]) && !ft_isdigit(s[i]) && s[i] != '_')
 		{
-			printf("bash: export: `%s': not a valid identifier\n", s);
+			print_error_msg(s);
 			return (NULL);
 		}
 	}
 	if (!ft_isalpha(s[i]) && !ft_isdigit(s[i]) && s[i] != '_' && s[i] != '+')
 	{
-		printf("bash: export: `%s': not a valid identifier\n", s);
+		print_error_msg(s);
 		return (NULL);
 	}
 	if (s[i] == '+')
@@ -66,6 +73,8 @@ static void	add_to_env(char *args, t_env **env_l, int *not_in)
 			else
 			{
 				*env_l = new_el(key);
+				(*env_l)->value = ft_substr(args, ft_strchr(args, '=')
+						- args + 1, ft_strlen(args));
 				(*env_l)->next = tmp;
 				tmp->prev = *env_l;
 			}
@@ -88,7 +97,11 @@ int	my_export(char **args, t_env **env_l)
 	{
 		while (tmp)
 		{
-			printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
+			ft_putstr_fd("declare -x ", STDOUT_FILENO);
+			ft_putstr_fd(tmp->key, STDOUT_FILENO);
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(tmp->value, STDOUT_FILENO);
+			ft_putendl_fd("\"", STDOUT_FILENO);
 			tmp = tmp->next;
 		}
 	}

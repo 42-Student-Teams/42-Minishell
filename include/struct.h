@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/14 18:02:08 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:44:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "define.h"
 
-/*  
+/*
     - fullcmd : Tableau de chaînes représentant la commande et ses arguments.
     - fullpath : Tableau de chaînes contenant les chemins complets associés à chaque commande.
     - infile : Descripteur de fichier pour l'entrée (stdin) de la commande.
@@ -49,7 +49,6 @@ typedef struct s_token
 	enum e_token_type	type;
 	struct s_token		*next;
 }	t_token;
-
 
 typedef struct s_env
 {

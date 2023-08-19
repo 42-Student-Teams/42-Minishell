@@ -24,6 +24,7 @@ SRCS        := src/main.c			\
 		src/builtins/export.c		\
 		src/builtins/unset.c		\
 		src/tokenizer/tokenizer.c	\
+		src/builtins/exit.c			\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

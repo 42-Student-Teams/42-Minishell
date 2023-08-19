@@ -6,13 +6,13 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/06 10:31:17 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:17:37 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	my_echo(char **args)
+int	my_echo(char **args)
 {
 	int		i;
 	char	*option;
@@ -26,11 +26,12 @@ void	my_echo(char **args)
 	}
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		i++;
 		if (args[i])
-			printf(" ");
+			ft_putstr_fd(" ", STDOUT_FILENO);
 	}
 	if (!option)
-		printf("\n");
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	return (0);
 }

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/11 20:43:41 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:53:18 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	copy_env(char **env)
+void	copy_env(char **env, t_global *g_shell)
 {
 	int	i;
 
 	i = 0;
-	g_shell.env_copy = ft_calloc(sizeof(char **), 1000);
+	g_shell->env_copy = ft_calloc(sizeof(char **), 1000);
 	while (env[i])
 	{
-		g_shell.env_copy[i] = ft_strdup(env[i]);
+		g_shell->env_copy[i] = ft_strdup(env[i]);
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:42 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/16 11:47:58 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:54:53 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	my_env(char **args)
+int	my_env(char **args, t_global *g_shell)
 {
 	int		i;
 	t_env	*tmp;
@@ -26,7 +26,7 @@ int	my_env(char **args)
 			return (1);
 		}
 	}
-	tmp = g_shell.env_l;
+	tmp = g_shell->env_l;
 	while (tmp)
 	{
 		ft_putstr_fd(tmp->key, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 18:58:45 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:56:24 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,20 @@
 # include "define.h"
 # include "struct.h"
 
-// VARIABLE GLOBALE 
-t_global	g_shell;
-
 t_list	*get_data(t_list *ptr);
 int		free_all(void);
 void	init_minishell(void);
 
 // --------- ENV ---------
 void	print_env(t_env *env);
-void	copy_env(char **env);
+void	copy_env(char **env, t_global *g_shell);
 int		env_list(t_env **env_l, char **env_copy);
 t_env	*new_el(char *key_value);
-
 
 // --------- UTILS ---------
 void	free_split(char **split);
 void	rl_replace_line(const char *text, int clear_undo);
 int		strtab_len(char **str_tab);
-
 
 // --------- SIGNALS ---------
 void	signal_handler(int signal);
@@ -58,7 +53,7 @@ void	signal_handler(int signal);
 void	init_termios(void);
 
 // --------- BUILTINS ---------
-int		builtins(char *input);
+int		builtins(char *input, t_global *g_shell);
 
 // CD
 int		my_cd(char **args);
@@ -71,7 +66,7 @@ void	my_echo(char **args);
 void	my_pwd(void);
 
 // ENV
-int		my_env(char **args);
+int		my_env(char **args, t_global *g_shell);
 
 // EXPORT
 int		my_export(char **args, t_env **env_l);
@@ -80,5 +75,8 @@ int		key_in_env(char *key, t_env *env_l);
 
 // UNSET
 int		my_unset(t_env **env_l, char **args, int i);
+
+// EXIT
+int		my_exit(char **args);
 
 #endif

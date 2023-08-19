@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/16 12:53:35 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:44:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_token
 	enum e_token_type	type;
 	struct s_token		*next;
 }	t_token;
-
 
 typedef struct s_env
 {

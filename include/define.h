@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:59:58 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/14 18:00:57 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:43:57 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define ERROR 1
 
 # define DEFAULT_PATH "/usr/bin:/bin"
-
 
 /*
 	E_END,			\n or #

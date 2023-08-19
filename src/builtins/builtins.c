@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/19 12:56:07 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:53:41 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,19 @@
 static int	commands(char **args, char *cmd, t_global *g_shell)
 {
 	if (ft_strcmp(cmd, "cd") == 0)
-	{
-		if (my_cd(args) == 1)
-			return (1);
-	}
+		g_shell->status = my_cd(args, &g_shell->env_l);
 	else if (ft_strcmp(cmd, "echo") == 0)
 		my_echo(args);
 	else if (ft_strcmp(cmd, "pwd") == 0)
 		my_pwd();
 	else if (ft_strcmp(cmd, "env") == 0)
-	{
-		if (my_env(args, g_shell) == 1)
-			return (1);
-	}
+		g_shell->status = my_env(args, g_shell);
 	else if (ft_strcmp(cmd, "export") == 0)
-		my_export(args, &g_shell->env_l);
+		g_shell->status = my_export(args, &g_shell->env_l);
 	else if (ft_strcmp(cmd, "unset") == 0)
-		my_unset(&g_shell->env_l, args, -1);
+		g_shell->status = my_unset(&g_shell->env_l, args, -1);
 	else if (ft_strcmp(cmd, "exit") == 0)
-		my_exit(args);
+		g_shell->status = my_exit(args);
 	return (0);
 }
 

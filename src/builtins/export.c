@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 12:11:44 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:54:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	add_to_env(char *args, t_env **env_l, int *not_in)
 			else
 			{
 				*env_l = new_el(key);
+				(*env_l)->value = ft_substr(args, ft_strchr(args, '=')
+						- args + 1, ft_strlen(args));
 				(*env_l)->next = tmp;
 				tmp->prev = *env_l;
 			}

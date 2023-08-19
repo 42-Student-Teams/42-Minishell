@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 12:56:24 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:52:22 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	init_termios(void);
 int		builtins(char *input, t_global *g_shell);
 
 // CD
-int		my_cd(char **args);
 int		exec_cd(char *path);
+int		my_cd(char **args, t_env **env_l);
 
 // ECHO
 void	my_echo(char **args);

@@ -6,7 +6,7 @@
 #    By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/27 11:02:33 by lsaba-qu          #+#    #+#              #
-#    Updated: 2023/06/22 16:07:10 by lsaba-qu         ###   ########.fr        #
+#    Updated: 2023/08/17 20:28:54 by lsaba-qu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,8 @@ SRCS	:= \
 	ft_putnbrendl_fd.c			\
 	ft_strcat.c					\
 	ft_strncat.c				\
-	ft_strcpy.c
+	ft_strcpy.c					\
+	ft_lst_get.c				\
 	
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 

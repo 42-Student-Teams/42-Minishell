@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 17:06:04 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/17 20:28:34 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/08/17 20:21:08 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/08/17 20:21:25 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_isascii(int c)
+int	ft_isspace(char c)
 {
-	if (c >= 0 && c <= 127)
-	{
+	if (c == ' ' || c == '\n' || c == '\t'
+		|| c == '\r' || c == '\v' || c == '\f')
 		return (1);
-	}
 	return (0);
+}
+
+void	printinfo(const char *format, ...)
+{
+	va_list	args;
+
+	va_start(args, format);
+	vprintf(format, args);
+	va_end(args);
 }

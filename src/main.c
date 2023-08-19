@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 18:45:14 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:27:13 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,47 @@ void	init_shell(t_shell *shell, char **env)
 	init_termios();
 }
 
+void	prepare_cmd(t_shell *shell)
+{
+	t_token *tokens;
+	t_token *first;
+	int		i;
+
+	i = 0;
+	tokens = NULL;
+	while (shell->input && shell->input[i])
+		i += lexer(&tokens, shell->input, i);
+	first = (t_token *)ft_lst_get((t_list *)tokens, 0);
+	if (first && first->type == E_PIPE)
+	{
+		printf("PIPE ERROR\n");
+		exit(1);
+	}
+	if (builtins(shell->input) == 1)
+	{
+		printf("BUILTIN ERROR\n");
+		exit(1);
+	}
+}
+
 void	init_loop(t_shell shell)
 {
 	while (42)
 	{
 		shell.input = readline("Minishell$ ");
 		if (!shell.input)
-			exit(0);
+		{
+			ft_putendl_fd("exit", STDOUT_FILENO);
+			exit(EXIT_SUCCESS);
+		}
 		if (shell.input[0] != '\0')
 		{
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
 			if (ft_strncmp(shell.input, "exit", 4) == 0)
 				exit(0);
-			if (builtins(shell.input) == 1)
-			{
-				printf("BUILTIN ERROR\n");
-				exit (1);
-			}
+			printf("HELLO\n");
+			prepare_cmd(&shell);
 		}
 	}
 }

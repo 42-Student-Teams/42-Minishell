@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lst_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 17:06:04 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/17 20:28:34 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/08/17 20:28:07 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/08/17 20:28:17 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(int c)
+/* gets t_list at index, supports negative indexes */
+t_list	*ft_lst_get(t_list *lst, ssize_t index)
 {
-	if (c >= 0 && c <= 127)
+	ssize_t	i;
+
+	if (!lst)
+		return (NULL);
+	if (index < 0)
+		index = ft_lstsize(lst) + index;
+	if (index < 0)
+		return (NULL);
+	i = 0;
+	while (lst)
 	{
-		return (1);
+		if (i == index)
+			return (lst);
+		lst = lst->next;
+		i ++;
 	}
-	return (0);
+	return (NULL);
 }

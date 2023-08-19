@@ -13,6 +13,7 @@ SRCS        := src/main.c			\
 		src/utils/free.c			\
 		src/utils/termios.c			\
 		src/utils/tabs.c			\
+		src/utils/utils1.c			\
 		src/env/init_env.c			\
 		src/builtins/builtins.c		\
 		src/builtins/cd.c			\
@@ -22,6 +23,7 @@ SRCS        := src/main.c			\
 		src/builtins/export_utils.c	\
 		src/builtins/export.c		\
 		src/builtins/unset.c		\
+		src/tokenizer/tokenizer.c	\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

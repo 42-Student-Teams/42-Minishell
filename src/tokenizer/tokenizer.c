@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 20:22:16 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:14:20 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ t_token	*ft_lstnewtoken(enum e_token_type type, char *str)
 	return (new);
 }
 
+
+
+
 int	handle_string(t_token **token, char *s, int index)
 {
-	(void)token;
+	int	end;
+
+	s += 
 	(void)index;
 	return (ft_strlen(s));
 }

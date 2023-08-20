@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:59:58 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/19 12:43:57 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:36:42 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ enum e_token_type
 	E_OUTFILE,
 	E_HEREDOC,
 	E_APPEND,
+	E_WORD,
 };
 
 #endif

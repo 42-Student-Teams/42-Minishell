@@ -3,32 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/20 21:59:222 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:22:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lstnewtoken(enum e_token_type type, char *str)
-{
-	t_token	*new;
-
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return (NULL);
-	new->str = str;
-	new->type = type;
-	new->next = NULL;
-	return (new);
-}
-
 static int	ft_istoken(char *s, int index)
 {
-	char c1;
-	char c2;
+	char	c1;
+	char	c2;
 
 	c1 = s[index];
 	c2 = s[index + 1];
@@ -44,30 +31,6 @@ static int	ft_istoken(char *s, int index)
 		return (1);
 	return (0);
 }
-
-// static char	*ft_check_quotes(char *s)
-// {
-// 	size_t 	len;
-// 	char	*str;
-	
-// 	len = ft_strlen(s);
-// 	if (s[0] == '\'')
-// 	{
-// 		return (ft_strdup(str));
-// 	}
-//     else if (len >= 2 && s[0] == '\'' && s[len - 1] == '\'')
-//     {
-// 		str = ft_strtrim(s, "'");
-//         return (str);
-//     }
-//     else if (len >= 2 && s[0] == '"' && s[len - 1] == '"')
-//     {
-// 		str = ft_strtrim(s, "\"");
-//         return (str);
-//     }
-	
-//     return NULL;
-// }
 
 int	handle_string(t_token **token, char *s, int index)
 {
@@ -90,8 +53,8 @@ int	handle_string(t_token **token, char *s, int index)
 
 int	lexer(t_token **token, char *s, int index)
 {
-	char c1;
-	char c2;
+	char	c1;
+	char	c2;
 
 	c1 = s[index];
 	c2 = s[index + 1];
@@ -113,12 +76,21 @@ int	lexer(t_token **token, char *s, int index)
 		return (handle_string(token, s, index));
 }
 
-
-int	insert_token_into_lst(enum e_token_type t, char *value, t_token **lst, int i)
+int	insert_token_into_lst(enum e_token_type t, char *value,
+		t_token **lst, int i)
 {
 	t_token	*new;
+	t_token	*tmp;
 
 	new = ft_lstnewtoken(t, value);
-	ft_lstadd_back((t_list **)lst, (t_list *)new);
+	tmp = *lst;
+	if (tmp)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		return (i);
+	}
+	*lst = new;
 	return (i);
 }

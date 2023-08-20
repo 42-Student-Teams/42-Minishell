@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 19:51:03 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:22:07 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	prepare_cmd(t_shell *shell);
 t_token	*ft_lstnewtoken(enum e_token_type type, char *str);
 int		lexer(t_token **token, char *s, int index);
 int		handle_string(t_token **token, char *s, int index);
-int		insert_token_into_lst(enum e_token_type t, char *value, t_token **lst, int i);
+int		insert_token_into_lst(enum e_token_type t, char *value,
+			t_token **lst, int i);
 
 // --------- ENV ---------
 void	print_env(t_env *env);
@@ -53,7 +54,7 @@ void	free_split(char **split);
 void	rl_replace_line(const char *text, int clear_undo);
 int		strtab_len(char **str_tab);
 int		ft_isspace(char c);
-
+void	printinfo(const char *format, ...);
 
 // --------- SIGNALS ---------
 void	signal_handler(int signal);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/20 21:53:24 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:15:53 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,13 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 
 void	prepare_cmd(t_shell *shell)
 {
-	t_token *tokens;
-	t_token *first;
+	t_token	*tokens;
 	int		i;
 
 	tokens = NULL;
 	i = 0;
-	while (shell->input && shell->input[i])
+	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
-	(void)first;
-	// first = (t_token *)ft_lst_get((t_list *)tokens, 0);
-	// if (first && first->type == E_PIPE)
-	// {
-	// 	printf("PIPE ERROR\n");
-	// 	exit(1);
-	// }
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)

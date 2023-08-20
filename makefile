@@ -7,24 +7,26 @@ READLINE_DIR := /opt/homebrew/opt/readline
 INCS        := include libft/include $(READLINE_DIR)/include
 
 SRC_DIR     := src
-SRCS        := src/main.c			\
-		src/signals/signals.c		\
-		src/utils/get_data.c		\
-		src/utils/free.c			\
-		src/utils/termios.c			\
-		src/utils/tabs.c			\
-		src/utils/utils1.c			\
-		src/env/init_env.c			\
-		src/builtins/builtins.c		\
-		src/builtins/cd.c			\
-		src/builtins/echo.c			\
-		src/builtins/pwd.c			\
-		src/builtins/env.c			\
-		src/builtins/export_utils.c	\
-		src/builtins/export.c		\
-		src/builtins/unset.c		\
-		src/tokenizer/tokenizer.c	\
-		src/builtins/exit.c			\
+SRCS        := 							\
+		src/main.c						\
+		src/signals/signals.c			\
+		src/utils/get_data.c			\
+		src/utils/free.c				\
+		src/utils/termios.c				\
+		src/utils/tabs.c				\
+		src/utils/utils1.c				\
+		src/env/init_env.c				\
+		src/builtins/builtins.c			\
+		src/builtins/cd.c				\
+		src/builtins/echo.c				\
+		src/builtins/pwd.c				\
+		src/builtins/env.c				\
+		src/builtins/export_utils.c		\
+		src/builtins/export.c			\
+		src/builtins/unset.c			\
+		src/builtins/exit.c				\
+		src/tokenizer/tokenizer.c		\
+		src/tokenizer/tokenizer_utils.c	\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

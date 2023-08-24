@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/19 12:44:40 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:31:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@
 */
 typedef struct s_parser
 {
-	char			**fullcmd;
-	char			**fullpath;
+	char			*cmd;
+	char			**args;
+	char			*fullpath;
 	int				infile;
 	int				outfile;
 	int				redirect;
 	int				pid;
 	int				nb_args;
-	struct s_cmd	*next;
+	struct s_parser	*next;
 }	t_parser;
 
 /*

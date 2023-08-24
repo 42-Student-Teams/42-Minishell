@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/20 23:15:53 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:46:24 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,30 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 	init_termios();
 }
 
+/* toujours utile pour debug
+while (cmds)
+{
+	printf("CMD : %s\n", cmds->cmd);
+	i = -1;
+	printf("ARGS : \n");
+	while (cmds->args[++i])
+		printf("[%d] %s \n", i, cmds->args[i]);
+	cmds = cmds->next;
+}
+*/
+
 void	prepare_cmd(t_shell *shell)
 {
-	t_token	*tokens;
-	int		i;
+	t_token		*tokens;
+	t_parser	*cmds;
+	int			i;
 
 	tokens = NULL;
+	cmds = NULL;
 	i = 0;
 	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
+	parser(&cmds, tokens);
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)

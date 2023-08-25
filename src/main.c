@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/24 22:46:24 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:43:42 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ while (cmds)
 }
 */
 
-void	prepare_cmd(t_shell *shell)
+void	prepare_cmd(t_shell *shell, t_global *g_shell)
 {
 	t_token		*tokens;
 	t_parser	*cmds;
@@ -49,6 +49,7 @@ void	prepare_cmd(t_shell *shell)
 	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
 	parser(&cmds, tokens);
+	exec_cmd(cmds, g_shell->env_l);
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)
@@ -65,7 +66,7 @@ void	init_loop(t_shell shell, t_global *g_shell)
 		{
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
-			prepare_cmd(&shell);
+			prepare_cmd(&shell, g_shell);
 			if (builtins(shell.input, g_shell) == 1)
 			{
 				printf("BUILTIN ERROR\n");

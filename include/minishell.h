@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/24 16:57:55 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:44:53 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
 void		init_minishell(void);
-void		prepare_cmd(t_shell *shell);
+void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
 // ------- PARSING -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
@@ -44,6 +44,10 @@ int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
 // ------- PARSING.2 -------
 void		parser(t_parser **cmds, t_token *tokens);
+
+// EXECUTION
+void		exec_cmd(t_parser *cmd, t_env *env);
+
 // --------- ENV ---------
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);

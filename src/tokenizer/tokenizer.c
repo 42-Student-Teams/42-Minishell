@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 11:59:43 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:39:50 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ int	handle_string(t_token **token, char *s, int index)
 	flag = 0;
 	while (s[end])
 	{
-		// TO DO : respect_matching_quotes
 		if (s[end] == '\'' || s[end] == '\"')
 		{
 			flag = !flag;
-			// printf("flag :%d : \nchar : %c\n", flag, s[end]);
 		}
 		if (flag)
 			;

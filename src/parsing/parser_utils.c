@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:51:54 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 14:14:02 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:39:10 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,44 @@
 
 char	*trim_matching_quotes(char *str, char quote)
 {
-	char *start = str;
-	char *end = str + strlen(str) - 1;	
-	while (*start == quote && *end == quote) {
-	    start++;
-	    end--;
+	char	*start;
+	char	*end;
+	size_t	len;
+	char	*trimmed;
+
+	start = str;
+	end = str + strlen(str) - 1;
+	while (*start == quote && *end == quote)
+	{
+		start++;
+		end--;
 	}
-	size_t len = end - start + 1;
-	char *trimmed = malloc(len + 1);
+	len = end - start + 1;
+	trimmed = malloc(len + 1);
 	ft_strncpy(trimmed, start, len);
-	trimmed[len] = '\0';	
-	return trimmed;
+	trimmed[len] = '\0';
+	return (trimmed);
 }
 
 void	trim_first_quote(char *command)
 {
-	char *start = command;	
-	// Find the first quote or double quote
-	while (*start && *start != '\'' && *start != '\"') {
-	    start++;
-	}	
-	// If a quote is found, adjust the string
-	if (*start == '\'' || *start == '\"') {
-		char *end = start;	
-		// Find the matching quote or double quote
+	char	*start;
+	char	*end;
+
+	start = command;
+	while (*start && *start != '\'' && *start != '\"')
+	{
+		start++;
+	}
+	if (*start == '\'' || *start == '\"')
+	{
+		end = start;
 		while (*end && *end != *start)
 		{
-		    end++;
+			end++;
 		}
-		// If a matching quote or double quote is found, adjust the string
-		if (*end == *start) {
+		if (*end == *start)
+		{
 			while (*end)
 			{
 				*end = *(end + 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/24 16:31:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 15:41:57 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 
 # include "define.h"
 
-/*
-    - fullcmd : Tableau de chaînes représentant la commande et ses arguments.
-    - fullpath : Tableau de chaînes contenant les chemins complets associés à chaque commande.
-    - infile : Descripteur de fichier pour l'entrée (stdin) de la commande.
-    - outfile : Descripteur de fichier pour la sortie (stdout) de la commande.
-    - redirect : Indicateur pour la redirection de flux (peut être un booléen).
-    - pid : ID du processus associé à la commande.
-    - nb_args : Nombre total d'arguments dans la commande.
-    - next : Pointeur vers la prochaine structure de commande (dans une liste chaînée).
-*/
 typedef struct s_parser
 {
 	char			*cmd;

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 19:40:03 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:08:16 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	(*create_pipes(int nb_cmds))[2]
 
 void	process_exec(t_parser *cmd, t_global *g_shell)
 {
-	(void)cmd;
-	(void)g_shell;
+	char	**paths;
+
+	paths = get_paths(g_shell->env_l);
 }
 
 void	execution(t_parser **cmds, t_global *g_shell)
@@ -85,7 +86,6 @@ void	execution(t_parser **cmds, t_global *g_shell)
 	t_parser	*tmp;
 	int			nb_cmds;
 	int			(*pipes)[2];
-	char		**paths;
 	int			i;
 
 	tmp = *cmds;
@@ -126,5 +126,4 @@ void	execution(t_parser **cmds, t_global *g_shell)
 		waitpid(tmp->pid, &(g_shell)->status, 0);
 		tmp = tmp->next;
 	}
-	paths = get_paths(g_shell->env_l);
 }

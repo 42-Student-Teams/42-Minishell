@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:48:34 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:11:55 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		parser(t_parser **cmds, t_token *tokens);
 char		*trim_matching_quotes(char *str, char quote);
 
 // EXECUTION
-void		exec_cmd(t_parser *cmd, t_env *env);
+void		execution(t_parser **cmds, t_global *g_shell);
 
 // --------- ENV ---------
 void		print_env(t_env *env);

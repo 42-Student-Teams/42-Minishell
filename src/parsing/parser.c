@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 15:40:56 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:07:47 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_cmd(t_parser **cmd)
 	tmp->infile = 0;
 	tmp->outfile = 1;
 	tmp->nb_args = 0;
+	tmp->index = 0;
 	tmp->args = NULL;
 	tmp->cmd = NULL;
 	tmp->fullpath = NULL;

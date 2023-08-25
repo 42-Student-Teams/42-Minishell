@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:48:52 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:12:16 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
 	parser(&cmds, tokens);
-	exec_cmd(cmds, g_shell->env_l);
+	execution(&cmds, g_shell);
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)

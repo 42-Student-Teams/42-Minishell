@@ -2,3 +2,5 @@
 *.a
 *.d
 minishell
+
+.DS_Store

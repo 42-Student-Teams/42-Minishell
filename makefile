@@ -38,7 +38,7 @@ CPPFLAGS    := $(addprefix -I,$(INCS))
 # -------  GARDER POUR ECOLE ------- 
 LDLIBS		:= -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include -Llibft -lft
 # -------  GARDER POUR ECOLE -------
-# LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
+#LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
 
 RM          := rm -rf
 MAKEFLAGS   += --silent --no-print-directory

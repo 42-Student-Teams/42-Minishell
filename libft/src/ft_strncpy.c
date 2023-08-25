@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 16:26:49 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:39:22 by lsaba-qu         ###   ########.fr       */
+/*   Created: 2023/08/25 11:00:50 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/08/25 15:33:49 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	my_pwd(void)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	char	*buff;
+	char	*original_dest;
 
-	buff = malloc(1024);
-	if (!buff)
+	original_dest = dest;
+	while (*src && n > 0)
 	{
-		ft_putendl_fd("malloc error", STDERR_FILENO);
-		return (1);
+		*dest = *src;
+		dest++;
+		src++;
+		n--;
 	}
-	getcwd(buff, 1024);
-	ft_putendl_fd(buff, STDOUT_FILENO);
-	free(buff);
-	return (0);
+	while (n > 0)
+	{
+		*dest = '\0';
+		dest++;
+		n--;
+	}
+	return (original_dest);
 }

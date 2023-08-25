@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:22:05 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/17 20:27:45 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:04:15 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		ft_putnbrendl_fd(long int num, int fd);
 char		*ft_strcat(char *dest, char *src);
 char		*ft_strncat(char *dest, char *src, unsigned int nb);
 char		*ft_strcpy(char *dest, char *src);
+char		*ft_strncpy(char *dest, const char *src, size_t n);
 
 typedef struct s_list
 {

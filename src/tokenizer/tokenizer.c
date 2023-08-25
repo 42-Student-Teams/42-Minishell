@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/20 23:22:40 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/25 11:59:43 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,25 @@ int	handle_string(t_token **token, char *s, int index)
 {
 	int		end;
 	char	*str;
+	int		flag;
 
 	end = index;
-	while (s[++end])
+	flag = 0;
+	while (s[end])
 	{
-		if (ft_isspace(s[end]))
+		// TO DO : respect_matching_quotes
+		if (s[end] == '\'' || s[end] == '\"')
+		{
+			flag = !flag;
+			// printf("flag :%d : \nchar : %c\n", flag, s[end]);
+		}
+		if (flag)
+			;
+		else if (ft_isspace(s[end]))
 			break ;
-		if (ft_istoken(s, end))
+		else if (ft_istoken(s, end))
 			break ;
+		end ++;
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);

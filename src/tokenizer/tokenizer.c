@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:39:50 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:10:37 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	lexer(t_token **token, char *s, int index)
 	else if (c1 == '>' && c2 == '>')
 		return (insert_token_into_lst(E_APPEND, NULL, token, 2));
 	else if (c1 == '<' && c2 == '<')
-		return (insert_token_into_lst(E_HEREDOC, NULL, token, 2));
+		return (insert_token_into_lst(E_HEREDOC, "<<", token, 2));
 	else if (c1 == '>' && c2 != '>')
 		return (insert_token_into_lst(E_OUTFILE, NULL, token, 1));
 	else if (c1 == '<' && c2 != '<')

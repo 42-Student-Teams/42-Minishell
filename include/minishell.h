@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 18:22:13 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:31:43 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			insert_token_into_lst(enum e_token_type t, char *value,
 // ------- PARSING.2 -------
 void		parser(t_parser **cmds, t_token *tokens);
 char		*trim_matching_quotes(char *str, char quote);
-void		heredoc(char *delimiter);
+int			heredoc(char *delimiter);
 // --------- ENV ---------
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);

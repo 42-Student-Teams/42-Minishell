@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 17:19:26 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:11:39 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_parser	*create_cmd(t_token **tokens)
 					| O_RDWR | O_APPEND, 0666);
 			*tokens = (*tokens)->next->next;
 		}
-		if (*tokens && (*tokens)->str)
+		if (*tokens && ((*tokens)->str || (*tokens)->type == E_HEREDOC))
 			add_cmd_args(&cmd, tokens);
 		if (*tokens && (*tokens)->type == E_OUTFILE)
 		{

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 19:31:43 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:41:08 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
 void		init_minishell(void);
-void		prepare_cmd(t_shell *shell);
+void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
 // ------- PARSING -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
@@ -45,6 +45,10 @@ int			insert_token_into_lst(enum e_token_type t, char *value,
 // ------- PARSING.2 -------
 void		parser(t_parser **cmds, t_token *tokens);
 char		*trim_matching_quotes(char *str, char quote);
+
+// EXECUTION
+void		execution(t_parser **cmds, t_global *g_shell);
+
 int			heredoc(char *delimiter);
 // --------- ENV ---------
 void		print_env(t_env *env);

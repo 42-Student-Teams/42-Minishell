@@ -28,6 +28,7 @@ SRCS        := 							\
 		src/tokenizer/tokenizer.c		\
 		src/tokenizer/tokenizer_utils.c	\
 		src/parsing/parser.c			\
+		src/execution/exec.c			\
 		src/parsing/heredoc.c			\
 
 BUILD_DIR   := .build

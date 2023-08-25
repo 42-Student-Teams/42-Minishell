@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:40:27 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:27:30 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	prepare_cmd(t_shell *shell)
 	i = 0;
 	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
-	parser(&cmds, tokens);
+	heredoc(shell->input); 
+	parser(&cmds, tokens);	
 }
 
 void	init_loop(t_shell shell, t_global *g_shell)

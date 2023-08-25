@@ -2,6 +2,8 @@
 	"files.associations": {
 		"*.excalidraw": "json",
 		"*.excalidrawlib": "json",
-		"readline.h": "c"
+		"readline.h": "c",
+		"sstream": "c",
+		"minishell.h": "c"
 	}
 }

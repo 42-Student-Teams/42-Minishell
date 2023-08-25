@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 15:40:56 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:19:26 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ t_parser	*create_cmd(t_token **tokens)
 		if (*tokens && (*tokens)->type == E_INFILE && start == *tokens)
 		{
 			cmd->infile = open((*tokens)->next->str, O_RDONLY);
+			*tokens = (*tokens)->next->next;
+		}
+		if (*tokens && (*tokens)->type == E_APPEND)
+		{
+			cmd->outfile = open((*tokens)->next->str, O_CREAT
+					| O_RDWR | O_APPEND, 0666);
 			*tokens = (*tokens)->next->next;
 		}
 		if (*tokens && (*tokens)->str)

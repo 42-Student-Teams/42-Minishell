@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 21:38:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 22:01:39 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	add_heredoc_args(t_parser **cmd, t_token *tokens)
 	tmp->args = ft_calloc(sizeof(char *), 2);
 	if (!tmp->args)
 		return (1);
-	if (tmp->args[0])
+	if (tok->next)
 		tmp->args[0] = ft_strdup(tok->next->str);
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 18:03:17 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:19:10 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ t_parser	*create_cmd(t_token **tokens)
 					| O_RDWR | O_TRUNC, 0666);
 			*tokens = (*tokens)->next->next;
 		}
-		if (*tokens && (*tokens)->type != E_PIPE && (*tokens)->type != E_HEREDOC)
+		if (*tokens && (*tokens)->type != E_PIPE
+			&& (*tokens)->type != E_HEREDOC)
 			*tokens = (*tokens)->next;
 	}
 	return (cmd);
@@ -131,9 +132,11 @@ void	parser(t_parser **cmds, t_token *tokens)
 	while (tok)
 	{
 		if (tok && tok->type == E_HEREDOC)
+		{
 			lst_add_cmd(cmds, create_heredoc(tok));
-		if (tok->next)
-			tok = tok->next->next;
+			if (tok->next)
+				tok = tok->next->next;
+		}
 		else
 			tok = tok->next;
 	}
@@ -141,7 +144,12 @@ void	parser(t_parser **cmds, t_token *tokens)
 	while (tok)
 	{
 		if (tok->type == E_HEREDOC)
-			tok = tok->next->next;
+		{
+			if (tok->next)
+				tok = tok->next->next;
+			else
+				tok = tok->next;
+		}
 		else
 		{
 			lst_add_cmd(cmds, create_cmd(&tok));

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 17:50:09 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:24:30 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,6 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 	i = 0;
 	while (tmp)
 	{
-		printf("COMMAND : %s 1st ARG : %s\n", tmp->cmd, tmp->args[0]);
-		if (tmp->args[1])
-			printf("COMMAND : %s 2 ARG : %s\n", tmp->cmd, tmp->args[1]);
 		tmp->index = i;
 		tmp->pid = fork();
 		if (tmp->pid < 0)

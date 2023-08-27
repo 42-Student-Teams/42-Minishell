@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 18:19:10 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:38:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 		tok = tok->next;
 		tmp->nb_args++;
 	}
+	if (tok && tok->type == E_HEREDOC)
+		tmp->infile = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	tmp->args = ft_calloc(sizeof(char *), tmp->nb_args + 1);
 	if (!tmp->args)
 		return ;
@@ -40,7 +42,7 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	i = -1;
 }
 
-void	add_heredoc_args(t_parser **cmd, t_token *tokens)
+int	add_heredoc_args(t_parser **cmd, t_token *tokens)
 {
 	t_parser	*tmp;
 	t_token		*tok;
@@ -50,8 +52,16 @@ void	add_heredoc_args(t_parser **cmd, t_token *tokens)
 	tmp->cmd = ft_strdup("<<");
 	tmp->args = ft_calloc(sizeof(char *), 2);
 	if (!tmp->args)
-		return ;
-	tmp->args[0] = ft_strdup(tok->next->str);
+		return (1);
+	if (tmp->args[0])
+		tmp->args[0] = ft_strdup(tok->next->str);
+	else
+	{
+		ft_putendl_fd("bash: syntax error near unexpected token `newline'",
+			STDERR_FILENO);
+		return (258);
+	}
+	return (0);
 }
 
 void	init_cmd(t_parser **cmd)
@@ -114,17 +124,17 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 	tmp->next = cmd;
 }
 
-t_parser	*create_heredoc(t_token *tokens)
+t_parser	*create_heredoc(t_token *tokens, t_global *g_shell)
 {
 	t_parser	*cmd;
 
 	cmd = malloc(sizeof(t_parser));
 	init_cmd(&cmd);
-	add_heredoc_args(&cmd, tokens);
+	g_shell->status = add_heredoc_args(&cmd, tokens);
 	return (cmd);
 }
 
-void	parser(t_parser **cmds, t_token *tokens)
+void	parser(t_parser **cmds, t_token *tokens, t_global *g_shell)
 {
 	t_token		*tok;
 
@@ -133,9 +143,11 @@ void	parser(t_parser **cmds, t_token *tokens)
 	{
 		if (tok && tok->type == E_HEREDOC)
 		{
-			lst_add_cmd(cmds, create_heredoc(tok));
+			lst_add_cmd(cmds, create_heredoc(tok, g_shell));
 			if (tok->next)
 				tok = tok->next->next;
+			else
+				tok = tok->next;
 		}
 		else
 			tok = tok->next;

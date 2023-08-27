@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 11:35:17 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:56:23 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 	ft_bzero((void *)&shell, 0);
 	copy_env(env, g_shell);
 	g_shell->env_l = NULL;
+	g_shell->vars = NULL;
 	if (env_list(&g_shell->env_l, g_shell->env_copy) == 1)
 	{
 		ft_putendl_fd("env liste error", STDERR_FILENO);
@@ -48,7 +49,7 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	i = 0;
 	while (shell->input[i])
 		i += lexer(&tokens, shell->input, i);
-	parser(&cmds, tokens);
+	parser(&cmds, tokens, g_shell);
 	execution(&cmds, g_shell);
 }
 

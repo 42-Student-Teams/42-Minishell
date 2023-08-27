@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 18:32:21 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:24:20 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	heredoc(char *delimiter)
 			free(line);
 			return (fd);
 		}
+		ft_putendl_fd(line, fd);
 	}
 	free(line);
 	return (fd);

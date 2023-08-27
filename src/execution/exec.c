@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 18:15:37 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:40:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	execution(t_parser **cmds, t_global *g_shell)
 	tmp = *cmds;
 	pipes = NULL;
 	nb_cmds = parser_len(tmp);
+	if (!tmp->args[0])
+		return ;
 	while (tmp && (ft_strcmp("<<", tmp->cmd) == 0))
 	{
 		heredoc(tmp->args[0]);

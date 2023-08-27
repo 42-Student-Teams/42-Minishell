@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 19:50:22 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:55:39 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	free_strtab(paths);
 	free_strtab(env);
 	free(command);
-	ft_putendl_fd("Command not found", STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	ft_putstr_fd("bash: ", STDERR_FILENO);
+	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
+	ft_putendl_fd(": command not found", STDERR_FILENO);
+	exit(127);
 }
 
 void	prepare_exec(t_parser *tmp, int **pipes, int *i)
@@ -110,5 +112,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		tmp = tmp->next;
 		i++;
 	}
-	waiting_pid(cmds, &g_shell->status);
+	waiting_pid(cmds, &i);
+	if (WIFEXITED(i))
+		g_shell->status = WEXITSTATUS(i);
 }

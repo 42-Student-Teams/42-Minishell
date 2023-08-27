@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 11:52:25 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:53:57 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			handle_string(t_token **token, char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
 // ------- PARSING.2 -------
-void		parser(t_parser **cmds, t_token *tokens);
+void		parser(t_parser **cmds, t_token *tokens, t_global *g_shell);
 char		*trim_matching_quotes(char *str, char quote);
 
 // EXECUTION
@@ -100,5 +100,6 @@ int			is_equal_in(char *s);
 int			key_in_env(char *key, t_env *env_l);
 int			my_unset(t_env **env_l, char **args, int i);
 int			my_exit(char **args);
+int			my_vars(char **args, t_env **env_l);
 
 #endif

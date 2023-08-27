@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 16:38:24 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:03:12 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_string(t_token **token, char *s, int index)
 			flag = !flag;
 		}
 		if (flag)
-			break ;
+			continue ;
 		else if (ft_isspace(s[end]))
 			break ;
 		else if (ft_istoken(s, end))

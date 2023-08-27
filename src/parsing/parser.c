@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 18:19:10 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:59:51 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,31 +99,6 @@ t_parser	*create_cmd(t_token **tokens)
 	return (cmd);
 }
 
-void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
-{
-	t_parser	*tmp;
-
-	if (*cmds == NULL)
-	{
-		*cmds = cmd;
-		return ;
-	}
-	tmp = *cmds;
-	while (tmp && tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = cmd;
-}
-
-t_parser	*create_heredoc(t_token *tokens)
-{
-	t_parser	*cmd;
-
-	cmd = malloc(sizeof(t_parser));
-	init_cmd(&cmd);
-	add_heredoc_args(&cmd, tokens);
-	return (cmd);
-}
-
 void	parser(t_parser **cmds, t_token *tokens)
 {
 	t_token		*tok;
@@ -158,4 +133,3 @@ void	parser(t_parser **cmds, t_token *tokens)
 		}
 	}
 }
-

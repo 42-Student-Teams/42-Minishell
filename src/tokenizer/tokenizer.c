@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 16:38:24 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 21:00:28 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ static int	ft_istoken(char *s, int index)
 	return (0);
 }
 
+/*
+** 	TO DO QUOTES
+** 	handle_quotes(&str);
+*/
 int	handle_string(t_token **token, char *s, int index)
 {
 	int		end;
@@ -52,7 +56,7 @@ int	handle_string(t_token **token, char *s, int index)
 			break ;
 		else if (ft_istoken(s, end))
 			break ;
-		end ++;
+		end++;
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);

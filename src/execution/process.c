@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 19:50:22 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:06:59 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,7 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 		}
 		free(path_cmd);
 	}
-	free_strtab(paths);
-	free_strtab(env);
-	free(command);
-	ft_putendl_fd("Command not found", STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	free_process(paths, env, command);
 }
 
 void	prepare_exec(t_parser *tmp, int **pipes, int *i)

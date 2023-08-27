@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 11:52:25 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:57:43 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int			lexer(t_token **token, char *s, int index);
 int			handle_string(t_token **token, char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
+void		lst_add_cmd(t_parser **cmds, t_parser *cmd);
+void		init_cmd(t_parser **cmd);
+t_parser	*create_cmd(t_token **tokens);
+void		add_heredoc_args(t_parser **cmd, t_token *tokens);
 // ------- PARSING.2 -------
 void		parser(t_parser **cmds, t_token *tokens);
 char		*trim_matching_quotes(char *str, char quote);
@@ -64,6 +68,7 @@ int			**create_pipes(int nb_cmds);
 
 // HEREDOC
 int			heredoc(char *delimiter);
+t_parser	*create_heredoc(t_token *tokens);
 
 // --------- ENV ---------
 void		print_env(t_env *env);
@@ -79,7 +84,7 @@ int			ft_isspace(char c);
 void		printinfo(const char *format, ...);
 void		throw_error(char *str);
 void		free_pipes(int **pipes, int len);
-
+void		free_process(char **paths, char **env, char *command);
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);

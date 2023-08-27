@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:51:54 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:39:10 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:11:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,19 @@ void	trim_first_quote(char *command)
 			}
 		}
 	}
+}
+
+void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
+{
+	t_parser	*tmp;
+
+	if (*cmds == NULL)
+	{
+		*cmds = cmd;
+		return ;
+	}
+	tmp = *cmds;
+	while (tmp && tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = cmd;
 }

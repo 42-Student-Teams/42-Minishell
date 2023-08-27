@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 15:20:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 02:29:24 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:08:48 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ void	free_pipes(int **pipes, int len)
 	while (++i < len)
 		free(pipes[i]);
 	free(pipes);
+}
+
+void	free_process(char **paths, char **env, char *command)
+{
+	free_strtab(paths);
+	free_strtab(env);
+	free(command);
+	ft_putendl_fd("Minishell: command not found", STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }

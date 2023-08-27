@@ -30,6 +30,7 @@ SRCS        := 							\
 		src/tokenizer/tokenizer_utils.c	\
 		src/parsing/parser.c			\
 		src/parsing/heredoc.c			\
+		src/parsing/parser_utils.c		\
 		src/execution/exec.c			\
 		src/execution/exec_utils.c		\
 		src/execution/process.c			\
@@ -41,9 +42,9 @@ CC          := gcc
 CFLAGS      := -Wall -Wextra -Werror -fsanitize=address -g3
 CPPFLAGS    := $(addprefix -I,$(INCS))
 # -------  GARDER POUR ECOLE ------- 
-#LDLIBS		:= -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include -Llibft -lft
+LDLIBS		:= -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include -Llibft -lft
 # -------  GARDER POUR ECOLE -------
-LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
+#LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
 
 RM          := rm -rf
 MAKEFLAGS   += --silent --no-print-directory

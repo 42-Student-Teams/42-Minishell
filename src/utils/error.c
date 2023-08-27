@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 20:47:29 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/16 11:48:39 by bverdeci         ###   ########.fr       */
+/*   Created: 2023/08/27 01:31:54 by bverdeci          #+#    #+#             */
+/*   Updated: 2023/08/27 01:32:54 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_env(t_env *env)
+void	throw_error(char *str)
 {
-	t_env	*temp;
-
-	while (env)
-	{
-		temp = env;
-		env = env->next;
-		free(temp->key);
-		free(temp->value);
-		free(temp);
-	}
+	perror(str);
+	exit(EXIT_FAILURE);
 }

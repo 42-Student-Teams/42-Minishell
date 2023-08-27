@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 20:10:37 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/27 16:38:24 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_string(t_token **token, char *s, int index)
 			flag = !flag;
 		}
 		if (flag)
-			;
+			break ;
 		else if (ft_isspace(s[end]))
 			break ;
 		else if (ft_istoken(s, end))
@@ -72,7 +72,7 @@ int	lexer(t_token **token, char *s, int index)
 	else if (c1 == '>' && c2 == '>')
 		return (insert_token_into_lst(E_APPEND, NULL, token, 2));
 	else if (c1 == '<' && c2 == '<')
-		return (insert_token_into_lst(E_HEREDOC, "<<", token, 2));
+		return (insert_token_into_lst(E_HEREDOC, NULL, token, 2));
 	else if (c1 == '>' && c2 != '>')
 		return (insert_token_into_lst(E_OUTFILE, NULL, token, 1));
 	else if (c1 == '<' && c2 != '<')

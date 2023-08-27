@@ -15,6 +15,7 @@ SRCS        := 							\
 		src/utils/termios.c				\
 		src/utils/tabs.c				\
 		src/utils/utils1.c				\
+		src/utils/error.c				\
 		src/env/init_env.c				\
 		src/builtins/builtins.c			\
 		src/builtins/cd.c				\
@@ -28,8 +29,10 @@ SRCS        := 							\
 		src/tokenizer/tokenizer.c		\
 		src/tokenizer/tokenizer_utils.c	\
 		src/parsing/parser.c			\
-		src/execution/exec.c			\
 		src/parsing/heredoc.c			\
+		src/execution/exec.c			\
+		src/execution/exec_utils.c		\
+		src/execution/process.c			\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

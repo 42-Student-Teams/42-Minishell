@@ -1,0 +1,17 @@
+total 2896
+drwxr-xr-x  16 borito  staff      512 26 aoû 23:25 .
+drwxr-x---+ 61 borito  staff     1952 26 aoû 23:25 ..
+drwxr-xr-x@ 10 borito  staff      320 26 aoû 22:00 .build
+-rw-r--r--@  1 borito  staff    16395 15 aoû 19:35 .excalidraw
+drwxr-xr-x  15 borito  staff      480 26 aoû 22:37 .git
+-rw-r--r--@  1 borito  staff       32 25 aoû 21:11 .gitignore
+drwxr-xr-x@  4 borito  staff      128 25 aoû 21:11 .vscode
+-rw-r--r--   1 borito  staff     3709  7 jul 12:05 README.md
+-rw-r--r--@  1 borito  staff  1318846 16 aoû 10:01 fr.subject.pdf
+drwxr-xr-x   5 borito  staff      160 25 aoû 21:11 include
+drwxr-xr-x   7 borito  staff      224 26 aoû 22:29 libft
+-rw-r--r--@  1 borito  staff        0 26 aoû 23:26 lol.txt
+-rw-r--r--@  1 borito  staff     1883 25 aoû 21:11 makefile
+-rwxr-xr-x@  1 borito  staff   123846 26 aoû 23:25 minishell
+-rw-r--r--@  1 borito  staff        3 25 aoû 21:11 out.txt
+drwxr-xr-x  11 borito  staff      352 25 aoû 21:11 src

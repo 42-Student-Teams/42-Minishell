@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 19:07:47 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:03:17 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	tmp = *cmd;
 	tok = *tokens;
 	tmp->cmd = ft_strdup(tok->str);
-	tok = tok->next;
 	while (tok && tok->str)
 	{
 		tok = tok->next;
@@ -30,7 +29,7 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	tmp->args = ft_calloc(sizeof(char *), tmp->nb_args + 1);
 	if (!tmp->args)
 		return ;
-	tok = (*tokens)->next;
+	tok = *tokens;
 	i = -1;
 	while (tok && tok->str)
 	{
@@ -39,6 +38,20 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	}
 	*tokens = tok;
 	i = -1;
+}
+
+void	add_heredoc_args(t_parser **cmd, t_token *tokens)
+{
+	t_parser	*tmp;
+	t_token		*tok;
+
+	tmp = *cmd;
+	tok = tokens;
+	tmp->cmd = ft_strdup("<<");
+	tmp->args = ft_calloc(sizeof(char *), 2);
+	if (!tmp->args)
+		return ;
+	tmp->args[0] = ft_strdup(tok->next->str);
 }
 
 void	init_cmd(t_parser **cmd)
@@ -64,7 +77,7 @@ t_parser	*create_cmd(t_token **tokens)
 	cmd = malloc(sizeof(t_parser));
 	start = *tokens;
 	init_cmd(&cmd);
-	while (*tokens && (*tokens)->type != E_PIPE)
+	while (*tokens && (*tokens)->type != E_PIPE && (*tokens)->type != E_HEREDOC)
 	{
 		if (*tokens && (*tokens)->type == E_INFILE && start == *tokens)
 		{
@@ -79,7 +92,7 @@ t_parser	*create_cmd(t_token **tokens)
 					| O_RDWR | O_TRUNC, 0666);
 			*tokens = (*tokens)->next->next;
 		}
-		if (*tokens && (*tokens)->type != E_PIPE)
+		if (*tokens && (*tokens)->type != E_PIPE && (*tokens)->type != E_HEREDOC)
 			*tokens = (*tokens)->next;
 	}
 	return (cmd);
@@ -100,6 +113,16 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 	tmp->next = cmd;
 }
 
+t_parser	*create_heredoc(t_token *tokens)
+{
+	t_parser	*cmd;
+
+	cmd = malloc(sizeof(t_parser));
+	init_cmd(&cmd);
+	add_heredoc_args(&cmd, tokens);
+	return (cmd);
+}
+
 void	parser(t_parser **cmds, t_token *tokens)
 {
 	t_token		*tok;
@@ -107,8 +130,24 @@ void	parser(t_parser **cmds, t_token *tokens)
 	tok = tokens;
 	while (tok)
 	{
-		lst_add_cmd(cmds, create_cmd(&tok));
-		if (tok)
+		if (tok && tok->type == E_HEREDOC)
+			lst_add_cmd(cmds, create_heredoc(tok));
+		if (tok->next)
+			tok = tok->next->next;
+		else
 			tok = tok->next;
 	}
+	tok = tokens;
+	while (tok)
+	{
+		if (tok->type == E_HEREDOC)
+			tok = tok->next->next;
+		else
+		{
+			lst_add_cmd(cmds, create_cmd(&tok));
+			if (tok && tok->type != E_HEREDOC)
+				tok = tok->next;
+		}
+	}
 }
+

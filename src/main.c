@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 20:40:44 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:35:17 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* toujours utile pour debug
+while (cmds)
+{
+	printf("CMD : %s\n", cmds->cmd);
+	i = -1;
+	printf("ARGS : \n");
+	while (cmds->args[++i])
+		printf("[%d] %s \n", i, cmds->args[i]);
+	cmds = cmds->next;
+}
+*/
 
 void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 {	
@@ -24,18 +36,6 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 	}
 	init_termios();
 }
-
-/* toujours utile pour debug
-while (cmds)
-{
-	printf("CMD : %s\n", cmds->cmd);
-	i = -1;
-	printf("ARGS : \n");
-	while (cmds->args[++i])
-		printf("[%d] %s \n", i, cmds->args[i]);
-	cmds = cmds->next;
-}
-*/
 
 void	prepare_cmd(t_shell *shell, t_global *g_shell)
 {
@@ -67,11 +67,6 @@ void	init_loop(t_shell shell, t_global *g_shell)
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
 			prepare_cmd(&shell, g_shell);
-			if (builtins(shell.input, g_shell) == 1)
-			{
-				printf("BUILTIN ERROR\n");
-				exit (1);
-			}
 		}
 	}
 }

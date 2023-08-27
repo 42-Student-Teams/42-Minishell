@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 20:41:08 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:52:25 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,22 @@ char		*trim_matching_quotes(char *str, char quote);
 // EXECUTION
 void		execution(t_parser **cmds, t_global *g_shell);
 
+// EXECUTION - PROCESS 
+void		process_exec(t_parser *cmd, t_global *g_shell);
+void		prepare_exec(t_parser *tmp, int **pipes, int *i);
+void		waiting_pid(t_parser *cmds, int *status);
+void		ft_process(t_parser *cmds, t_parser *tmp,
+				int **pipes, t_global *g_shell);
+
+// EXECUTION - UTILS
+char		**get_paths(t_env *env);
+int			parser_len(t_parser *lst);
+char		**from_chaintotab(t_env *env);
+int			**create_pipes(int nb_cmds);
+
+// HEREDOC
 int			heredoc(char *delimiter);
+
 // --------- ENV ---------
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);
@@ -57,11 +72,14 @@ int			env_list(t_env **env_l, char **env_copy);
 t_env		*new_el(char *key_value);
 
 // --------- UTILS ---------
-void		free_split(char **split);
+void		free_strtab(char **split);
 void		rl_replace_line(const char *text, int clear_undo);
 int			strtab_len(char **str_tab);
 int			ft_isspace(char c);
 void		printinfo(const char *format, ...);
+void		throw_error(char *str);
+void		free_pipes(int **pipes, int len);
+
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);
@@ -70,7 +88,8 @@ void		signal_handler(int signal);
 void		init_termios(void);
 
 // --------- BUILTINS ---------
-int			builtins(char *input, t_global *g_shell);
+void		builtins(t_parser *cmd, t_global *g_shell);
+int			is_builtin(char *cmd);
 int			my_cd(char **args, t_env **env_l);
 int			exec_cd(char *path);
 int			my_echo(char **args);

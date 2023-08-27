@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 18:24:30 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:50:22 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	}
 	paths = get_paths(g_shell->env_l);
 	env = from_chaintotab(g_shell->env_l);
+	if (ft_strncmp("/", cmd->cmd, 1) == 0)
+	{
+		if (access(cmd->cmd, F_OK) == 0)
+		{
+			if (execve(cmd->cmd, cmd->args, env) == -1)
+				throw_error(NULL);
+		}
+	}
 	command = ft_strjoin("/", cmd->cmd);
 	i = -1;
 	while (paths[++i])

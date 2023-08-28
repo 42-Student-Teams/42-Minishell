@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 11:52:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:55:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,45 @@ static void	commands(char **args, char *cmd, t_global *g_shell)
 		g_shell->status = my_exit(args);
 }
 
+int	is_variable(char *cmd)
+{
+	int	i;
+
+	i = -1;
+	while (cmd[++i])
+	{
+		if (cmd[i] == '=' && cmd[i + 1])
+			return (1);
+	}
+	return (0);
+}
+
 void	builtins(t_parser *cmd, t_global *g_shell)
 {
+	t_parser	*tmp;
+	char		**args;
+	char		*key;
+
+	tmp = cmd;
+	args = NULL;
+	key = NULL;
+	if (is_variable(tmp->cmd))
+	{
+		while (tmp && is_variable(tmp->cmd))
+		{
+			args = ft_calloc(sizeof(char *), 3);
+			args[0] = ft_strdup("export");
+			args[1] = ft_strdup(tmp->cmd);
+			key = ft_substr(args[1], 0, ft_strchr(args[1], '=') - args[1]);
+			if (key_in_env(key, g_shell->env_l))
+				g_shell->status = my_export(args, &g_shell->env_l);
+			else
+				g_shell->status = my_vars(args, &g_shell->vars);
+			free_strtab(args);
+			tmp = tmp->next;
+		}
+		return ;
+	}
 	commands(cmd->args, cmd->cmd, g_shell);
 }
 
@@ -50,6 +87,8 @@ int	is_builtin(char *cmd)
 	else if (ft_strcmp(cmd, "unset") == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "exit") == 0)
+		return (1);
+	else if (is_variable(cmd))
 		return (1);
 	return (0);
 }

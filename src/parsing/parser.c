@@ -6,116 +6,35 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 20:59:51 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:24:06 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_cmd_args(t_parser **cmd, t_token **tokens)
+static void	parse_heredoc(t_token *tok, t_parser **cmds, t_global *g_shell)
 {
-	t_parser	*tmp;
-	t_token		*tok;
-	int			i;
-
-	tmp = *cmd;
-	tok = *tokens;
-	tmp->cmd = ft_strdup(tok->str);
-	while (tok && tok->str)
-	{
-		tok = tok->next;
-		tmp->nb_args++;
-	}
-	tmp->args = ft_calloc(sizeof(char *), tmp->nb_args + 1);
-	if (!tmp->args)
-		return ;
-	tok = *tokens;
-	i = -1;
-	while (tok && tok->str)
-	{
-		tmp->args[++i] = ft_strdup(tok->str);
-		tok = tok->next;
-	}
-	*tokens = tok;
-	i = -1;
-}
-
-void	add_heredoc_args(t_parser **cmd, t_token *tokens)
-{
-	t_parser	*tmp;
-	t_token		*tok;
-
-	tmp = *cmd;
-	tok = tokens;
-	tmp->cmd = ft_strdup("<<");
-	tmp->args = ft_calloc(sizeof(char *), 2);
-	if (!tmp->args)
-		return ;
-	tmp->args[0] = ft_strdup(tok->next->str);
-}
-
-void	init_cmd(t_parser **cmd)
-{
-	t_parser	*tmp;
-
-	tmp = *cmd;
-	tmp->infile = 0;
-	tmp->outfile = 1;
-	tmp->nb_args = 0;
-	tmp->index = 0;
-	tmp->args = NULL;
-	tmp->cmd = NULL;
-	tmp->fullpath = NULL;
-	tmp->next = NULL;
-}
-
-t_parser	*create_cmd(t_token **tokens)
-{
-	t_parser	*cmd;
-	t_token		*start;
-
-	cmd = malloc(sizeof(t_parser));
-	start = *tokens;
-	init_cmd(&cmd);
-	while (*tokens && (*tokens)->type != E_PIPE && (*tokens)->type != E_HEREDOC)
-	{
-		if (*tokens && (*tokens)->type == E_INFILE && start == *tokens)
-		{
-			cmd->infile = open((*tokens)->next->str, O_RDONLY);
-			*tokens = (*tokens)->next->next;
-		}
-		if (*tokens && (*tokens)->str)
-			add_cmd_args(&cmd, tokens);
-		if (*tokens && (*tokens)->type == E_OUTFILE)
-		{
-			cmd->outfile = open((*tokens)->next->str, O_CREAT
-					| O_RDWR | O_TRUNC, 0666);
-			*tokens = (*tokens)->next->next;
-		}
-		if (*tokens && (*tokens)->type != E_PIPE
-			&& (*tokens)->type != E_HEREDOC)
-			*tokens = (*tokens)->next;
-	}
-	return (cmd);
-}
-
-void	parser(t_parser **cmds, t_token *tokens)
-{
-	t_token		*tok;
-
-	tok = tokens;
 	while (tok)
 	{
 		if (tok && tok->type == E_HEREDOC)
 		{
-			lst_add_cmd(cmds, create_heredoc(tok));
+			lst_add_cmd(cmds, create_heredoc(tok, g_shell));
 			if (tok->next)
 				tok = tok->next->next;
+			else
+				tok = tok->next;
 		}
 		else
 			tok = tok->next;
 	}
+}
+
+void	parser(t_parser **cmds, t_token *tokens, t_global *g_shell)
+{
+	t_token		*tok;
+
 	tok = tokens;
+	parse_heredoc(tok, cmds, g_shell);
 	while (tok)
 	{
 		if (tok->type == E_HEREDOC)

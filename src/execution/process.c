@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 20:06:59 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:22:39 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,11 @@
 
 void	process_exec(t_parser *cmd, t_global *g_shell)
 {
-	char	**paths;
-	char	*path_cmd;
-	char	**env;
-	char	*command;
-	int		i;
-
-	if (is_builtin(cmd->cmd))
-	{
-		builtins(cmd, g_shell);
-		exit(g_shell->status);
-	}
-	paths = get_paths(g_shell->env_l);
-	env = from_chaintotab(g_shell->env_l);
-	if (ft_strncmp("/", cmd->cmd, 1) == 0)
-	{
-		if (access(cmd->cmd, F_OK) == 0)
-		{
-			if (execve(cmd->cmd, cmd->args, env) == -1)
-				throw_error(NULL);
-		}
-	}
-	command = ft_strjoin("/", cmd->cmd);
-	i = -1;
-	while (paths[++i])
-	{
-		path_cmd = ft_strjoin(paths[i], command);
-		if (access(path_cmd, F_OK) == 0)
-		{
-			if (execve(path_cmd, cmd->args, env) == -1)
-				throw_error(NULL);
-		}
-		free(path_cmd);
-	}
-	free_process(paths, env, command);
+	exec_cmd(cmd, g_shell, -1);
+	ft_putstr_fd("bash: ", STDERR_FILENO);
+	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
+	ft_putendl_fd(": command not found", STDERR_FILENO);
+	exit(127);
 }
 
 void	prepare_exec(t_parser *tmp, int **pipes, int *i)
@@ -106,5 +77,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		tmp = tmp->next;
 		i++;
 	}
-	waiting_pid(cmds, &g_shell->status);
+	waiting_pid(cmds, &i);
+	if (WIFEXITED(i))
+		g_shell->status = WEXITSTATUS(i);
 }

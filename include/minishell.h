@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 20:57:43 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:22:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,35 @@ int			free_all(void);
 void		init_minishell(void);
 void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
-// ------- PARSING -------
+// ------- LEXER -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
 int			lexer(t_token **token, char *s, int index);
 int			handle_string(t_token **token, char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
+// ------- PARSING -------
+void		parser(t_parser **cmds, t_token *tokens, t_global *g_shell);
+
+// ------- PARSING UTILS -------
+char		*trim_matching_quotes(char *str, char quote);
+void		trim_first_quote(char *command);
+
+// COMMANDS
 void		lst_add_cmd(t_parser **cmds, t_parser *cmd);
+void		add_cmd_args(t_parser **cmd, t_token **tokens);
 void		init_cmd(t_parser **cmd);
 t_parser	*create_cmd(t_token **tokens);
-void		add_heredoc_args(t_parser **cmd, t_token *tokens);
-// ------- PARSING.2 -------
-void		parser(t_parser **cmds, t_token *tokens);
-char		*trim_matching_quotes(char *str, char quote);
+
+// HEREDOC
+int			heredoc(char *delimiter);
+t_parser	*create_heredoc(t_token *tokens, t_global *g_shell);
+int			add_heredoc_args(t_parser **cmd, t_token *tokens);
 
 // EXECUTION
 void		execution(t_parser **cmds, t_global *g_shell);
+
+// EXECUTION - CMD
+void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
@@ -65,10 +78,6 @@ char		**get_paths(t_env *env);
 int			parser_len(t_parser *lst);
 char		**from_chaintotab(t_env *env);
 int			**create_pipes(int nb_cmds);
-
-// HEREDOC
-int			heredoc(char *delimiter);
-t_parser	*create_heredoc(t_token *tokens);
 
 // --------- ENV ---------
 void		print_env(t_env *env);
@@ -84,7 +93,6 @@ int			ft_isspace(char c);
 void		printinfo(const char *format, ...);
 void		throw_error(char *str);
 void		free_pipes(int **pipes, int len);
-void		free_process(char **paths, char **env, char *command);
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);
@@ -105,5 +113,6 @@ int			is_equal_in(char *s);
 int			key_in_env(char *key, t_env *env_l);
 int			my_unset(t_env **env_l, char **args, int i);
 int			my_exit(char **args);
+int			my_vars(char **args, t_env **env_l);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/25 19:06:32 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:13:06 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_global
 	int				status;
 	char			**env_copy;
 	struct s_env	*env_l;
+	struct s_env	*vars;
 }	t_global;
 
 typedef struct s_shell

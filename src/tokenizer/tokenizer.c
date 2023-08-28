@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:32:40 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:44:04 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ int	handle_string(t_token **token, char *s, int index)
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);
+	// remplacer les variables environnementales par leur valeur
+	// check quotes si oui enlever et inserer dans la liste
+	// faire un memmove pour enlever les quotes
+	
 	insert_token_into_lst(E_WORD, str, token, 0);
 	return (end);
 }

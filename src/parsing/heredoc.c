@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:23:06 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:25:33 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ int	heredoc(char *delimiter)
 	}
 	free(line);
 	return (fd);
-}
-
-t_parser	*create_heredoc(t_token *tokens)
-{
-	t_parser	*cmd;
-
-	cmd = malloc(sizeof(t_parser));
-	init_cmd(&cmd);
-	add_heredoc_args(&cmd, tokens);
-	return (cmd);
 }
 
 t_parser	*create_heredoc(t_token *tokens, t_global *g_shell)

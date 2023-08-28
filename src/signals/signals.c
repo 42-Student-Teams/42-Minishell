@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:18:23 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:11:28 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:32:12 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,21 @@ void	signal_handler(int signal)
 		rl_redisplay();
 	}
 }
+
+// static	void	heredoc_sigint_handler(int status __attribute__((unused)))
+// {
+// 	write(STDOUT_FILENO, "\n", 1);
+// 	exit(130);
+// }
+
+// void	set_heredoc_signals(void)
+// {
+// 	static struct sigaction	act_sigint
+// 		= {.sa_handler = heredoc_sigint_handler, .sa_flags = SA_RESTART};
+
+// 	signal(SIGQUIT, SIG_IGN);
+// 	sigfillset(&act_sigint.sa_mask);
+// 	sigaction(SIGINT, &act_sigint, NULL);
+// }
+
+

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:30:14 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:31:13 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <readline/history.h>
 # include "define.h"
 # include "struct.h"
+
 
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
@@ -96,6 +97,8 @@ void		free_pipes(int **pipes, int len);
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);
+void		set_heredoc_signals(void);
+void		handle_interrupt(int signal);
 
 // --------- TERMIOS ---------
 void		init_termios(void);

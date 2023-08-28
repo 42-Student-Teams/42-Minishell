@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:39:02 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:31:41 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ while (cmds)
 	cmds = cmds->next;
 }
 */
+
+/*
+** Volatile eviter que le preprocesseur optimise la variable
+** (pour les signaux)
+*/
+
 
 void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 {	

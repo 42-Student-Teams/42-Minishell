@@ -6,19 +6,28 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:25:33 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:35:59 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t g_quit_flag = 0;
+
+void	handle_interrupt(int signal)
+{
+	if (signal == SIGINT)
+		g_quit_flag = 1;
+}
 
 int	heredoc(char *delimiter)
 {
 	char	*line;
 	int		fd;
 
+	signal(SIGINT, handle_interrupt);
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
-	while (1)
+	while (!g_quit_flag)
 	{
 		line = readline("> ");
 		if (!line)
@@ -30,6 +39,7 @@ int	heredoc(char *delimiter)
 		}
 		ft_putendl_fd(line, fd);
 	}
+	g_quit_flag = 0;
 	free(line);
 	return (fd);
 }

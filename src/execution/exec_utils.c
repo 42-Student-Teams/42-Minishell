@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:00:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 02:51:49 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:11:45 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	**get_paths(t_env *env)
 		exit(EXIT_FAILURE);
 	return (paths);
 }
-
 
 int	parser_len(t_parser *lst)
 {

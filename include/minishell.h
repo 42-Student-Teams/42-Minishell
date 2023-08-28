@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 17:56:58 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:09:46 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int			add_heredoc_args(t_parser **cmd, t_token *tokens);
 
 // EXECUTION
 void		execution(t_parser **cmds, t_global *g_shell);
+
+// EXECUTION - CMD
+void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);

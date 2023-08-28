@@ -36,6 +36,7 @@ SRCS        := 							\
 		src/execution/exec.c			\
 		src/execution/exec_utils.c		\
 		src/execution/process.c			\
+		src/execution/exec_cmd.c		\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)

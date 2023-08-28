@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 21:53:57 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:56:58 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,29 @@ int			free_all(void);
 void		init_minishell(void);
 void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
-// ------- PARSING -------
+// ------- LEXER -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
 int			lexer(t_token **token, char *s, int index);
 int			handle_string(t_token **token, char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
-// ------- PARSING.2 -------
+// ------- PARSING -------
 void		parser(t_parser **cmds, t_token *tokens, t_global *g_shell);
+
+// ------- PARSING UTILS -------
 char		*trim_matching_quotes(char *str, char quote);
+void		trim_first_quote(char *command);
+
+// COMMANDS
+void		lst_add_cmd(t_parser **cmds, t_parser *cmd);
+void		add_cmd_args(t_parser **cmd, t_token **tokens);
+void		init_cmd(t_parser **cmd);
+t_parser	*create_cmd(t_token **tokens);
+
+// HEREDOC
+int			heredoc(char *delimiter);
+t_parser	*create_heredoc(t_token *tokens, t_global *g_shell);
+int			add_heredoc_args(t_parser **cmd, t_token *tokens);
 
 // EXECUTION
 void		execution(t_parser **cmds, t_global *g_shell);
@@ -62,9 +76,6 @@ int			parser_len(t_parser *lst);
 char		**from_chaintotab(t_env *env);
 int			**create_pipes(int nb_cmds);
 
-// HEREDOC
-int			heredoc(char *delimiter);
-
 // --------- ENV ---------
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);
@@ -79,7 +90,6 @@ int			ft_isspace(char c);
 void		printinfo(const char *format, ...);
 void		throw_error(char *str);
 void		free_pipes(int **pipes, int len);
-
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);

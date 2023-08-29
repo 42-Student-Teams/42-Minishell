@@ -6,18 +6,18 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 15:29:27 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:28:43 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t g_quit_flag = 0;
+
 
 void	handle_interrupt(int signal)
 {
 	if (signal == SIGINT)
-		g_quit_flag = 1;
+		g_status = 1;
 }
 
 int	heredoc(char *delimiter)
@@ -27,21 +27,20 @@ int	heredoc(char *delimiter)
 
 	signal(SIGINT, handle_interrupt);
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
-	while (!g_quit_flag)
+	while (!g_status)
 	{
 		line = readline("> ");
-		if (!line)
-			return (fd);
-		if (ft_strcmp(line, delimiter) == 0)
+		if (!line || (!ft_strncmp(line, delimiter, ft_strlen(line))))
 		{
 			free(line);
 			return (fd);
 		}
 		ft_putendl_fd(line, fd);
 	}
-	g_quit_flag = 0;
+	g_status = 0;
 	free(line);
-	return (fd);
+	close(fd);
+	return (0);
 }
 /*
 ** il faudra unlink le fichier .heredoc

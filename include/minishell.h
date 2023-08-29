@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 15:28:38 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:44:52 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # include "define.h"
 # include "struct.h"
 
+
+int			g_status;
 
 t_list		*get_data(t_list *ptr);
 int			free_all(void);

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 15:29:42 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:54:42 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	handle_string(t_global *g_shell, t_token **token, char *s, int index)
 	while (s[end])
 	{
 		if (s[end] == '\'' || s[end] == '\"')
-		{
 			flag = !flag;
-		}
 		if (flag)
 			continue ;
 		else if (ft_isspace(s[end]))

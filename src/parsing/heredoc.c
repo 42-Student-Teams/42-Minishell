@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:12:28 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:40:48 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	heredoc(char *delimiter)
 	free(line);
 	return (fd);
 }
-
 /*
 ** il faudra unlink le fichier .heredoc
 */

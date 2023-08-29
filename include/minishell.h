@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:09:46 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:49:25 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
 // ------- LEXER -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
-int			lexer(t_token **token, char *s, int index);
-int			handle_string(t_token **token, char *s, int index);
+char		*change_str(char *str, t_global *g_shell);
+
+int			lexer(t_global *g_shell, t_token **token, char *s, int index);
+int			handle_string(t_global *g_shell, t_token **token,
+				char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
 // ------- PARSING -------
@@ -68,7 +71,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
-void		prepare_exec(t_parser *tmp, int **pipes, int *i);
+void		prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds);
 void		waiting_pid(t_parser *cmds, int *status);
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);
@@ -103,6 +106,7 @@ void		init_termios(void);
 // --------- BUILTINS ---------
 void		builtins(t_parser *cmd, t_global *g_shell);
 int			is_builtin(char *cmd);
+int			is_spe_builtin(char *cmd);
 int			my_cd(char **args, t_env **env_l);
 int			exec_cd(char *path);
 int			my_echo(char **args);

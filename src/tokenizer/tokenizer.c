@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 21:03:12 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:23:05 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ static int	ft_istoken(char *s, int index)
 	return (0);
 }
 
-int	handle_string(t_token **token, char *s, int index)
+int	handle_string(t_global *g_shell, t_token **token, char *s, int index)
 {
 	int		end;
 	char	*str;
+	char	*new;
 	int		flag;
 
 	end = index;
@@ -56,15 +57,17 @@ int	handle_string(t_token **token, char *s, int index)
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);
-	insert_token_into_lst(E_WORD, str, token, 0);
+	new = change_str(str, g_shell);
+	insert_token_into_lst(E_WORD, new, token, 0);
 	return (end);
 }
 
-int	lexer(t_token **token, char *s, int index)
+int	lexer(t_global *g_shell, t_token **token, char *s, int index)
 {
 	char	c1;
 	char	c2;
 
+	(void)g_shell;
 	c1 = s[index];
 	c2 = s[index + 1];
 	if (c1 == '|')
@@ -82,7 +85,7 @@ int	lexer(t_token **token, char *s, int index)
 		return (1);
 	}
 	else
-		return (handle_string(token, s, index));
+		return (handle_string(g_shell, token, s, index));
 }
 
 int	insert_token_into_lst(enum e_token_type t, char *value,

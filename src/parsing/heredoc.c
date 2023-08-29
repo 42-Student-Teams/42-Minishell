@@ -6,13 +6,13 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 02:48:40 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:40:48 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc(char *delimiter)
+int	heredoc(char *delimiter)
 {
 	char	*line;
 	int		fd;
@@ -22,16 +22,17 @@ void	heredoc(char *delimiter)
 	{
 		line = readline("> ");
 		if (!line)
-			exit(EXIT_FAILURE);
+			return (fd);
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
-			exit (EXIT_SUCCESS);
+			return (fd);
 		}
 		ft_putendl_fd(line, fd);
 	}
+	free(line);
+	return (fd);
 }
-
 /*
 ** il faudra unlink le fichier .heredoc
 */

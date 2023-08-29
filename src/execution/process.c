@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 01:44:02 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:49:12 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	exit(127);
 }
 
-void	prepare_exec(t_parser *tmp, int **pipes, int *i)
+void	prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds)
 {
 	int	j;
 
@@ -34,7 +34,7 @@ void	prepare_exec(t_parser *tmp, int **pipes, int *i)
 	else if (tmp->next)
 		dup2(pipes[*i][1], STDOUT_FILENO);
 	j = -1;
-	while (++j < tmp->nb_args - 1)
+	while (++j < nb_cmds - 1)
 	{
 		if (j != *i - 1)
 			close(pipes[j][0]);
@@ -69,7 +69,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 			throw_error("fork error");
 		if (tmp->pid == 0)
 		{
-			prepare_exec(tmp, pipes, &i);
+			prepare_exec(tmp, pipes, &i, g_shell->nb_cmds);
 			process_exec(tmp, g_shell);
 			exit (EXIT_SUCCESS);
 		}

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 01:24:21 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:42:47 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 			while (str[++i] && str[i] != '\'')
 				new[j++] = str[i];
 		}
-		else if (ft_isalnum(str[i]))
+		else
 			new[j++] = str[i];
 		if (!str[i])
 			return ;

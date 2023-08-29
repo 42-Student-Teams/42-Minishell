@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 03:30:27 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:49:25 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		init_cmd(t_parser **cmd);
 t_parser	*create_cmd(t_token **tokens);
 
 // HEREDOC
-void		heredoc(char *delimiter);
+int			heredoc(char *delimiter);
 t_parser	*create_heredoc(t_token *tokens, t_global *g_shell);
 int			add_heredoc_args(t_parser **cmd, t_token *tokens);
 
@@ -71,7 +71,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
-void		prepare_exec(t_parser *tmp, int **pipes, int *i);
+void		prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds);
 void		waiting_pid(t_parser *cmds, int *status);
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);

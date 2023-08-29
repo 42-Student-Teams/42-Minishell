@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/28 19:44:04 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:29:42 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ static int	ft_istoken(char *s, int index)
 	return (0);
 }
 
-/*
-** 	TO DO QUOTES
-** 	handle_quotes(&str);
-*/
-int	handle_string(t_token **token, char *s, int index)
+int	handle_string(t_global *g_shell, t_token **token, char *s, int index)
 {
 	int		end;
 	char	*str;
+	char	*new;
 	int		flag;
 
 	end = index;
@@ -60,19 +57,17 @@ int	handle_string(t_token **token, char *s, int index)
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);
-	// remplacer les variables environnementales par leur valeur
-	// check quotes si oui enlever et inserer dans la liste
-	// faire un memmove pour enlever les quotes
-	
-	insert_token_into_lst(E_WORD, str, token, 0);
+	new = change_str(str, g_shell);
+	insert_token_into_lst(E_WORD, new, token, 0);
 	return (end);
 }
 
-int	lexer(t_token **token, char *s, int index)
+int	lexer(t_global *g_shell, t_token **token, char *s, int index)
 {
 	char	c1;
 	char	c2;
 
+	(void)g_shell;
 	c1 = s[index];
 	c2 = s[index + 1];
 	if (c1 == '|')
@@ -90,7 +85,7 @@ int	lexer(t_token **token, char *s, int index)
 		return (1);
 	}
 	else
-		return (handle_string(token, s, index));
+		return (handle_string(g_shell, token, s, index));
 }
 
 int	insert_token_into_lst(enum e_token_type t, char *value,

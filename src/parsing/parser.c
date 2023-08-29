@@ -6,14 +6,17 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:39:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/28 19:24:06 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:29:13 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	parse_heredoc(t_token *tok, t_parser **cmds, t_global *g_shell)
+static void	parse_heredoc(t_token *tokens, t_parser **cmds, t_global *g_shell)
 {
+	t_token	*tok;
+
+	tok = tokens;
 	while (tok)
 	{
 		if (tok && tok->type == E_HEREDOC)

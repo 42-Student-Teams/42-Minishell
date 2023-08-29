@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/27 20:55:40 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:26:51 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ int	is_builtin(char *cmd)
 	else if (ft_strcmp(cmd, "env") == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "export") == 0)
+		return (1);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		return (1);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		return (1);
+	else if (is_variable(cmd))
+		return (1);
+	return (0);
+}
+
+int	is_spe_builtin(char *cmd)
+{
+	if (ft_strcmp(cmd, "export") == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "unset") == 0)
 		return (1);

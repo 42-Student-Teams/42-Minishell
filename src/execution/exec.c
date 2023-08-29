@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/28 21:33:46 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:29:01 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 		}
 		*tmp = (*tmp)->next;
 	}
-	if (*tmp && nb_cmds == 1 && is_builtin((*tmp)->cmd))
+	if (*tmp && nb_cmds == 1 && is_spe_builtin((*tmp)->cmd))
 		builtins(*tmp, g_shell);
 	return (0);
 }
@@ -40,6 +40,7 @@ void	execution(t_parser **cmds, t_global *g_shell)
 	tmp = *cmds;
 	pipes = NULL;
 	nb_cmds = parser_len(tmp);
+	g_shell->nb_cmds = nb_cmds;
 	if (pre_exec(g_shell, &tmp, nb_cmds) == 1)
 		return ;
 	if (!tmp)
@@ -49,3 +50,4 @@ void	execution(t_parser **cmds, t_global *g_shell)
 	waiting_pid(*cmds, &g_shell->status);
 	free_pipes(pipes, nb_cmds);
 }
+

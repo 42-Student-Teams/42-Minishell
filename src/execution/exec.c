@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 03:34:09 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:39:40 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,20 @@
 
 static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 {
-	int	pid;
-
-	while (*tmp)
+	while (*tmp && (ft_strcmp("<<", (*tmp)->cmd) == 0))
 	{
-		if (ft_strcmp("<<", (*tmp)->cmd) == 0)
-		{
-			(*tmp)->pid = fork();
-			pid = (*tmp)->pid;
-			if ((*tmp)->pid < 0)
-				throw_error("fork error");
-			if ((*tmp)->pid == 0)
-			{
-				if ((*tmp)->args[0])
-					heredoc((*tmp)->args[0]);
-				else
-				{
-					ft_putendl_fd("bash: syntax error near"
-						" unexpected token `newline'", STDERR_FILENO);
-					exit(EXIT_FAILURE);
-				}
-			}
-			waitpid(pid, 0, 0);
-		}
+		if ((*tmp)->args[0])
+			heredoc((*tmp)->args[0]);
 		else
-			break ;
+		{
+			ft_putendl_fd("bash: syntax error near unexpected token `newline'",
+				STDERR_FILENO);
+			return (1);
+		}
 		*tmp = (*tmp)->next;
 	}
-	if (*tmp && nb_cmds == 1)
-	{
-		if (is_spe_builtin((*tmp)->cmd))
-			builtins(*tmp, g_shell);
-	}
+	if (*tmp && nb_cmds == 1 && is_builtin((*tmp)->cmd))
+		builtins(*tmp, g_shell);
 	return (0);
 }
 
@@ -67,3 +49,4 @@ void	execution(t_parser **cmds, t_global *g_shell)
 	waiting_pid(*cmds, &g_shell->status);
 	free_pipes(pipes, nb_cmds);
 }
+

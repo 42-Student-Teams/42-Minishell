@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 02:13:35 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:34:09 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 {
 	int	pid;
 
-	printf("NB CMDS : %d\n", nb_cmds);
 	while (*tmp)
 	{
 		if (ft_strcmp("<<", (*tmp)->cmd) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 03:42:47 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:24:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static int	check_next_quote(char *str, char c, int *i)
 	while (str[++(*i)])
 	{
 		if (str[*i] == c)
+		{
+			printf("%c\n",str[*i]);
 			return (1);
+		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 17:15:19 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:34:17 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 {
-	
 	while (*tmp && (ft_strcmp("<<", (*tmp)->cmd) == 0))
 	{
 		if ((*tmp)->args[0])

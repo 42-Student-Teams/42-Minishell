@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:20:56 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2022/11/16 11:43:46 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:52:45 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*dst;
 	int		len;
 
+	if (!s1 || !s2)
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	dst = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dst)

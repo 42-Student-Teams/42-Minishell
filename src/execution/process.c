@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 15:29:06 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:32:29 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	ft_putstr_fd("bash: ", STDERR_FILENO);
 	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
+	g_status = 127;
 	exit(127);
 }
 

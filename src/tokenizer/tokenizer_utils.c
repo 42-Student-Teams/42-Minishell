@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/19 17:24:22 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:57:55 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	check_next_quote(char *str, char c, int *i)
 	{
 		if (str[*i] == c)
 		{
-			printf("%c\n",str[*i]);
 			return (1);
 		}
 	}
@@ -227,5 +226,7 @@ char	*change_str(char *str, t_global *g_shell)
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}
-	return (str);
+	ft_putendl_fd("bash: unexpected EOF while looking for matching \"\'",
+		STDERR_FILENO);
+	return (NULL);
 }

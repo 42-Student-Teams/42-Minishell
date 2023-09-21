@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:18:23 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 19:16:54 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:51:05 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	signal_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
+		g_status = 130;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -23,6 +24,7 @@ void	signal_handler(int signal)
 	}
 	if (signal == SIGQUIT)
 	{
+		g_status = 131;
 		rl_on_new_line();
 		rl_redisplay();
 	}

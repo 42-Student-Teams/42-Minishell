@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/29 19:28:43 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:28:03 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	heredoc(char *delimiter)
 		}
 		ft_putendl_fd(line, fd);
 	}
-	g_status = 0;
 	free(line);
 	close(fd);
-	return (0);
+	g_status = 0;
+	return (g_status);
 }
 /*
 ** il faudra unlink le fichier .heredoc
@@ -50,9 +50,10 @@ t_parser	*create_heredoc(t_token *tokens, t_global *g_shell)
 {
 	t_parser	*cmd;
 
+	(void)g_shell;
 	cmd = malloc(sizeof(t_parser));
 	init_cmd(&cmd);
-	g_shell->status = add_heredoc_args(&cmd, tokens);
+	g_status = add_heredoc_args(&cmd, tokens);
 	return (cmd);
 }
 

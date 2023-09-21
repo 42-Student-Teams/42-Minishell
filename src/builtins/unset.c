@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:51 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/14 18:59:13 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:19:00 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int	my_unset(t_env **env_l, char **args, int i)
 				++not_in;
 		}
 	}
+	g_status = not_in;
 	return (not_in);
 }

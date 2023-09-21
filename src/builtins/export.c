@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/27 20:42:56 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:17:56 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ int	my_export(char **args, t_env **env_l)
 	i = 0;
 	while (args[++i])
 		add_to_env(args[i], env_l, &not_in);
+	g_status = not_in;
 	return (not_in);
 }

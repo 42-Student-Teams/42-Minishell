@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:42 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 16:12:26 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:16:50 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	my_env(char **args, t_global *g_shell)
 			ft_putstr_fd("env: ", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
 			ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+			g_status = 127;
 			return (127);
 		}
 	}
@@ -36,5 +37,6 @@ int	my_env(char **args, t_global *g_shell)
 		ft_putendl_fd(tmp->value, STDOUT_FILENO);
 		tmp = tmp->next;
 	}
+	g_status = 0;
 	return (0);
 }

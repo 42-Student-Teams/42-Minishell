@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 16:07:29 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:14:49 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ int	my_cd(char **args, t_env **env_l)
 	if (args[1])
 		path = args[1];
 	if (exec_cd(path) == 1)
+	{
+		g_status = 1;
 		return (1);
+	}
 	change_pwd(env_l, old_pwd);
 	free(old_pwd);
+	g_status = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/20 14:57:55 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:30:15 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ static void	add_variable(char *new, char *var, t_env *env, int *i)
 		tmp = tmp->next;
 	}
 }
+// echo erno après $?
+
 
 static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 {
@@ -168,6 +170,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 	{
 		if (str[i] == '"')
 		{
+			printf("HEre\n");
 			while (str[++i] && str[i] != '"')
 			{
 				if (str[i] == '$')
@@ -191,6 +194,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		}
 		else if (str[i] == '$')
 		{
+			printf("HEre 2\n");
 			start = i + 1;
 			while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'')
 				continue ;
@@ -203,11 +207,17 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		}
 		else if (str[i] == '\'')
 		{
+			printf("HEre 3\n");
 			while (str[++i] && str[i] != '\'')
 				new[j++] = str[i];
 		}
 		else
+		{
+			// printf("plante la %d \n", new[j]);
+			// printf("ça plante ICI : %c\n", str[i]);
 			new[j++] = str[i];
+			// j++;
+		}
 		if (!str[i])
 			return ;
 	}
@@ -222,7 +232,7 @@ char	*change_str(char *str, t_global *g_shell)
 	if (check_quotes(str))
 	{
 		len = new_len(str, g_shell->env_l, g_shell->vars);
-		new = ft_calloc(sizeof(char), len + 1);
+		new = ft_calloc(sizeof(char), len + 2);
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/20 14:10:13 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:26:03 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 		{
 			ft_putendl_fd("bash: syntax error near unexpected token `newline'",
 				STDERR_FILENO);
+			g_status = 258;
 			return (1);
 		}
 		*tmp = (*tmp)->next;

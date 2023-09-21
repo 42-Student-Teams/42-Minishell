@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:59:17 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/19 16:55:42 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:16:45 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	exec_builtin(t_parser *cmd, t_global *g_shell)
 	if (is_builtin(cmd->cmd))
 	{
 		builtins(cmd, g_shell);
-		exit(g_shell->status);
+		exit(g_status);
 	}
 }
 

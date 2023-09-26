@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/25 14:26:35 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:13:10 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,21 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 			{
 				if (str[i] == '$')
 				{
-					start = i + 1;
-					while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'')
-						continue ;
-					end = i;
-					variable = ft_substr(str, start, end - start - 1);
-					if (key_in_env(variable, env_l))
-						len += len_value(variable, env_l);
-					else if (key_in_env(variable, vars))
-						len += len_value(variable, vars);
-					free(variable);
+					while (str[i] == '$')
+					{
+						start = i + 1;
+						while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+							continue ;
+						end = i;
+						// ft_putchar_fd(str[end], 1);
+						variable = ft_substr(str, start, end - start - 1);
+						if (key_in_env(variable, env_l))
+							len += len_value(variable, env_l);
+						else if (key_in_env(variable, vars))
+							len += len_value(variable, vars);
+						i = end -1;
+						free(variable);
+					}
 				}
 				else
 					len++;
@@ -109,15 +114,19 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 		}
 		else if (str[i] == '$')
 		{
-			start = i + 1;
-			while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'')
-				continue ;
-			end = i;
-			variable = ft_substr(str, start, end - start);
-			if (key_in_env(variable, env_l))
-				len += len_value(variable, env_l);
-			else if (key_in_env(variable, vars))
-				len += len_value(variable, vars);
+			while (str[i] == '$')
+			{
+				start = i + 1;
+				while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+					continue ;
+				end = i;
+				variable = ft_substr(str, start, end - start);
+				if (key_in_env(variable, env_l))
+					len += len_value(variable, env_l);
+				else if (key_in_env(variable, vars))
+					len += len_value(variable, vars);
+				i = end;
+			}
 		}
 		else if (str[i] == '\'')
 		{
@@ -153,8 +162,6 @@ static void	add_variable(char *new, char *var, t_env *env, int *i)
 		tmp = tmp->next;
 	}
 }
-// echo erno après $?
-
 
 static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 {
@@ -170,21 +177,25 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 	{
 		if (str[i] == '"' && str[i])
 		{
-			printf("HEre\n");
 			while (str[++i] && str[i] != '"')
 			{
 				if (str[i] == '$')
 				{
-					start = i + 1;
-					while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'')
-						continue ;
-					end = i;
-					variable = ft_substr(str, start, end - start - 1);
-					if (key_in_env(variable, env_l))
-						add_variable(new, variable, env_l, &j);
-					else if (key_in_env(variable, vars))
-						add_variable(new, variable, vars, &j);
-					free(variable);
+					while (str[i] == '$')
+					{
+						
+						start = i + 1;
+						while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+							continue ;
+						end = i;
+						variable = ft_substr(str, start, end - start - 1);
+						if (key_in_env(variable, env_l))
+							add_variable(new, variable, env_l, &j);
+						else if (key_in_env(variable, vars))
+							add_variable(new, variable, vars, &j);
+						free(variable);
+						end = i; 
+					}
 				}
 				else
 					new[j++] = str[i];
@@ -194,29 +205,29 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		}
 		else if (str[i] == '$' && str[i])
 		{
-			printf("HEre 2\n");
-			start = i + 1;
-			while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'')
-				continue ;
-			end = i;
-			variable = ft_substr(str, start, end - start);
-			if (key_in_env(variable, env_l))
-				add_variable(new, variable, env_l, &j);
-			else if (key_in_env(variable, vars))
-				add_variable(new, variable, vars, &j);
+			while (str[i] == '$')
+			{
+				
+				start = i + 1;
+				while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+					continue ;
+				end = i;
+				variable = ft_substr(str, start, end - start);
+				if (key_in_env(variable, env_l))
+					add_variable(new, variable, env_l, &j);
+				else if (key_in_env(variable, vars))
+					add_variable(new, variable, vars, &j);
+				i = end;
+			}
 		}
 		else if (str[i] == '\'' && str[i])
 		{
-			printf("HEre 3\n");
 			while (str[++i] && str[i] != '\'')
 				new[j++] = str[i];
 		}
 		else
 		{
-			// printf("plante la %d \n", new[j]);
-			// printf("ça plante ICI : %c\n", str[i]);
 			new[j++] = str[i];
-			// j++;
 		}
 		if (!str[i])
 			return ;
@@ -232,7 +243,8 @@ char	*change_str(char *str, t_global *g_shell)
 	if (check_quotes(str))
 	{
 		len = new_len(str, g_shell->env_l, g_shell->vars);
-		new = ft_calloc(sizeof(char), len + 2);
+		printf("len = %d\n", len);
+		new = ft_calloc(sizeof(char), len + 1);
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}

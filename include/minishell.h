@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/25 15:39:33 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/26 08:20:08 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char		**get_paths(t_env *env);
 int			parser_len(t_parser *lst);
 char		**from_chaintotab(t_env *env);
 int			**create_pipes(int nb_cmds);
+void		str_tolower(char *s);
 
 // --------- ENV ---------
 void		print_env(t_env *env);

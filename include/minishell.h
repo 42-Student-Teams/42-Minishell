@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/21 14:52:59 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:39:33 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include "define.h"
 # include "struct.h"
 # include "errno.h"
-
 
 int			g_status;
 

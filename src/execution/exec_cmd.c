@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:59:17 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/21 17:16:45 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:00:36 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	exec_cmd(t_parser *cmd, t_global *g_shell, int i)
 {
 	char	**paths;
 	char	*path_cmd;
-	char	**env;
+	char	**env_tab;
 	char	*command;
 
 	paths = NULL;
 	command = NULL;
 	exec_builtin(cmd, g_shell);
-	env = from_chaintotab(g_shell->env_l);
-	exec_abs_paths(cmd, env);
+	env_tab = from_chaintotab(g_shell->env_l);
+	exec_abs_paths(cmd, env_tab);
 	command = ft_strjoin("/", cmd->cmd);
 	paths = get_paths(g_shell->env_l);
 	while (paths[++i])
@@ -60,12 +60,12 @@ void	exec_cmd(t_parser *cmd, t_global *g_shell, int i)
 		path_cmd = ft_strjoin(paths[i], command);
 		if (access(path_cmd, F_OK) == 0)
 		{
-			if (execve(path_cmd, cmd->args, env) == -1)
+			if (execve(path_cmd, cmd->args, env_tab) == -1)
 				throw_error(NULL);
 		}
 		free(path_cmd);
 	}
 	free_strtab(paths);
-	free_strtab(env);
+	free_strtab(env_tab);
 	free(command);
 }

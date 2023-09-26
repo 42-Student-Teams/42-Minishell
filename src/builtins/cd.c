@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/21 14:14:49 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:05:28 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ static void	change_pwd(t_env **env_l, char *old_pwd)
 			if (tmp->value)
 				free(tmp->value);
 			tmp->value = ft_strdup(old_pwd);
+			printf("OLDPWD = %s\n", tmp->value);
 		}
 		else if (ft_strcmp(tmp->key, "PWD") == 0)
 		{
 			if (tmp->value)
 				free(tmp->value);
 			tmp->value = ft_strdup(pwd);
+			printf("PWD = %s\n", tmp->value);
 		}
 		tmp = tmp->next;
 	}

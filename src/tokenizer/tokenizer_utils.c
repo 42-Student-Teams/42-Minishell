@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/21 19:30:15 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:26:35 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '"')
+		if (str[i] == '"' && str[i])
 		{
 			printf("HEre\n");
 			while (str[++i] && str[i] != '"')
@@ -192,7 +192,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 					return ;
 			}
 		}
-		else if (str[i] == '$')
+		else if (str[i] == '$' && str[i])
 		{
 			printf("HEre 2\n");
 			start = i + 1;
@@ -205,7 +205,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 			else if (key_in_env(variable, vars))
 				add_variable(new, variable, vars, &j);
 		}
-		else if (str[i] == '\'')
+		else if (str[i] == '\'' && str[i])
 		{
 			printf("HEre 3\n");
 			while (str[++i] && str[i] != '\'')

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/27 17:17:39 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:51:25 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,21 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 			{
 				if (str[i] == '$')
 				{
-					start = i + 1;
-					while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
-						continue ;
-					end = i;
-					variable = ft_substr(str, start, end - start);
-					if (key_in_env(variable, env_l))
-						len += len_value(variable, env_l);
-					else if (key_in_env(variable, vars))
-						len += len_value(variable, vars);
+					while (str[i] == '$')
+					{
+						start = i + 1;
+						while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+							continue ;
+						end = i;
+						variable = ft_substr(str, start, end - start);
+						variable = ft_strtrim(variable, "\"");
+						// printf("%s\n", variable);
+						if (key_in_env(variable, env_l))
+							len += len_value(variable, env_l);
+						else if (key_in_env(variable, vars))
+							len += len_value(variable, vars);
+						i = end;
+					}
 					free(variable);
 				}
 				else
@@ -152,7 +158,6 @@ static void	add_variable(char *new, char *var, t_env *env, int *i)
 				new[*i] = tmp->value[j];
 				(*i)++;
 			}
-			printf("PRINT : %s\n ", new);
 			return ;
 		}
 		tmp = tmp->next;
@@ -180,16 +185,16 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 					while (str[i] == '$')
 					{
 						start = i + 1;
-					while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
-						continue ;
-					end = i;
-					variable = ft_substr(str, start, end - start);
-					// ft_putendl_fd(variable, 1);
-					if (key_in_env(variable, env_l))
-						add_variable(new, variable, env_l, &j);
-					else if (key_in_env(variable, vars))
-						add_variable(new, variable, vars, &j);
-					i = end;
+						while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
+							continue ;
+						end = i;
+						variable = ft_substr(str, start, end - start);
+						variable = ft_strtrim(variable, "\"");
+						if (key_in_env(variable, env_l))
+							add_variable(new, variable, env_l, &j);
+						else if (key_in_env(variable, vars))
+							add_variable(new, variable, vars, &j);
+						i = end;
 					}
 					free(variable);
 				}
@@ -239,8 +244,8 @@ char	*change_str(char *str, t_global *g_shell)
 	if (check_quotes(str))
 	{
 		len = new_len(str, g_shell->env_l, g_shell->vars);
-		printf("len = %d\n", len);
 		new = ft_calloc(sizeof(char), len + 1);
+		// printf("%d\n", len);
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}

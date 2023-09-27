@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/27 17:51:25 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/27 19:12:30 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 						end = i;
 						variable = ft_substr(str, start, end - start);
 						variable = ft_strtrim(variable, "\"");
-						// printf("%s\n", variable);
 						if (key_in_env(variable, env_l))
 							len += len_value(variable, env_l);
 						else if (key_in_env(variable, vars))
@@ -134,7 +133,7 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 			while (str[++i] && str[i] != '\'')
 				len++;
 		}
-		else if (ft_isalnum(str[i]))
+		else
 			len++;
 		if (!str[i])
 			return (len);
@@ -228,7 +227,9 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		}
 		else
 		{
+			
 			new[j++] = str[i];
+
 		}
 		if (!str[i])
 			return ;
@@ -245,7 +246,6 @@ char	*change_str(char *str, t_global *g_shell)
 	{
 		len = new_len(str, g_shell->env_l, g_shell->vars);
 		new = ft_calloc(sizeof(char), len + 1);
-		// printf("%d\n", len);
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}

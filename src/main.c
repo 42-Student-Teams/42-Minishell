@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/26 17:01:38 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:32:23 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 	init_termios();
 }
 
+void printTokens(t_token *head) {
+    t_token *current = head;
+
+    while (current != NULL) {
+        printf("Token str: %s\n", current->str);
+        current = current->next;
+    }
+}
+
 void	prepare_cmd(t_shell *shell, t_global *g_shell)
 {
 	t_token		*tokens;
@@ -55,6 +64,7 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	i = 0;
 	while (shell->input[i])
 		i += lexer(g_shell, &tokens, shell->input, i);
+    // printTokens(*tokens);
 	parser(&cmds, tokens, g_shell);
 	execution(&cmds, g_shell);
 }

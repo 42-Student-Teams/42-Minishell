@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/26 16:39:31 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:33:17 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,17 @@ int	handle_string(t_global *g_shell, t_token **token, char *s, int index)
 	{
 		if (s[end] == '\'' || s[end] == '\"')
 			flag = !flag;
-		if (flag)
-			continue ;
-		else if (ft_isspace(s[end]))
+		else if (!flag && ft_isspace(s[end]))
 			break ;
-		else if (ft_istoken(s, end))
+		else if (!flag && ft_istoken(s, end))
 			break ;
 		end++;
 	}
 	str = ft_substr(s, index, end - index);
 	end = ft_strlen(str);
 	new = change_str(str, g_shell);
-	insert_token_into_lst(E_WORD, new, token, 0);
+	if (new)
+		insert_token_into_lst(E_WORD, new, token, 0);
 	return (end);
 }
 
@@ -79,9 +78,7 @@ int	lexer(t_global *g_shell, t_token **token, char *s, int index)
 	else if (c1 == '<' && c2 != '<')
 		return (insert_token_into_lst(E_INFILE, NULL, token, 1));
 	else if (ft_isspace(c1))
-	{
 		return (1);
-	}
 	else
 		return (handle_string(g_shell, token, s, index));
 }

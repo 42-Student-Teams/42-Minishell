@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/28 16:20:08 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/28 22:43:16 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static int	check_quotes(char *str)
 		if (str[i] == '"')
 		{
 			if (!check_next_quote(str, '"', &i))
+			{
 				return (0);
+			}
 		}
 		if (str[i] == '\'')
 		{
@@ -84,6 +86,7 @@ static int	new_len(char *str, t_env *env_l, t_env *vars)
 	i = -1;
 	while (str[++i])
 	{
+		
 		if (str[i] == '"')
 		{
 			while (str[++i] && str[i] != '"')
@@ -179,7 +182,6 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		{
 			while (str[++i] && str[i] != '"')
 			{
-				printf("STRING %c\n", str[i]);
 				if (str[i] == '$')
 				{
 					while (str[i] == '$')

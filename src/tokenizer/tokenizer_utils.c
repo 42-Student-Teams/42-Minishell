@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:49:23 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/27 19:12:30 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:20:08 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		{
 			while (str[++i] && str[i] != '"')
 			{
+				printf("STRING %c\n", str[i]);
 				if (str[i] == '$')
 				{
 					while (str[i] == '$')
@@ -207,7 +208,6 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 		{
 			while (str[i] == '$')
 			{
-				
 				start = i + 1;
 				while (str[++i] && !ft_isspace(str[i]) && str[i] != '\'' && str[i] != '$')
 					continue ;
@@ -226,11 +226,7 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 				new[j++] = str[i];
 		}
 		else
-		{
-			
 			new[j++] = str[i];
-
-		}
 		if (!str[i])
 			return ;
 	}
@@ -249,7 +245,7 @@ char	*change_str(char *str, t_global *g_shell)
 		new_str(str, new, g_shell->env_l, g_shell->vars);
 		return (new);
 	}
-	ft_putendl_fd("bash: unexpected EOF while looking for matching \"\'",
+	ft_putstr_fd("bash: unexpected EOF while looking for matching \"\'",
 		STDERR_FILENO);
 	return (NULL);
 }

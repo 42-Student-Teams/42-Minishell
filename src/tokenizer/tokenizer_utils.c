@@ -198,7 +198,8 @@ static void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 							add_variable(new, variable, vars, &j);
 						i = end;
 					}
-					free(variable);
+					if (variable)
+						free(variable);
 				}
 				else
 					new[j++] = str[i];

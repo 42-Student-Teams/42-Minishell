@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:20:02 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/28 21:33:17 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:39:25 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ int	handle_string(t_global *g_shell, t_token **token, char *s, int index)
 	end = ft_strlen(str);
 	new = change_str(str, g_shell);
 	if (new)
+	{
 		insert_token_into_lst(E_WORD, new, token, 0);
+	}
 	return (end);
 }
 

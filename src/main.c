@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/03 18:10:24 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
@@ -41,17 +53,17 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 		ft_putendl_fd("env liste error", STDERR_FILENO);
 		exit(1);
 	}
-	init_termios();
+	init_termios(1);
 }
 
-void printTokens(t_token *head) {
-    t_token *current = head;
-
-    while (current != NULL) {
-        printf("Token str: %s\n", current->str);
-        current = current->next;
-    }
-}
+//void printTokens(t_token *head) {
+//    t_token *current = head;
+//
+//    while (current != NULL) {
+//        printf("Token str: %s\n", current->str);
+//        current = current->next;
+//    }
+//}
 
 void	prepare_cmd(t_shell *shell, t_global *g_shell)
 {
@@ -64,7 +76,6 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	i = 0;
 	while (shell->input[i])
 		i += lexer(g_shell, &tokens, shell->input, i);
-    // printTokens(*tokens);
 	parser(&cmds, tokens, g_shell);
 	execution(&cmds, g_shell);
 }

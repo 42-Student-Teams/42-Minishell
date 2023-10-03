@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/25 15:39:33 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:55:50 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "define.h"
 # include "struct.h"
 # include "errno.h"
+# include <sys/ioctl.h>
 
 int			g_status;
 
@@ -39,11 +40,16 @@ int			free_all(void);
 void		init_minishell(void);
 void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
-// ------- LEXER -------
+// ------- TOKENIZER -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
 char		*change_str(char *str, t_global *g_shell);
-
 int			lexer(t_global *g_shell, t_token **token, char *s, int index);
+int			check_quotes(char *str);
+int			check_next_quote(char *str, char c, int *i);
+int			new_len(char *str, t_env *env_l, t_env *vars);
+void		new_str(char *str, char *new, t_env *env_l, t_env *vars);
+void		add_variable(char *new, char *var, t_env *env, int *i);
+int			len_value(char *var, t_env	*vars);
 int			handle_string(t_global *g_shell, t_token **token,
 				char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
@@ -102,11 +108,11 @@ void		free_pipes(int **pipes, int len);
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);
-void		set_heredoc_signals(void);
-void		handle_interrupt(int signal);
+void		signal_cmd(int signal);
+void		signal_heredoc(int signal);
 
 // --------- TERMIOS ---------
-void		init_termios(void);
+int			init_termios(int mode);
 
 // --------- BUILTINS ---------
 void		builtins(t_parser *cmd, t_global *g_shell);

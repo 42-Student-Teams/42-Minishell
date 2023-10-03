@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/03 18:22:45 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
@@ -63,6 +75,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 	int	i;
 
 	i = 0;
+	init_termios(2);
 	while (tmp)
 	{
 		tmp->index = i;
@@ -80,6 +93,8 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		i++;
 	}
 	waiting_pid(cmds, &i);
+	init_termios(1);
+
 	if (WIFEXITED(i))
 		g_status = WEXITSTATUS(i);
 }

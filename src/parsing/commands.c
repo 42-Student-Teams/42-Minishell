@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <lsaba-qu@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/03 19:08:16 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:03:09 by bverdeci          #+#    #+#             */
@@ -27,6 +39,18 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 	tmp->next = cmd;
 }
 
+static void	replace_env_var(char *str)
+{
+	if (str[0] == '$')
+	{
+		if (str[1] == '?')
+		{
+			free(str);
+			str = ft_itoa(g_status);
+		}
+	}
+}
+
 void	add_cmd_args(t_parser **cmd, t_token **tokens)
 {
 	t_parser	*tmp;
@@ -36,6 +60,9 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	tmp = *cmd;
 	tok = *tokens;
 	tmp->cmd = ft_strdup(tok->str);
+	if (ft_strcmp(tmp->cmd, "\0") == 0)
+		tmp->cmd = " ";
+	replace_env_var(&tmp->cmd);
 	while (tok && tok->str)
 	{
 		tok = tok->next;

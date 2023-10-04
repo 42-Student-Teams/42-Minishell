@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 17:55:50 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:40:53 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "errno.h"
 # include <sys/ioctl.h>
 
-int			g_status;
+unsigned char g_status;
 
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
@@ -81,7 +81,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
 void		prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds);
-void		waiting_pid(t_parser *cmds, int *status);
+int			waiting_pid();
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);
 
@@ -95,7 +95,9 @@ int			**create_pipes(int nb_cmds);
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);
 int			env_list(t_env **env_l, char **env_copy);
+int			add_to_env_var(char *args, t_env **env_l);
 t_env		*new_el(char *key_value);
+void		assign_g_status(t_global *g_shell);
 
 // --------- UTILS ---------
 void		free_strtab(char **split);

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:36:58 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 17:12:56 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:18:40 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	new_len(char *str, t_env *env_l, t_env *vars)
 					return (len);
 			}
 		}
-		else if (str[i] == '$' && str[i + 1] != '?')
+		else if (str[i] == '$')
 		{
 			while (str[i] == '$')
 			{
@@ -123,7 +123,7 @@ void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 					return ;
 			}
 		}
-		else if (str[i] == '$' && str[i] && str[i + 1] != '?')
+		else if (str[i] == '$' && str[i])
 		{
 			while (str[i] == '$')
 			{

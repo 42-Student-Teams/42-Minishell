@@ -6,7 +6,19 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 18:22:45 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:01:43 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/04 17:04:02 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +68,31 @@ void	prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds)
 	}
 }
 
-void	waiting_pid(t_parser *cmds, int *status)
+int	waiting_pid()
 {
-	t_parser	*tmp;
+	int ret;
+	int status;
 
-	tmp = cmds;
-	(void)status;
-	while (tmp)
-	{
-		waitpid(tmp->pid, &g_status, 0);
-		tmp = tmp->next;
+	ret = 0;
+	while (ret != -1) {
+		ret = waitpid(-1, &status, 0);
 	}
+	if (errno == ECHILD) {
+		errno = 0;
+		if (WIFEXITED(status)) {
+			return WEXITSTATUS(status);
+		} else if (WIFSIGNALED(status)) {
+			if (WTERMSIG(status) == SIGBUS)
+				printf("Bus error: 10\n");
+			return WTERMSIG(status) + 128;
+		} else if (WIFSTOPPED(status)) {
+			return WSTOPSIG(status) + 128;
+		} else if (WIFCONTINUED(status)) {
+			return (0);
+		}
+		return 0;
+	}
+	return (0);
 }
 
 void	ft_process(t_parser *cmds, t_parser *tmp,
@@ -75,6 +101,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 	int	i;
 
 	i = 0;
+	(void)cmds;
 	init_termios(2);
 	while (tmp)
 	{
@@ -92,9 +119,8 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		tmp = tmp->next;
 		i++;
 	}
-	waiting_pid(cmds, &i);
+	g_status = waiting_pid();
 	init_termios(1);
 
-	if (WIFEXITED(i))
-		g_status = WEXITSTATUS(i);
+
 }

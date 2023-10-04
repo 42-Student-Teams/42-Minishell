@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 17:59:03 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:05:21 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	add_heredoc_args(t_parser **cmd, t_token *tokens)
 	if (tok->next)
 		tmp->args[0] = ft_strdup(tok->next->str);
 	else
-		return (258);
+		return (127);
 	return (0);
 }

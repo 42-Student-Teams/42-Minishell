@@ -3,10 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <lsaba-qu@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/04 15:48:45 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:03:09 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 02:46:38 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:31:22 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +39,24 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 	tmp->next = cmd;
 }
 
+//static char *replace_env_var(char *str)
+//{
+//	int		i;
+//	char	*tmp;
+//
+//	i = 0;
+//	while (str[i])
+//	{
+//		printf("%c\n", str[i]);
+//		if (str[i] == '$' && str[i + 1] == '?')
+//		{
+//			//TODO replace str with the status
+//			printf("%d\n",g_status);
+//		}
+//		i ++;
+//	}
+//}
+
 void	add_cmd_args(t_parser **cmd, t_token **tokens)
 {
 	t_parser	*tmp;
@@ -36,6 +66,8 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	tmp = *cmd;
 	tok = *tokens;
 	tmp->cmd = ft_strdup(tok->str);
+	if (ft_strcmp(tmp->cmd, "\0") == 0)
+		tmp->cmd = " ";
 	while (tok && tok->str)
 	{
 		tok = tok->next;

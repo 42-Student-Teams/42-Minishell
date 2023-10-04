@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/04 18:50:38 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
@@ -22,7 +34,7 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 		{
 			ft_putendl_fd("bash: syntax error near unexpected token `newline'",
 				STDERR_FILENO);
-			g_status = 258;
+			g_status = 2;
 			return (1);
 		}
 		*tmp = (*tmp)->next;

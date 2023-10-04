@@ -3,10 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/04 19:56:09 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:35:39 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/21 17:29:23 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:32:23 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +36,19 @@ while (cmds)
 }
 */
 
-/*
-** Volatile eviter que le preprocesseur optimise la variable
-** (pour les signaux)
-*/
-
-
 void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 {	
 	ft_bzero((void *)&shell, 0);
 	copy_env(env, g_shell);
 	g_shell->env_l = NULL;
 	g_shell->vars = NULL;
+	g_status = 0;
 	if (env_list(&g_shell->env_l, g_shell->env_copy) == 1)
 	{
 		ft_putendl_fd("env liste error", STDERR_FILENO);
 		exit(1);
 	}
-	init_termios();
+	init_termios(1);
 }
 
 void	prepare_cmd(t_shell *shell, t_global *g_shell)
@@ -59,8 +66,34 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	execution(&cmds, g_shell);
 }
 
+void	print_vars(t_env *vars)
+{
+	t_env	*tmp;
+
+	tmp = vars;
+	while (tmp)
+	{
+		printf("%s=%s\n", tmp->key, tmp->value);
+
+		tmp = tmp->next;
+	}
+}
+
+void	assign_g_status(t_global *g_shell)
+{
+	char keyandenv[10];
+	char *str_status;
+
+	ft_strcpy(keyandenv, "?=");
+	str_status = ft_itoa((int)g_status);
+	ft_strcpy(keyandenv + 2, str_status);
+	free(str_status);
+	add_to_env_var(keyandenv, &g_shell->vars);
+}
+
 void	init_loop(t_shell shell, t_global *g_shell)
 {
+	assign_g_status(g_shell);
 	while (42)
 	{
 		shell.input = readline("Minishell$ ");
@@ -74,6 +107,7 @@ void	init_loop(t_shell shell, t_global *g_shell)
 			if (ft_strlen(shell.input) != 0)
 				add_history(shell.input);
 			prepare_cmd(&shell, g_shell);
+			assign_g_status(g_shell);
 		}
 	}
 }

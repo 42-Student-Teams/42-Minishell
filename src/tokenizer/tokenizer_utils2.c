@@ -53,7 +53,7 @@ int	new_len(char *str, t_env *env_l, t_env *vars)
 					return (len);
 			}
 		}
-		else if (str[i] == '$')
+		else if (str[i] == '$' && str[i + 1] != '?')
 		{
 			while (str[i] == '$')
 			{
@@ -123,7 +123,7 @@ void	new_str(char *str, char *new, t_env *env_l, t_env *vars)
 					return ;
 			}
 		}
-		else if (str[i] == '$' && str[i])
+		else if (str[i] == '$' && str[i] && str[i + 1] != '?')
 		{
 			while (str[i] == '$')
 			{

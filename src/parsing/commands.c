@@ -41,13 +41,18 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 
 static void	replace_env_var(char *str)
 {
-	if (str[0] == '$')
+	int		i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (str[1] == '?')
+		printf("%c\n", str[i]);
+		if (str[i] == '$' && str[i + 1] == '?')
 		{
-			free(str);
-			str = ft_itoa(g_status);
+			//TODO replace str with the status
+			printf("%d\n",g_status);
 		}
+		i ++;
 	}
 }
 
@@ -62,7 +67,7 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 	tmp->cmd = ft_strdup(tok->str);
 	if (ft_strcmp(tmp->cmd, "\0") == 0)
 		tmp->cmd = " ";
-	replace_env_var(&tmp->cmd);
+	replace_env_var(tmp->cmd);
 	while (tok && tok->str)
 	{
 		tok = tok->next;

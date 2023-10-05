@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 18:38:54 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:30:59 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@
 #include "minishell.h"
 
 
-void signal_heredoc(int signal)
+void	signal_heredoc(int signal)
 {
 	if (signal == SIGINT)
 	{
-		g_status = 130;
+		g_status = 1;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 	}
 }
 
-void signal_cmd(int signal)
+void	signal_cmd(int signal)
 {
 	if (signal == SIGINT)
 	{

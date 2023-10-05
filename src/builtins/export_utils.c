@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:27:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 00:17:13 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:19:37 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ int	key_in_env(char *key, t_env *env_l)
 	t_env	*tmp;
 
 	tmp = env_l;
+
+
+	char keyandenv[10];
+	char *str_status;
+
+	ft_strcpy(keyandenv, "?=");
+	str_status = ft_itoa((int)g_status);
+	ft_strcpy(keyandenv + 2, str_status);
+	free(str_status);
+	add_to_env_var(keyandenv, &env_l);
+
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, key) == 0)

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/26 08:18:39 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:03:48 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 {
-	while (*tmp && (ft_strcmp("<<", (*tmp)->cmd) == 0))
-	{
-		if ((*tmp)->args[0])
-			heredoc((*tmp)->args[0]);
-		else
-		{
-			ft_putendl_fd("bash: syntax error near unexpected token `newline'",
-				STDERR_FILENO);
-			g_status = 258;
-			return (1);
-		}
-		*tmp = (*tmp)->next;
-	}
+	// while (*tmp && (ft_strcmp("<<", (*tmp)->cmd) == 0))
+	// {
+	// 	if ((*tmp)->args[0])
+	// 		heredoc((*tmp)->args[0]);
+	// 	else
+	// 	{
+	// 		ft_putendl_fd("bash: syntax error near unexpected token `newline'",
+	// 			STDERR_FILENO);
+	// 		g_status = 258;
+	// 		return (1);
+	// 	}
+	// 	*tmp = (*tmp)->next;
+	// }
 	if (*tmp && nb_cmds == 1 && is_spe_builtin((*tmp)->cmd))
 	{
 		if (is_spe_builtin((*tmp)->cmd) == 1)

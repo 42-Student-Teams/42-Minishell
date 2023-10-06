@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 15:03:09 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/08/29 02:46:38 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:11:36 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_parser	*create_cmd(t_token **tokens)
 
 	start = *tokens;
 	init_cmd(&cmd);
-	while (*tokens && (*tokens)->type != E_PIPE)
+	while (*tokens && (*tokens)->type != E_PIPE && (*tokens)->type != E_HEREDOC)
 	{
 		if (*tokens && (*tokens)->type == E_INFILE && start == *tokens)
 		{
@@ -94,7 +94,8 @@ t_parser	*create_cmd(t_token **tokens)
 					| O_RDWR | O_TRUNC, 0666);
 			*tokens = (*tokens)->next->next;
 		}
-		if (*tokens && (*tokens)->type != E_PIPE)
+		if (*tokens && (*tokens)->type != E_PIPE
+			&& (*tokens)->type != E_HEREDOC)
 			*tokens = (*tokens)->next;
 	}
 	return (cmd);

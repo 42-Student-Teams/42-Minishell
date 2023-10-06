@@ -7,36 +7,37 @@ READLINE_DIR := /opt/homebrew/opt/readline
 INCS        := include libft/include $(READLINE_DIR)/include
 
 SRC_DIR     := src
-SRCS        := 							\
-		src/main.c						\
-		src/signals/signals.c			\
-		src/utils/get_data.c			\
-		src/utils/free.c				\
-		src/utils/termios.c				\
-		src/utils/tabs.c				\
-		src/utils/utils1.c				\
-		src/utils/error.c				\
-		src/env/init_env.c				\
-		src/builtins/builtins.c			\
-		src/builtins/cd.c				\
-		src/builtins/echo.c				\
-		src/builtins/pwd.c				\
-		src/builtins/env.c				\
-		src/builtins/export_utils.c		\
-		src/builtins/export.c			\
-		src/builtins/unset.c			\
-		src/builtins/exit.c				\
-		src/builtins/vars.c				\
-		src/tokenizer/tokenizer.c		\
-		src/tokenizer/tokenizer_utils.c	\
-		src/parsing/parser.c			\
-		src/parsing/commands.c			\
-		src/parsing/heredoc.c			\
-		src/parsing/parser_utils.c		\
-		src/execution/exec.c			\
-		src/execution/exec_utils.c		\
-		src/execution/process.c			\
-		src/execution/exec_cmd.c		\
+SRCS        := 								\
+		src/main.c							\
+		src/signals/signals.c				\
+		src/utils/get_data.c				\
+		src/utils/free.c					\
+		src/utils/termios.c					\
+		src/utils/tabs.c					\
+		src/utils/utils1.c					\
+		src/utils/error.c					\
+		src/env/init_env.c					\
+		src/builtins/builtins.c				\
+		src/builtins/cd.c					\
+		src/builtins/echo.c					\
+		src/builtins/pwd.c					\
+		src/builtins/env.c					\
+		src/builtins/export_utils.c			\
+		src/builtins/export.c				\
+		src/builtins/unset.c				\
+		src/builtins/exit.c					\
+		src/builtins/vars.c					\
+		src/tokenizer/tokenizer.c			\
+		src/tokenizer/tokenizer_utils.c		\
+		src/tokenizer/tokenizer_utils2.c	\
+		src/parsing/parser.c				\
+		src/parsing/commands.c				\
+		src/parsing/heredoc.c				\
+		src/parsing/parser_utils.c			\
+		src/execution/exec.c				\
+		src/execution/exec_utils.c			\
+		src/execution/process.c				\
+		src/execution/exec_cmd.c			\
 
 BUILD_DIR   := .build
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
@@ -47,7 +48,7 @@ CPPFLAGS    := $(addprefix -I,$(INCS))
 # -------  GARDER POUR ECOLE ------- 
 #LDLIBS		:= -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include -Llibft -lft
 # -------  GARDER POUR ECOLE -------
-LDLIBS      := -lreadline -L$(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
+LDLIBS      := -lreadline -L $(READLINE_DIR)/lib -I $(READLINE_DIR)/include -Wl,-rpath,$(READLINE_DIR)/lib -Llibft -lft
 
 RM          := rm -rf
 MAKEFLAGS   += --silent --no-print-directory

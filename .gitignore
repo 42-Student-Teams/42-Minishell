@@ -5,3 +5,5 @@
 *.txt
 minishell
 .DS_Store
+.vscode
+.idea

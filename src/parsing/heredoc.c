@@ -3,6 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
+/*   Updated: 2023/10/04 17:05:21 by lsaba-qu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:50 by lsaba-qu          #+#    #+#             */
@@ -25,7 +37,7 @@ int	heredoc(char *delimiter)
 	char	*line;
 	int		fd;
 
-	signal(SIGINT, handle_interrupt);
+	init_termios(3);
 	fd = open(".heredoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	while (!g_status)
 	{
@@ -40,6 +52,7 @@ int	heredoc(char *delimiter)
 	free(line);
 	close(fd);
 	g_status = 0;
+	init_termios(1);
 	return (g_status);
 }
 /*
@@ -71,6 +84,6 @@ int	add_heredoc_args(t_parser **cmd, t_token *tokens)
 	if (tok->next)
 		tmp->args[0] = ft_strdup(tok->next->str);
 	else
-		return (258);
+		return (127);
 	return (0);
 }

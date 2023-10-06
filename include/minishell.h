@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/30 18:08:19 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/06 08:14:02 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,25 @@
 # include "define.h"
 # include "struct.h"
 # include "errno.h"
+# include <sys/ioctl.h>
 
-int			g_status;
+unsigned char g_status;
 
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
 void		init_minishell(void);
 void		prepare_cmd(t_shell *shell, t_global *g_shell);
 
-// ------- LEXER -------
+// ------- TOKENIZER -------
 t_token		*ft_lstnewtoken(enum e_token_type type, char *str);
 char		*change_str(char *str, t_global *g_shell);
-
 int			lexer(t_global *g_shell, t_token **token, char *s, int index);
+int			check_quotes(char *str);
+int			check_next_quote(char *str, char c, int *i);
+int			new_len(char *str, t_env *env_l, t_env *vars);
+void		new_str(char *str, char *new, t_env *env_l, t_env *vars);
+void		add_variable(char *new, char *var, t_env *env, int *i);
+int			len_value(char *var, t_env	*vars);
 int			handle_string(t_global *g_shell, t_token **token,
 				char *s, int index);
 int			insert_token_into_lst(enum e_token_type t, char *value,
@@ -75,7 +81,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
 void		prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds);
-void		waiting_pid(t_parser *cmds, int *status);
+int			waiting_pid();
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);
 
@@ -90,7 +96,9 @@ void		str_tolower(char *s);
 void		print_env(t_env *env);
 void		copy_env(char **env, t_global *g_shell);
 int			env_list(t_env **env_l, char **env_copy);
+int			add_to_env_var(char *args, t_env **env_l);
 t_env		*new_el(char *key_value);
+void		assign_g_status(t_global *g_shell);
 
 // --------- UTILS ---------
 void		free_strtab(char **split);
@@ -103,11 +111,11 @@ void		free_pipes(int **pipes, int len);
 
 // --------- SIGNALS ---------
 void		signal_handler(int signal);
-void		set_heredoc_signals(void);
-void		handle_interrupt(int signal);
+void		signal_cmd(int signal);
+void		signal_heredoc(int signal);
 
 // --------- TERMIOS ---------
-void		init_termios(void);
+int			init_termios(int mode);
 
 // --------- BUILTINS ---------
 void		builtins(t_parser *cmd, t_global *g_shell);

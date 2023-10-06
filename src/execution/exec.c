@@ -6,7 +6,6 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/05 07:42:20 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +59,6 @@ void	execution(t_parser **cmds, t_global *g_shell)
 		return ;
 	pipes = create_pipes(nb_cmds);
 	ft_process(*cmds, tmp, pipes, g_shell);
-	g_status = waiting_pid();
 	free_pipes(pipes, nb_cmds);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/04 19:56:09 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:26:41 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 		exit(1);
 	}
 	init_termios(1);
+	assign_g_status(g_shell);
 }
 
 void	prepare_cmd(t_shell *shell, t_global *g_shell)
@@ -66,18 +67,18 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 	execution(&cmds, g_shell);
 }
 
-void	print_vars(t_env *vars)
-{
-	t_env	*tmp;
-
-	tmp = vars;
-	while (tmp)
-	{
-		printf("%s=%s\n", tmp->key, tmp->value);
-
-		tmp = tmp->next;
-	}
-}
+//void	print_vars(t_env *vars)
+//{
+//	t_env	*tmp;
+//
+//	tmp = vars;
+//	while (tmp)
+//	{
+//		printf("%s=%s\n", tmp->key, tmp->value);
+//
+//		tmp = tmp->next;
+//	}
+//}
 
 void	assign_g_status(t_global *g_shell)
 {

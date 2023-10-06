@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/04 20:01:43 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:31:13 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	g_status = 127;
+	assign_g_status(g_shell);
 	exit(g_status);
 }
 
@@ -77,20 +78,22 @@ int	waiting_pid()
 	while (ret != -1) {
 		ret = waitpid(-1, &status, 0);
 	}
-	if (errno == ECHILD) {
+	if (errno == ECHILD)
+    {
 		errno = 0;
-		if (WIFEXITED(status)) {
-			return WEXITSTATUS(status);
-		} else if (WIFSIGNALED(status)) {
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+        else if (WIFSIGNALED(status))
+        {
 			if (WTERMSIG(status) == SIGBUS)
 				printf("Bus error: 10\n");
-			return WTERMSIG(status) + 128;
-		} else if (WIFSTOPPED(status)) {
-			return WSTOPSIG(status) + 128;
-		} else if (WIFCONTINUED(status)) {
-			return (0);
+			return (WTERMSIG(status) + 128);
 		}
-		return 0;
+        else if (WIFSTOPPED(status))
+			return (WSTOPSIG(status) + 128);
+        else if (WIFCONTINUED(status))
+			return (0);
+		return (0);
 	}
 	return (0);
 }
@@ -121,6 +124,4 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 	}
 	g_status = waiting_pid();
 	init_termios(1);
-
-
 }

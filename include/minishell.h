@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/06 08:14:02 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/11 23:36:51 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
-void		prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds);
+void		prepare_exec(t_parser *tmp, int **pipes, int nb_cmds);
 int			waiting_pid();
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);

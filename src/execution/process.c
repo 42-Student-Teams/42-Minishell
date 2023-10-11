@@ -3,34 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/05 20:31:13 by lsaba-qu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/04 17:04:02 by lsaba-qu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 11:19:06 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/21 17:28:50 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/12 00:05:57 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,35 +23,38 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 	exit(g_status);
 }
 
-void	prepare_exec(t_parser *tmp, int **pipes, int *i, int nb_cmds)
+void	prepare_exec(t_parser *tmp, int **pipes, int nb_cmds)
 {
 	int	j;
+	int	i;
 
-	if (tmp->infile != 0)
-		dup2(tmp->infile, STDIN_FILENO);
-	else if (*i > 0)
-		dup2(pipes[*i - 1][0], STDIN_FILENO);
-	if (tmp->outfile != 1)
-		dup2(tmp->outfile, STDOUT_FILENO);
-	else if (tmp->next)
-		dup2(pipes[*i][1], STDOUT_FILENO);
+	i = tmp->index;
 	j = -1;
 	while (++j < nb_cmds - 1)
 	{
-		if (j != *i - 1)
+		if (j != i - 1)
 			close(pipes[j][0]);
-		if (j != *i)
+		if (j != i)
 			close(pipes[j][1]);
 	}
+	if (i > 0)
+		dup2(pipes[i - 1][0], STDIN_FILENO);
+	if (tmp->next)
+		dup2(pipes[i][1], STDOUT_FILENO);
+	if (tmp->infile != 0)
+		dup2(tmp->infile, STDIN_FILENO);
+	if (tmp->outfile != 1)
+		dup2(tmp->outfile, STDOUT_FILENO);
 }
 
-int	waiting_pid()
+int	waiting_pid(void)
 {
-	int ret;
-	int status;
+	int	ret;
+	int	status;
 
 	ret = 0;
-	while (ret != -1) {
+	while (ret != -1) 
+	{
 		ret = waitpid(-1, &status, 0);
 	}
 	if (errno == ECHILD)
@@ -102,6 +81,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 					int **pipes, t_global *g_shell)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	(void)cmds;
@@ -114,13 +94,18 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 			throw_error("fork error");
 		if (tmp->pid == 0)
 		{
-			prepare_exec(tmp, pipes, &i, g_shell->nb_cmds);
+			prepare_exec(tmp, pipes, g_shell->nb_cmds);
 			process_exec(tmp, g_shell);
 			exit (EXIT_SUCCESS);
 		}
-		close(pipes[i][1]);
 		tmp = tmp->next;
 		i++;
+	}
+	j = -1;
+	while (++j < g_shell->nb_cmds - 1)
+	{
+		close(pipes[j][0]);
+		close(pipes[j][1]);
 	}
 	g_status = waiting_pid();
 	init_termios(1);

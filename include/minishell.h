@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/11 23:36:51 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:14:53 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int			env_list(t_env **env_l, char **env_copy);
 int			add_to_env_var(char *args, t_env **env_l);
 t_env		*new_el(char *key_value);
 void		assign_g_status(t_global *g_shell);
+void		fake_env(t_env **env_l);
 
 // --------- UTILS ---------
 void		free_strtab(char **split);

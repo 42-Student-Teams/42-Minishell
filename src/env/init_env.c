@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/19 12:53:18 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:41:19 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	env_list(t_env **env_l, char **env_copy)
 
 	i = 0;
 	tmp = NULL;
+	if (!env_copy[0])
+		return (NO_ENV);
 	*env_l = new_el(env_copy[i]);
 	prev = NULL;
 	while (env_copy[++i])
@@ -68,4 +70,9 @@ int	env_list(t_env **env_l, char **env_copy)
 			return (ERROR);
 	}
 	return (0);
+}
+
+void	fake_env(t_env **env_l)
+{
+	*env_l = new_el("PATH");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:21:08 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/08/25 15:40:47 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/09/26 08:19:33 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,23 @@ void	printinfo(const char *format, ...)
 	va_start(args, format);
 	vprintf(format, args);
 	va_end(args);
+}
+
+static int	ft_isupper(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (1);
+	return (0);
+}
+
+void	str_tolower(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (ft_isupper(s[i]))
+			ft_tolower(s[i]);
+	}
 }

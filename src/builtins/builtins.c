@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/25 14:32:36 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/09/26 08:17:44 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ void	builtins(t_parser *cmd, t_global *g_shell)
 
 int	is_builtin(char *cmd)
 {
+	if (ft_strcmp(cmd, "export") == 0)
+		return (1);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		return (1);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		return (1);
+	else if (is_variable(cmd))
+		return (1);
+	str_tolower(cmd);
 	if (ft_strcmp(cmd, "cd") == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "echo") == 0)
@@ -83,14 +92,6 @@ int	is_builtin(char *cmd)
 	else if (ft_strcmp(cmd, "pwd") == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "env") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "export") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "unset") == 0)
-		return (1);
-	else if (ft_strcmp(cmd, "exit") == 0)
-		return (1);
-	else if (is_variable(cmd))
 		return (1);
 	return (0);
 }
@@ -104,6 +105,14 @@ int	is_spe_builtin(char *cmd)
 	else if (ft_strcmp(cmd, "exit") == 0)
 		return (1);
 	else if (is_variable(cmd))
+		return (1);
+	else if (ft_strcmp(cmd, "Cd") == 0)
+		return (2);
+	else if (ft_strcmp(cmd, "CD") == 0)
+		return (2);
+	else if (ft_strcmp(cmd, "cD") == 0)
+		return (2);
+	else if (ft_strcmp(cmd, "cd") == 0)
 		return (1);
 	return (0);
 }

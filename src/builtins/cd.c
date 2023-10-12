@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 16:52:00 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/06 08:14:35 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exec_cd(char *path)
 		path = getenv("HOME");
 	if (chdir(path) == -1)
 	{
+		printf("HERE\n");
 		perror(NULL);
 		return (1);
 	}
@@ -42,22 +43,15 @@ static void	change_pwd(t_env **env_l, char *old_pwd)
 	tmp = *env_l;
 	pwd = malloc(1024);
 	getcwd(pwd, 1024);
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->key, "OLDPWD") == 0)
-		{
-			if (tmp->value)
-				free(tmp->value);
-			tmp->value = ft_strdup(old_pwd);
-		}
-		else if (ft_strcmp(tmp->key, "PWD") == 0)
-		{
-			if (tmp->value)
-				free(tmp->value);
-			tmp->value = ft_strdup(pwd);
-		}
-		tmp = tmp->next;
-	}
+	while (ft_strcmp(tmp->key, "OLDPWD"))
+			tmp = tmp->next;
+	free(tmp->value);
+	tmp->value = ft_strdup(old_pwd);
+	tmp = *env_l;
+	while (ft_strcmp(tmp->key, "PWD"))
+			tmp = tmp->next;
+	free(tmp->value);
+	tmp->value = ft_strdup(pwd);
 	free(pwd);
 }
 

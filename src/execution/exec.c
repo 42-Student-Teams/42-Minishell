@@ -3,22 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/05 20:21:12 by lsaba-qu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 16:21:10 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/09/21 17:26:03 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/12 00:15:42 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +28,11 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 		*tmp = (*tmp)->next;
 	}
 	if (*tmp && nb_cmds == 1 && is_spe_builtin((*tmp)->cmd))
-		builtins(*tmp, g_shell);
+	{
+		if (is_spe_builtin((*tmp)->cmd) == 1)
+			builtins(*tmp, g_shell);
+		return (1);
+	}
 	return (0);
 }
 

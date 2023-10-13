@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 20:03:30 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/05 21:05:03 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:12:29 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	free_pipes(int **pipes, int len)
 
 	i = -1;
 	while (++i < len)
-    {
-        close(pipes[i][0]);
-        close(pipes[i][1]);
+	{
+		close(pipes[i][0]);
+		close(pipes[i][1]);
 		free(pipes[i]);
-    }
+	}
 	free(pipes);
 }

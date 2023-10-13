@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/13 15:55:20 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:21:07 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	process_exec(t_parser *cmd, t_global *g_shell)
 {
 	if (cmd->infile < 0)
 	{
-		ft_putendl_fd("bash: No such file or directory",STDERR_FILENO);
+		ft_putendl_fd("bash: No such file or directory", STDERR_FILENO);
 		exit(1);
 	}
 	if (!cmd->cmd)
@@ -54,30 +54,37 @@ void	prepare_exec(t_parser *tmp, int **pipes, int nb_cmds)
 		dup2(tmp->outfile, STDOUT_FILENO);
 }
 
+static int	ret_utils(int ret, int status)
+{
+	while (ret != -1)
+	{
+		ret = waitpid(-1, &status, 0);
+	}
+	return (ret);
+}
+
 int	waiting_pid(void)
 {
 	int	ret;
 	int	status;
 
+	status = 0;
 	ret = 0;
-	while (ret != -1) 
-	{
-		ret = waitpid(-1, &status, 0);
-	}
+	ret = ret_utils(ret, status);
 	if (errno == ECHILD)
-    {
+	{
 		errno = 0;
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
-        else if (WIFSIGNALED(status))
-        {
+		else if (WIFSIGNALED(status))
+		{
 			if (WTERMSIG(status) == SIGBUS)
 				printf("Bus error: 10\n");
 			return (WTERMSIG(status) + 128);
 		}
-        else if (WIFSTOPPED(status))
+		else if (WIFSTOPPED(status))
 			return (WSTOPSIG(status) + 128);
-        else if (WIFCONTINUED(status))
+		else if (WIFCONTINUED(status))
 			return (0);
 		return (0);
 	}
@@ -85,10 +92,9 @@ int	waiting_pid(void)
 }
 
 void	ft_process(t_parser *cmds, t_parser *tmp,
-					int **pipes, t_global *g_shell)
+	int **pipes, t_global *g_shell)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	(void)cmds;
@@ -108,12 +114,7 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		tmp = tmp->next;
 		i++;
 	}
-	j = -1;
-	while (++j < g_shell->nb_cmds - 1)
-	{
-		close(pipes[j][0]);
-		close(pipes[j][1]);
-	}
+	close_pipes(pipes, g_shell->nb_cmds);
 	g_status = waiting_pid();
 	init_termios(1);
 }

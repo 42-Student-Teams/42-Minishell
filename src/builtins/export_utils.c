@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:27:12 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/10/05 19:19:37 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:55:18 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,15 @@ int	is_equal_in(char *s)
 int	key_in_env(char *key, t_env *env_l)
 {
 	t_env	*tmp;
+	char	keyandenv[10];
+	char	*str_status;
 
 	tmp = env_l;
-
-
-	char keyandenv[10];
-	char *str_status;
-
 	ft_strcpy(keyandenv, "?=");
 	str_status = ft_itoa((int)g_status);
 	ft_strcpy(keyandenv + 2, str_status);
 	free(str_status);
 	add_to_env_var(keyandenv, &env_l);
-
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, key) == 0)

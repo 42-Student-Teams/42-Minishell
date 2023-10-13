@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/13 15:53:07 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:34:51 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,12 @@ void	lst_add_cmd(t_parser **cmds, t_parser *cmd)
 	tmp->next = cmd;
 }
 
-//static char *replace_env_var(char *str)
-//{
-//	int		i;
-//	char	*tmp;
-//
-//	i = 0;
-//	while (str[i])
-//	{
-//		printf("%c\n", str[i]);
-//		if (str[i] == '$' && str[i + 1] == '?')
-//		{
-//			//TODO replace str with the status
-//			printf("%d\n",g_status);
-//		}
-//		i ++;
-//	}
-//}
+static void	init_cmd_args(t_parser *tmp, char *str)
+{
+	tmp->cmd = ft_strdup(str);
+	if (ft_strcmp(tmp->cmd, "\0") == 0)
+		tmp->cmd = " ";
+}
 
 void	add_cmd_args(t_parser **cmd, t_token **tokens)
 {
@@ -53,9 +42,7 @@ void	add_cmd_args(t_parser **cmd, t_token **tokens)
 
 	tmp = *cmd;
 	tok = *tokens;
-	tmp->cmd = ft_strdup(tok->str);
-	if (ft_strcmp(tmp->cmd, "\0") == 0)
-		tmp->cmd = " ";
+	init_cmd_args(tmp, tok->str);
 	while (tok && tok->str)
 	{
 		tok = tok->next;

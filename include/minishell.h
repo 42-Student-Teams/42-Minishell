@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/12 15:14:53 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:21:41 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "errno.h"
 # include <sys/ioctl.h>
 
-unsigned char g_status;
+unsigned char	g_status;
 
 t_list		*get_data(t_list *ptr);
 int			free_all(void);
@@ -81,7 +81,7 @@ void		exec_cmd(t_parser *cmd, t_global *g_shell, int i);
 // EXECUTION - PROCESS 
 void		process_exec(t_parser *cmd, t_global *g_shell);
 void		prepare_exec(t_parser *tmp, int **pipes, int nb_cmds);
-int			waiting_pid();
+int			waiting_pid(void);
 void		ft_process(t_parser *cmds, t_parser *tmp,
 				int **pipes, t_global *g_shell);
 
@@ -90,6 +90,7 @@ char		**get_paths(t_env *env);
 int			parser_len(t_parser *lst);
 char		**from_chaintotab(t_env *env);
 int			**create_pipes(int nb_cmds);
+void		close_pipes(int **pipes, int nb_cmds);
 void		str_tolower(char *s);
 
 // --------- ENV ---------
@@ -133,5 +134,9 @@ int			key_in_env(char *key, t_env *env_l);
 int			my_unset(t_env **env_l, char **args, int i);
 int			my_exit(char **args);
 int			my_vars(char **args, t_env **env_l);
+int			add_to_env_var(char *args, t_env **env_l);
+void		change_value(char *args, t_env *tmp, char *key);
+char		*check_valid(char *s, int i);
+char		*key_in_env_var(char *key, t_env *env_l);
 
 #endif

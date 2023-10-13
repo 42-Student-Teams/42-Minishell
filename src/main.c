@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42l>  +#+  +:+       +#+        */
+/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/12 15:12:08 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:12:05 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ while (cmds)
 
 void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 {
-	int res;
+	int	res;
 
 	ft_bzero((void *)&shell, 0);
 	copy_env(env, g_shell);
@@ -53,7 +53,6 @@ void	init_shell(t_shell *shell, t_global *g_shell, char **env)
 	}
 	if (res == NO_ENV)
 		fake_env(&g_shell->env_l);
-
 	init_termios(1);
 	assign_g_status(g_shell);
 }
@@ -88,8 +87,8 @@ void	prepare_cmd(t_shell *shell, t_global *g_shell)
 
 void	assign_g_status(t_global *g_shell)
 {
-	char keyandenv[10];
-	char *str_status;
+	char	keyandenv[10];
+	char	*str_status;
 
 	ft_strcpy(keyandenv, "?=");
 	str_status = ft_itoa((int)g_status);

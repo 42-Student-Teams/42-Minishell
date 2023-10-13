@@ -27,6 +27,7 @@ SRCS        := 								\
 		src/builtins/unset.c				\
 		src/builtins/exit.c					\
 		src/builtins/vars.c					\
+		src/builtins/vars_utils.c			\
 		src/tokenizer/tokenizer.c			\
 		src/tokenizer/tokenizer_utils.c		\
 		src/tokenizer/tokenizer_utils2.c	\

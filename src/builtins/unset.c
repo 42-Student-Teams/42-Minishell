@@ -6,7 +6,7 @@
 /*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:51 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/21 14:19:00 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:57:13 by lsaba-qu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ int	my_unset(t_env **env_l, char **args, int i)
 				++not_in;
 		}
 	}
-	g_status = not_in;
-	return (not_in);
+	return (g_status = not_in);
 }

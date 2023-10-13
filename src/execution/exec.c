@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/12 00:15:42 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:44:43 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 {
-	while (*tmp && (ft_strcmp("<<", (*tmp)->cmd) == 0))
+	while (*tmp && (*tmp)->cmd && (ft_strcmp("<<", (*tmp)->cmd) == 0))
 	{
 		if ((*tmp)->args[0])
 			heredoc((*tmp)->args[0]);
@@ -27,7 +27,7 @@ static int	pre_exec(t_global *g_shell, t_parser **tmp, int nb_cmds)
 		}
 		*tmp = (*tmp)->next;
 	}
-	if (*tmp && nb_cmds == 1 && is_spe_builtin((*tmp)->cmd))
+	if (*tmp && (*tmp)->cmd && nb_cmds == 1 && is_spe_builtin((*tmp)->cmd))
 	{
 		if (is_spe_builtin((*tmp)->cmd) == 1)
 			builtins(*tmp, g_shell);

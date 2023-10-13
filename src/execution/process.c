@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/12 00:05:57 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:55:20 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	process_exec(t_parser *cmd, t_global *g_shell)
 {
+	if (cmd->infile < 0)
+	{
+		ft_putendl_fd("bash: No such file or directory",STDERR_FILENO);
+		exit(1);
+	}
+	if (!cmd->cmd)
+		exit(0);
 	exec_cmd(cmd, g_shell, -1);
 	ft_putstr_fd("bash: ", STDERR_FILENO);
 	ft_putstr_fd(cmd->cmd, STDERR_FILENO);
@@ -41,7 +48,7 @@ void	prepare_exec(t_parser *tmp, int **pipes, int nb_cmds)
 		dup2(pipes[i - 1][0], STDIN_FILENO);
 	if (tmp->next)
 		dup2(pipes[i][1], STDOUT_FILENO);
-	if (tmp->infile != 0)
+	if (tmp->infile > 0)
 		dup2(tmp->infile, STDIN_FILENO);
 	if (tmp->outfile != 1)
 		dup2(tmp->outfile, STDOUT_FILENO);

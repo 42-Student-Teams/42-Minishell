@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 18:42:08 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:00:33 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	exec_cd(char *path)
 		path = getenv("HOME");
 	if (chdir(path) == -1)
 	{
-		printf("HERE\n");
 		perror(NULL);
 		return (1);
 	}

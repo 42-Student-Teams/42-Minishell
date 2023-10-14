@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 18:19:42 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:43:14 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ int			insert_token_into_lst(enum e_token_type t, char *value,
 				t_token **lst, int i);
 // ------- PARSING -------
 void		parser(t_parser **cmds, t_token *tokens, t_global *g_shell);
-
-// ------- PARSING UTILS -------
-char		*trim_matching_quotes(char *str, char quote);
-void		trim_first_quote(char *command);
 
 // COMMANDS
 void		lst_add_cmd(t_parser **cmds, t_parser *cmd);

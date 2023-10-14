@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:36:58 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 16:59:30 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:44:04 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	process_doubleq_var(int	*i, t_env *vars, char *str, t_env *env_l)
 		free(variable);
 	return (len);
 }
-
 
 static int	check_doubleq_var(int *i, t_env *vars, char *str, t_env *env_l)
 {

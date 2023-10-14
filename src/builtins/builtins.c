@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:26:01 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/10/13 22:54:45 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:46:34 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	builtins(t_parser *cmd, t_global *g_shell)
 	char		*key;
 
 	tmp = cmd;
-	args = NULL;
-	key = NULL;
 	if (is_variable(tmp->cmd))
 	{
 		while (tmp && is_variable(tmp->cmd))
 		{
 			args = ft_calloc(sizeof(char *), 3);
+			if (!args)
+				return ;
 			args[0] = ft_strdup("export");
 			args[1] = ft_strdup(tmp->cmd);
 			key = ft_substr(args[1], 0, ft_strchr(args[1], '=') - args[1]);

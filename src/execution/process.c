@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 18:30:03 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:43:54 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	waiting_pid(void)
 	{
 		errno = 0;
 		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));	
+			return (WEXITSTATUS(status));
 		else if (WIFSIGNALED(status))
 		{
 			if (WTERMSIG(status) == SIGBUS)

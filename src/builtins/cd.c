@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:37 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/06 08:14:35 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:42:08 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	change_pwd(t_env **env_l, char *old_pwd)
 
 	tmp = *env_l;
 	pwd = malloc(1024);
+	if (!pwd)
+		return ;
 	getcwd(pwd, 1024);
 	while (ft_strcmp(tmp->key, "OLDPWD"))
 			tmp = tmp->next;

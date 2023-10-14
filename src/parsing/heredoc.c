@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 16:36:46 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:40:48 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_parser	*create_heredoc(t_token *tokens, t_global *g_shell)
 
 	(void)g_shell;
 	cmd = malloc(sizeof(t_parser));
+	if (!cmd)
+		return (NULL);
 	init_cmd(&cmd);
 	g_status = add_heredoc_args(&cmd, tokens);
 	return (cmd);

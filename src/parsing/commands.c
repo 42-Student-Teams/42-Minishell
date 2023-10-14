@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/13 23:34:51 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:41:19 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	init_cmd(t_parser **cmd)
 	t_parser	*tmp;
 
 	*cmd = malloc(sizeof(t_parser));
+	if (!cmd)
+		*cmd = NULL;
 	tmp = *cmd;
 	tmp->infile = 0;
 	tmp->outfile = 1;

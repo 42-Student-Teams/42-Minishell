@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 07:49:43 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/12 15:41:19 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:34:23 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	copy_env(char **env, t_global *g_shell)
 
 	i = 0;
 	g_shell->env_copy = ft_calloc(sizeof(char **), 1000);
+	if (!g_shell->env_copy)
+		return ;
 	while (env[i])
 	{
 		g_shell->env_copy[i] = ft_strdup(env[i]);

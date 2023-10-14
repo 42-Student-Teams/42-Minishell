@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:58:42 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/10/14 17:54:05 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:44:10 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*process_doubleq_next(int *i, t_env *vars, char *str, t_env *env_l)
 		free(utils.variable);
 	return (utils.new);
 }
-
 
 char	*process_doubleq(int *i, t_env *vars, char *str, t_env *env_l)
 {

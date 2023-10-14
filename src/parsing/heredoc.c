@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/06 09:13:42 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:36:46 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	add_heredoc_args(t_parser **cmd, t_token *tokens)
 	tmp->args = ft_calloc(sizeof(char *), 2);
 	if (!tmp->args)
 		return (1);
-	if (tok->next)
+	if (tok->next && tok->next->str)
 		tmp->args[0] = ft_strdup(tok->next->str);
 	else
 		return (127);

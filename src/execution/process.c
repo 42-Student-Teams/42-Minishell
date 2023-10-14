@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/13 23:21:07 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:30:03 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,25 @@ void	prepare_exec(t_parser *tmp, int **pipes, int nb_cmds)
 		dup2(tmp->outfile, STDOUT_FILENO);
 }
 
-static int	ret_utils(int ret, int status)
+static void	ret_utils(int *status)
 {
+	int	ret;
+
+	ret = 0;
 	while (ret != -1)
-	{
-		ret = waitpid(-1, &status, 0);
-	}
-	return (ret);
+		ret = waitpid(-1, status, 0);
 }
 
 int	waiting_pid(void)
 {
-	int	ret;
 	int	status;
 
-	status = 0;
-	ret = 0;
-	ret = ret_utils(ret, status);
+	ret_utils(&status);
 	if (errno == ECHILD)
 	{
 		errno = 0;
 		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
+			return (WEXITSTATUS(status));	
 		else if (WIFSIGNALED(status))
 		{
 			if (WTERMSIG(status) == SIGBUS)
@@ -109,7 +106,6 @@ void	ft_process(t_parser *cmds, t_parser *tmp,
 		{
 			prepare_exec(tmp, pipes, g_shell->nb_cmds);
 			process_exec(tmp, g_shell);
-			exit (EXIT_SUCCESS);
 		}
 		tmp = tmp->next;
 		i++;

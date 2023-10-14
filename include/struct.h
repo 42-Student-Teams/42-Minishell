@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bverdeci <bverdeci@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:01:25 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/10/13 15:52:44 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:41:38 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,15 @@ typedef struct s_shell
 	char			*input;
 	pid_t			pid;
 }	t_shell;
+
+typedef struct s_utils
+{
+	char	*new;
+	int		start;
+	int		end;
+	int		i;
+	int		j;
+	char	*variable;
+}	t_utils;
 
 #endif

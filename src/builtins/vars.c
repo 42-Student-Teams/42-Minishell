@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:40:19 by bverdeci          #+#    #+#             */
-/*   Updated: 2023/10/13 23:11:47 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:19:15 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	change_value(char *args, t_env *tmp, char *key)
+void	change_value_vars(char *args, t_env *tmp, char *key)
 {
 	while (ft_strcmp(tmp->key, key))
 			tmp = tmp->next;
@@ -35,7 +35,7 @@ static char	*process_plus_case(char *key, int len, char *s)
 	return (key);
 }
 
-char	*check_valid(char *s, int i)
+char	*check_valid_vars(char *s, int i)
 {
 	int		len;
 	char	*key;

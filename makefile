@@ -31,6 +31,7 @@ SRCS        := 								\
 		src/tokenizer/tokenizer.c			\
 		src/tokenizer/tokenizer_utils.c		\
 		src/tokenizer/tokenizer_utils2.c	\
+		src/tokenizer/tokenizer_utils3.c	\
 		src/parsing/parser.c				\
 		src/parsing/commands.c				\
 		src/parsing/heredoc.c				\

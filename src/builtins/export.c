@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:47 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/09/21 14:17:56 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:18:45 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	print_error_msg(char *s)
 	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 }
 
-static char	*check_valid(char *s, int i)
+char	*check_valid(char *s, int i)
 {
 	int		len;
 	char	*key;

@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 15:48:29 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:19:42 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			lexer(t_global *g_shell, t_token **token, char *s, int index);
 int			check_quotes(char *str);
 int			check_next_quote(char *str, char c, int *i);
 int			new_len(char *str, t_env *env_l, t_env *vars);
-void		new_str(char *str, char *new, t_env *env_l, t_env *vars);
+char		*new_str(char *str, int len, t_env *env_l, t_env *vars);
 void		add_variable(char *new, char *var, t_env *env, int *i);
 int			len_value(char *var, t_env	*vars);
 int			handle_string(t_global *g_shell, t_token **token,
@@ -135,8 +135,9 @@ int			my_unset(t_env **env_l, char **args, int i);
 int			my_exit(char **args);
 int			my_vars(char **args, t_env **env_l);
 int			add_to_env_var(char *args, t_env **env_l);
-void		change_value(char *args, t_env *tmp, char *key);
+void		change_value_vars(char *args, t_env *tmp, char *key);
 char		*check_valid(char *s, int i);
+char		*check_valid_vars(char *s, int i);
 char		*key_in_env_var(char *key, t_env *env_l);
 
 #endif

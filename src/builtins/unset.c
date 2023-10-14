@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <leonel.sabaquezada@student.42    +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:26:51 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/13 22:57:13 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:18:17 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	delete_node(t_env *tmp, t_env **env_l, int *found)
 	*found = 1;
 }
 
-static int	check_valid(char *s)
+static int	check_valid_unset(char *s)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ int	my_unset(t_env **env_l, char **args, int i)
 	{
 		tmp = *env_l;
 		found = 0;
-		if (check_valid(args[i]))
+		if (check_valid_unset(args[i]))
 		{
 			while (tmp)
 			{

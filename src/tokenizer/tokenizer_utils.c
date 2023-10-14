@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsaba-qu <lsaba-qu@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:26 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/03 17:12:20 by lsaba-qu         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:34:33 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,11 @@ void	add_variable(char *new, char *var, t_env *env, int *i)
 char	*change_str(char *str, t_global *g_shell)
 {
 	int		len;
-	char	*new;
 
-	new = NULL;
 	if (check_quotes(str))
 	{
 		len = new_len(str, g_shell->env_l, g_shell->vars);
-		new = ft_calloc(sizeof(char), len + 1);
-		new_str(str, new, g_shell->env_l, g_shell->vars);
-		return (new);
+		return (new_str(str, len, g_shell->env_l, g_shell->vars));
 	}
 	ft_putstr_fd("bash: unexpected EOF while looking for matching \"\'",
 		STDERR_FILENO);

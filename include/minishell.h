@@ -6,7 +6,7 @@
 /*   By: bverdeci <bverdeci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:23:06 by lsaba-qu          #+#    #+#             */
-/*   Updated: 2023/10/14 19:15:57 by bverdeci         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:18:52 by bverdeci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		parser(t_parser **cmds, t_token *tokens, t_global *g_shell);
 // COMMANDS
 void		lst_add_cmd(t_parser **cmds, t_parser *cmd);
 void		add_cmd_args(t_parser **cmd, t_token **tokens);
-void		init_cmd(t_parser **cmd, t_token **start, t_token **tokens);
+void		init_cmd(t_parser **cmd);
 t_parser	*create_cmd(t_token **tokens);
 
 // HEREDOC
